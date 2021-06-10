@@ -15,7 +15,7 @@ export default function StaffList() {
           <Table.Row>
             <Table.HeaderCell>Adı</Table.HeaderCell>
             <Table.HeaderCell>Soyadı</Table.HeaderCell>
-            <Table.HeaderCell>Mail adresi</Table.HeaderCell>
+            <Table.HeaderCell>E-Posta adresi</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
