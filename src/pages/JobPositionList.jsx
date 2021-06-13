@@ -13,7 +13,7 @@ export default function JobPositionList() {
 
   return (
     <div>
-      <Table celled>
+      <Table selectable celled color="orange">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell></Table.HeaderCell>
@@ -32,7 +32,7 @@ export default function JobPositionList() {
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan="3">
+            <Table.HeaderCell colSpan="1">
               <Menu floated="right" pagination>
                 <Menu.Item as="a" icon>
                   <Icon name="chevron left" />

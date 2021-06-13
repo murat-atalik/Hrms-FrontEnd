@@ -6,7 +6,7 @@ export default function SideMenu() {
   return (
     <div>
       <Menu compact icon="labeled" inverted vertical>
-        <Menu.Item as={NavLink} to="/employee">
+        <Menu.Item as={NavLink} to="/employer">
           <Icon name="briefcase" />
           İş veren
         </Menu.Item>
@@ -15,7 +15,7 @@ export default function SideMenu() {
           Çalışan
         </Menu.Item>
         <Menu.Item as={NavLink} to="/cv" name="Özgeçmişler">
-          <Icon name="address book " />
+          <Icon name="address book" />
           Özgeçmişler
         </Menu.Item>
         <Menu.Item as={NavLink} to="/job" name="İş pozisyonları">

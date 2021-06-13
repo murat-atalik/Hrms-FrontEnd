@@ -3,7 +3,7 @@ import { Grid } from "semantic-ui-react";
 import JobPositionList from "../pages/JobPositionList";
 import CandidateList from "../pages/CandidateList";
 import CurriculumVitaeList from "../pages/CurriculumVitaeList";
-import EmployeeList from "../pages/EmployeeList";
+import EmployerList from "../pages/EmployerList";
 import StaffList from "../pages/StaffList";
 import { Route } from "react-router";
 import SideMenu from "./SideMenu";
@@ -22,7 +22,7 @@ export default function DashBoard() {
             <Route exact path="/job" component={JobPositionList} />
             <Route exact path="/candidate" component={CandidateList} />
             <Route exact path="/cv" component={CurriculumVitaeList} />
-            <Route exact path="/employee" component={EmployeeList} />
+            <Route exact path="/employer" component={EmployerList} />
             <Route exact path="/staff" component={StaffList} />
           </Grid.Column>
         </Grid.Row>

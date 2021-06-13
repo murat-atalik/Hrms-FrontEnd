@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
-import EmployeeService from "../services/employeeService";
+import EmployerService from "../services/employerService";
 
 export default function EmployeeList() {
-  const [employees, setEmployees] = useState([]);
+  const [employers, setEmployers] = useState([]);
   useEffect(() => {
-    let employeeService = new EmployeeService();
-    employeeService
-      .getEmployee()
-      .then((result) => setEmployees(result.data.data));
+    let employerService = new EmployerService();
+    employerService
+      .getEmployer()
+      .then((result) => setEmployers(result.data.data));
   }, []);
   return (
     <div>
@@ -18,15 +18,18 @@ export default function EmployeeList() {
             <Table.HeaderCell>Şirket Adı</Table.HeaderCell>
             <Table.HeaderCell>Websitesi</Table.HeaderCell>
             <Table.HeaderCell>Mail adresi</Table.HeaderCell>
+            <Table.HeaderCell>Telefon numarası</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
-          {employees.map((employee) => {
+          {employers.map((employer) => {
             return (
-              <Table.Row key={employee.id}>
-                <Table.Cell>{employee.companyName}</Table.Cell>
-                <Table.Cell>{employee.webAddress}</Table.Cell>
+              <Table.Row key={employer.id}>
+                <Table.Cell>{employer.company.companyName}</Table.Cell>
+                <Table.Cell>{employer.company.webAddress}</Table.Cell>
+                <Table.Cell>{employer.email}</Table.Cell>
+                <Table.Cell>{employer.phoneNumber}</Table.Cell>
               </Table.Row>
             );
           })}
@@ -34,7 +37,7 @@ export default function EmployeeList() {
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan="3">
+            <Table.HeaderCell colSpan="4">
               <Menu floated="right" pagination>
                 <Menu.Item as="a" icon>
                   <Icon name="chevron left" />

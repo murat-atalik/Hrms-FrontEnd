@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Container, Menu, Icon } from "semantic-ui-react";
+import { Container, Menu, Icon } from "semantic-ui-react";
 
 export default function Navi() {
   return (
@@ -17,11 +17,12 @@ export default function Navi() {
           </Menu.Item>
           <Menu.Menu position="right">
             <Menu.Item>
-              <Button.Group>
+              {/* <Button.Group>
                 <Button>Giriş yap</Button>
                 <Button.Or text="" />
                 <Button positive>Kayıt Ol</Button>
               </Button.Group>
+            */}
             </Menu.Item>
           </Menu.Menu>
         </Container>
