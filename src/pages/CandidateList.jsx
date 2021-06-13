@@ -27,7 +27,15 @@ export default function CandidateList() {
               <Table.Row key={candidate.id}>
                 <Table.Cell>{candidate.firstName}</Table.Cell>
                 <Table.Cell>{candidate.lastName}</Table.Cell>
-                <Table.Cell>{candidate.email}</Table.Cell>
+                <Table.Cell>
+                  <a
+                    href={"mailto:" + candidate.email}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    {candidate.email}
+                  </a>
+                </Table.Cell>
               </Table.Row>
             );
           })}

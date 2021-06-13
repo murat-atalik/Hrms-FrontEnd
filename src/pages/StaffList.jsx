@@ -25,7 +25,15 @@ export default function StaffList() {
               <Table.Row key={staff.id}>
                 <Table.Cell>{staff.firstName}</Table.Cell>
                 <Table.Cell>{staff.lastName}</Table.Cell>
-                <Table.Cell>{staff.email}</Table.Cell>
+                <Table.Cell>
+                  <a
+                    href={"mailto:" + staff.email}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    {staff.email}
+                  </a>
+                </Table.Cell>
               </Table.Row>
             );
           })}

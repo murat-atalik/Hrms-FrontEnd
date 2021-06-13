@@ -27,8 +27,24 @@ export default function EmployeeList() {
             return (
               <Table.Row key={employer.id}>
                 <Table.Cell>{employer.company.companyName}</Table.Cell>
-                <Table.Cell>{employer.company.webAddress}</Table.Cell>
-                <Table.Cell>{employer.email}</Table.Cell>
+                <Table.Cell>
+                  <a
+                    href={"https://" + employer.company.webAddress}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    {employer.company.webAddress}
+                  </a>
+                </Table.Cell>
+                <Table.Cell>
+                  <a
+                    href={"mailto:" + employer.email}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    {employer.email}
+                  </a>
+                </Table.Cell>
                 <Table.Cell>{employer.phoneNumber}</Table.Cell>
               </Table.Row>
             );

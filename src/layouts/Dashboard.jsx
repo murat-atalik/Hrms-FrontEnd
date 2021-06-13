@@ -17,8 +17,6 @@ export default function DashBoard() {
             <SideMenu />
           </Grid.Column>
           <Grid.Column width={12}>
-            <Route exact path="/" component={JobPositionList} />
-            <Route exact path="/home" component={JobPositionList} />
             <Route exact path="/job" component={JobPositionList} />
             <Route exact path="/candidate" component={CandidateList} />
             <Route exact path="/cv" component={CurriculumVitaeList} />

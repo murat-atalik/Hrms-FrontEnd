@@ -55,11 +55,10 @@ export default function CurriculumVitaeList() {
                   {cv.educations.map((eductaion) => (
                     <p key={eductaion.id}>{eductaion.schoolName}</p>
                   ))}
-                </Table.Cell>{" "}
+                </Table.Cell>
                 <Table.Cell>
-                  {" "}
                   <a
-                    href={cv.github}
+                    href={"https://" + cv.github}
                     target={"_blank"}
                     rel="noopener noreferrer"
                   >
@@ -68,7 +67,7 @@ export default function CurriculumVitaeList() {
                 </Table.Cell>
                 <Table.Cell>
                   <a
-                    href={cv.linkedin}
+                    href={"https://" + cv.linkedin}
                     target={"_blank"}
                     rel="noopener noreferrer"
                   >
@@ -77,7 +76,7 @@ export default function CurriculumVitaeList() {
                 </Table.Cell>
                 <Table.Cell>
                   <a
-                    href={cv.github}
+                    href={"https://" + cv.linkedin}
                     target={"_blank"}
                     rel="noopener noreferrer"
                   >
