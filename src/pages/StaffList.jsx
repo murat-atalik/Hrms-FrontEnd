@@ -10,12 +10,13 @@ export default function StaffList() {
   }, []);
   return (
     <div>
-      <Table celled>
+      <Table striped celled color="black">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Adı</Table.HeaderCell>
             <Table.HeaderCell>Soyadı</Table.HeaderCell>
             <Table.HeaderCell>E-Posta adresi</Table.HeaderCell>
+            <Table.HeaderCell>Yetki Seviyesi</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -34,6 +35,7 @@ export default function StaffList() {
                     {staff.email}
                   </a>
                 </Table.Cell>
+                <Table.Cell>{staff.role?.roleName}</Table.Cell>
               </Table.Row>
             );
           })}
@@ -41,7 +43,7 @@ export default function StaffList() {
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan="3">
+            <Table.HeaderCell colSpan="4">
               <Menu floated="right" pagination>
                 <Menu.Item as="a" icon>
                   <Icon name="chevron left" />

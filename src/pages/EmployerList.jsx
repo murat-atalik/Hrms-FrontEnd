@@ -12,13 +12,14 @@ export default function EmployeeList() {
   }, []);
   return (
     <div>
-      <Table celled>
+      <Table selectable striped celled color="red">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Şirket Adı</Table.HeaderCell>
             <Table.HeaderCell>Websitesi</Table.HeaderCell>
             <Table.HeaderCell>Mail adresi</Table.HeaderCell>
             <Table.HeaderCell>Telefon numarası</Table.HeaderCell>
+            <Table.HeaderCell>İncele</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -26,14 +27,14 @@ export default function EmployeeList() {
           {employers.map((employer) => {
             return (
               <Table.Row key={employer.id}>
-                <Table.Cell>{employer.company.companyName}</Table.Cell>
+                <Table.Cell>{employer.company?.companyName}</Table.Cell>
                 <Table.Cell>
                   <a
-                    href={"https://" + employer.company.webAddress}
+                    href={"https://" + employer.company?.webAddress}
                     target={"_blank"}
                     rel="noopener noreferrer"
                   >
-                    {employer.company.webAddress}
+                    {employer.company?.webAddress}
                   </a>
                 </Table.Cell>
                 <Table.Cell>
@@ -46,6 +47,15 @@ export default function EmployeeList() {
                   </a>
                 </Table.Cell>
                 <Table.Cell>{employer.phoneNumber}</Table.Cell>
+                <Table.Cell>
+                  <a
+                    href={"https://www.youtube.com"}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    <Icon name="search" color="grey" dize="big" />
+                  </a>
+                </Table.Cell>
               </Table.Row>
             );
           })}
@@ -53,7 +63,7 @@ export default function EmployeeList() {
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan="4">
+            <Table.HeaderCell colSpan="5">
               <Menu floated="right" pagination>
                 <Menu.Item as="a" icon>
                   <Icon name="chevron left" />

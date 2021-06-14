@@ -1,8 +1,19 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import { Container, Menu, Icon } from "semantic-ui-react";
+import SignedIn from "./SignedIn";
+import SignedOut from "./SıgnedOut";
 
 export default function Navi() {
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const history = useHistory();
+  function handleSignOut() {
+    setIsAuthenticated(false);
+    history.push("/");
+  }
+  function handleSignIn() {
+    setIsAuthenticated(true);
+  }
   return (
     <div>
       <Menu inverted fixed="top" size="large">
@@ -17,12 +28,11 @@ export default function Navi() {
           </Menu.Item>
           <Menu.Menu position="right">
             <Menu.Item>
-              {/* <Button.Group>
-                <Button>Giriş yap</Button>
-                <Button.Or text="" />
-                <Button positive>Kayıt Ol</Button>
-              </Button.Group>
-            */}
+              {isAuthenticated ? (
+                <SignedIn signOut={handleSignOut} />
+              ) : (
+                <SignedOut signIn={handleSignIn} />
+              )}
             </Menu.Item>
           </Menu.Menu>
         </Container>

@@ -13,9 +13,10 @@ export default function JobPositionList() {
 
   return (
     <div>
-      <Table selectable celled color="orange">
+      <Table selectable striped celled color="orange">
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell></Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -25,6 +26,12 @@ export default function JobPositionList() {
             return (
               <Table.Row key={job.id}>
                 <Table.Cell>{job.positionName}</Table.Cell>
+                <Table.Cell>
+                  <a href={job.id} target={"_blank"} rel="noopener noreferrer">
+                    <Icon name="search" color="grey" size="big" />
+                    İncele
+                  </a>
+                </Table.Cell>
               </Table.Row>
             );
           })}
@@ -32,7 +39,7 @@ export default function JobPositionList() {
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan="1">
+            <Table.HeaderCell colSpan="2">
               <Menu floated="right" pagination>
                 <Menu.Item as="a" icon>
                   <Icon name="chevron left" />
