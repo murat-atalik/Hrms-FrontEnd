@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Menu, Table } from "semantic-ui-react";
+
 import JobPositionService from "../services/jobPositionService";
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  TableRow,
+  Paper,
+  makeStyles,
+} from "@material-ui/core";
+
+import { CgSearchLoading } from "react-icons/cg";
 
 export default function JobPositionList() {
   const [jobPositions, setJobPositions] = useState([]);
@@ -10,52 +23,85 @@ export default function JobPositionList() {
       .getJobPositions()
       .then((result) => setJobPositions(result.data.data));
   }, []);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const emptyRows =
+    rowsPerPage -
+    Math.min(rowsPerPage, jobPositions.length - page * rowsPerPage);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const useStyles = makeStyles({
+    root: {
+      width: "100%",
+    },
+    container: {
+      maxHeight: 600,
+    },
+  });
+  const classes = useStyles();
   return (
     <div>
-      <Table selectable striped celled color="orange">
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell></Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
+      <TableContainer component={Paper} className={classes.container}>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell>İş Pozisyonu</TableCell>
+              <TableCell>İncele</TableCell>
+            </TableRow>
+          </TableHead>
 
-        <Table.Body>
-          {jobPositions.map((job) => {
-            return (
-              <Table.Row key={job.id}>
-                <Table.Cell>{job.positionName}</Table.Cell>
-                <Table.Cell>
-                  <a href={job.id} target={"_blank"} rel="noopener noreferrer">
-                    <Icon name="search" color="grey" size="big" />
-                    İncele
-                  </a>
-                </Table.Cell>
-              </Table.Row>
-            );
-          })}
-        </Table.Body>
-
-        <Table.Footer>
-          <Table.Row>
-            <Table.HeaderCell colSpan="2">
-              <Menu floated="right" pagination>
-                <Menu.Item as="a" icon>
-                  <Icon name="chevron left" />
-                </Menu.Item>
-                <Menu.Item as="a">1</Menu.Item>
-                <Menu.Item as="a">2</Menu.Item>
-                <Menu.Item as="a">3</Menu.Item>
-                <Menu.Item as="a">4</Menu.Item>
-                <Menu.Item as="a" icon>
-                  <Icon name="chevron right" />
-                </Menu.Item>
-              </Menu>
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Footer>
-      </Table>
+          <TableBody>
+            {(rowsPerPage > 0
+              ? jobPositions.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : jobPositions
+            ).map((job) => {
+              return (
+                <TableRow hover key={job.id}>
+                  <TableCell>{job.positionName}</TableCell>
+                  <TableCell>
+                    <a
+                      href={job.id}
+                      target={"_blank"}
+                      rel="noopener noreferrer"
+                    >
+                      <CgSearchLoading color="black" size="3em" />
+                      İncele
+                    </a>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={2} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Paper>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+          component="div"
+          count={jobPositions.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      </Paper>
     </div>
   );
 }

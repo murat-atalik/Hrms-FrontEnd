@@ -1,27 +1,38 @@
+import { Menu, Button, MenuItem, Avatar } from "@material-ui/core";
 import React from "react";
-import { Dropdown, Menu, Image } from "semantic-ui-react";
+import Image from "material-ui-image";
 
 export default function SignedIn(props) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <div>
-      <Menu.Item>
-        <Image
-          avatar
+      <Button>
+        <Avatar
           spaced="right"
           src="https://avatarfiles.alphacoders.com/198/thumb-198784.png"
+          onClick={handleClick}
         />
+      </Button>
 
-        <Dropdown pointing="top left" text="Samurai">
-          <Dropdown.Menu>
-            <Dropdown.Item text="Bilgilerim" icon="info" />
-            <Dropdown.Item
-              onClick={props.signOut}
-              text="Çıkış Yap"
-              icon="sign-out"
-            />
-          </Dropdown.Menu>
-        </Dropdown>
-      </Menu.Item>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={props.signOut}>Logout</MenuItem>
+      </Menu>
     </div>
   );
 }

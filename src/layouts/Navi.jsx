@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { Container, Menu, Icon } from "semantic-ui-react";
+import {
+  Typography,
+  AppBar,
+  IconButton,
+  Toolbar,
+  makeStyles,
+  Grid,
+} from "@material-ui/core";
 import SignedIn from "./SignedIn";
 import SignedOut from "./SıgnedOut";
+import { ImHome } from "react-icons/im";
 
 export default function Navi() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -14,9 +22,21 @@ export default function Navi() {
   function handleSignIn() {
     setIsAuthenticated(true);
   }
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  }));
+  const classes = useStyles();
   return (
     <div>
-      <Menu inverted fixed="top" size="large">
+      {/* <Menu inverted fixed="top" size="large">
         <Container>
           <Menu.Item as={NavLink} to="/home">
             <Icon name="home" size="large" />
@@ -36,7 +56,33 @@ export default function Navi() {
             </Menu.Item>
           </Menu.Menu>
         </Container>
-      </Menu>
+      </Menu>*/}
+
+      <AppBar position="static" style={{ backgroundColor: "#1b1b1b" }}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            className={classes.menuButton}
+            aria-label="menu"
+            component={NavLink}
+            to="/home"
+            style={{ color: "white" }}
+          >
+            <Typography variant="h6" className={classes.title}>
+              <ImHome size="1em" /> ANA SAYFA
+            </Typography>
+          </IconButton>
+
+          <Grid container justify="flex-end">
+            {isAuthenticated ? (
+              <SignedIn signOut={handleSignOut} />
+            ) : (
+              <SignedOut signIn={handleSignIn} />
+            )}
+          </Grid>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }

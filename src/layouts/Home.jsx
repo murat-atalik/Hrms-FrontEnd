@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { Image } from "semantic-ui-react";
+import Image from "material-ui-image";
 
 export default function Home() {
   const history = useHistory();
@@ -10,7 +10,6 @@ export default function Home() {
       <Image
         src="https://res.cloudinary.com/eacth/image/upload/v1623616722/home_zcbdse.jpg"
         onClick={handleOnClick}
-        fluid
       />
     </div>
   );

@@ -1,31 +1,50 @@
 import React from "react";
-import { Container, List, Segment } from "semantic-ui-react";
-
+import { Paper, Container, List, ListItem } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 export default function FooterBar() {
   return (
     <div>
-      <Segment
-        inverted
-        vertical
-        style={{ margin: "1em 0em 0em", padding: "1em 0em" }}
+      <Paper
+        square
+        style={{
+          backgroundColor: "#1b1b1b",
+          color: "white",
+          padding: "1em",
+        }}
       >
-        <Container textAlign="center">
-          <List horizontal inverted divided link size="small">
-            <List.Item as="a" href="#">
+        <Container>
+          <List style={{ display: "flex", flexDirection: "row", padding: 0 }}>
+            <ListItem
+              component={NavLink}
+              to="#"
+              style={{ color: "whitesmoke" }}
+            >
               Site Map
-            </List.Item>
-            <List.Item as="a" href="#">
+            </ListItem>
+            <ListItem
+              acomponent={NavLink}
+              to="#"
+              style={{ color: "whitesmoke" }}
+            >
               Contact Us
-            </List.Item>
-            <List.Item as="a" href="#">
+            </ListItem>
+            <ListItem
+              component={NavLink}
+              to="#"
+              style={{ color: "whitesmoke" }}
+            >
               Terms and Conditions
-            </List.Item>
-            <List.Item as="a" href="#">
+            </ListItem>
+            <ListItem
+              component={NavLink}
+              to="#"
+              style={{ color: "whitesmoke" }}
+            >
               Privacy Policy
-            </List.Item>
+            </ListItem>
           </List>
         </Container>
-      </Segment>
+      </Paper>
     </div>
   );
 }
