@@ -79,6 +79,32 @@ export default function SideMenu() {
               <FaCogs size="2em" /> <br /> SİSTEM PERSONELLERİ
             </p>
           </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/jobadvert"
+            style={{
+              color: "white",
+              textAlign: "center",
+              justifyContent: "center",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" /> <br /> İŞ İLANI Ekle
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/jobadvertlist"
+            style={{
+              color: "white",
+              textAlign: "center",
+              justifyContent: "center",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" /> <br /> İŞ İLANI Listele
+            </p>
+          </MenuItem>
         </MenuList>
       </Paper>
     </div>
