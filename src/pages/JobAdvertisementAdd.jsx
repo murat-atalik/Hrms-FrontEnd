@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -6,8 +6,41 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import JobAdvertisementService from "../services/jobAdvertisementService";
 
+import { MenuItem } from "@material-ui/core";
+import CityService from "../services/cityService";
+
+import JobPositionService from "../services/jobPositionService";
+import WorkProgramService from "../services/workProgramService";
+import WorkTypeService from "../services/workTypeService";
+
 export default function JobAdvertisementAdd() {
   const jobService = new JobAdvertisementService();
+  const [cities, setCities] = useState([]);
+  useEffect(() => {
+    let cityService = new CityService();
+    cityService.getCities().then((result) => setCities(result.data.data));
+  }, []);
+  const [workPrograms, setWorkPrograms] = useState([]);
+  useEffect(() => {
+    let workProgramService = new WorkProgramService();
+    workProgramService
+      .getWorkPrograms()
+      .then((result) => setWorkPrograms(result.data.data));
+  }, []);
+  const [jobPositions, setJobPositions] = useState([]);
+  useEffect(() => {
+    let jobPositionsService = new JobPositionService();
+    jobPositionsService
+      .getJobPositions()
+      .then((result) => setJobPositions(result.data.data));
+  }, []);
+  const [workTypes, setWorkTypes] = useState([]);
+  useEffect(() => {
+    let workTypeService = new WorkTypeService();
+    workTypeService
+      .getWorkTypes()
+      .then((result) => setWorkTypes(result.data.data));
+  }, []);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const validationSchema = yup.object({
@@ -39,7 +72,7 @@ export default function JobAdvertisementAdd() {
         (value) => value > 0
       ),
 
-    applicationDeadLine: yup
+    applicationDeadline: yup
       .string("Son başvuru tarihi")
       .required("Son Başvuru tarihi girilmeli")
       .test(
@@ -53,7 +86,7 @@ export default function JobAdvertisementAdd() {
           } else return false;
         }
       ),
-    remoteId: yup
+    workTypeId: yup
       .string("Açık Pozisyon")
       .required("Açık pozisyon sayısı gerekli!")
       .test(
@@ -97,17 +130,16 @@ export default function JobAdvertisementAdd() {
       minSalary: 0,
       maxSalary: 0,
       openPosition: 0,
-      applicationDeadLine: "",
+      applicationDeadline: "",
       active: true,
-      remoteId: 0,
+      workTypeId: "",
       employerId: 1,
-      workProgramId: 0,
-      jobPositionId: 0,
+      workProgramId: "",
+      jobPositionId: "",
       cityPlateNumber: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       jobService.add(values).then((result) => console.log(result.data.data));
       alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
     },
@@ -172,19 +204,19 @@ export default function JobAdvertisementAdd() {
           />
           <TextField
             fullWidth
-            id="applicationDeadLine"
-            name="applicationDeadLine"
+            id="applicationDeadline"
+            name="applicationDeadline"
             type="date"
             label="Son Başvuru Tarihi"
-            value={formik.values.applicationDeadLine}
+            value={formik.values.applicationDeadline}
             onChange={formik.handleChange}
             error={
-              formik.touched.applicationDeadLine &&
-              Boolean(formik.errors.applicationDeadLine)
+              formik.touched.applicationDeadline &&
+              Boolean(formik.errors.applicationDeadline)
             }
             helperText={
-              formik.touched.applicationDeadLine &&
-              formik.errors.applicationDeadLine
+              formik.touched.applicationDeadline &&
+              formik.errors.applicationDeadline
             }
             InputLabelProps={{
               shrink: true,
@@ -192,23 +224,31 @@ export default function JobAdvertisementAdd() {
           />
           <TextField
             fullWidth
-            id="remoteId"
-            name="remoteId"
-            type="number"
+            id="workTypeId"
+            name="workTypeId"
+            select
             label="Çalışma şekli"
-            value={formik.values.remoteId}
+            value={formik.values.workTypeId}
             onChange={formik.handleChange}
-            error={formik.touched.remoteId && Boolean(formik.errors.remoteId)}
-            helperText={formik.touched.remoteId && formik.errors.remoteId}
-          />
+            error={
+              formik.touched.workTypeId && Boolean(formik.errors.workTypeId)
+            }
+            helperText={formik.touched.workTypeId && formik.errors.workTypeId}
+          >
+            {workTypes.map((workType) => (
+              <MenuItem key={workType.id} value={workType.id}>
+                {workType.workType}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             fullWidth
             id="workProgramId"
             name="workProgramId"
-            type="number"
+            select
             label="Çalışma programı"
             value={formik.values.workProgramId}
-            onChange={formik.handleChange}
+            onChange={formik.handleChange("workProgramId")}
             error={
               formik.touched.workProgramId &&
               Boolean(formik.errors.workProgramId)
@@ -216,12 +256,18 @@ export default function JobAdvertisementAdd() {
             helperText={
               formik.touched.workProgramId && formik.errors.workProgramId
             }
-          />
+          >
+            {workPrograms.map((workProgram) => (
+              <MenuItem key={workProgram.id} value={workProgram.id}>
+                {workProgram.programName}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             fullWidth
             id="jobPositionId"
             name="jobPositionId"
-            type="number"
+            select
             label="İş pozisyonu"
             value={formik.values.jobPositionId}
             onChange={formik.handleChange}
@@ -232,16 +278,22 @@ export default function JobAdvertisementAdd() {
             helperText={
               formik.touched.jobPositionId && formik.errors.jobPositionId
             }
-          />
+          >
+            {jobPositions.map((jobPosition) => (
+              <MenuItem key={jobPosition.id} value={jobPosition.id}>
+                {jobPosition.positionName}
+              </MenuItem>
+            ))}
+          </TextField>
 
           <TextField
             fullWidth
             id="cityPlateNumber"
             name="cityPlateNumber"
-            label="Şehir plaka numarası"
-            type="text"
+            select
+            label="Şehir"
             value={formik.values.cityPlateNumber}
-            onChange={formik.handleChange}
+            onChange={formik.handleChange("cityPlateNumber")}
             error={
               formik.touched.cityPlateNumber &&
               Boolean(formik.errors.cityPlateNumber)
@@ -249,7 +301,13 @@ export default function JobAdvertisementAdd() {
             helperText={
               formik.touched.cityPlateNumber && formik.errors.cityPlateNumber
             }
-          />
+          >
+            {cities.map((city) => (
+              <MenuItem key={city.id} value={city.plateNumber}>
+                {city.cityName}
+              </MenuItem>
+            ))}
+          </TextField>
           <Button color="primary" variant="contained" fullWidth type="submit">
             Submit
           </Button>
