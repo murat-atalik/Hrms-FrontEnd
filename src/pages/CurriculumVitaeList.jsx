@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Icon } from "semantic-ui-react";
 import CurriculumVitaeService from "../services/curriculumVitaeService";
 import {
   Table,
@@ -13,6 +12,7 @@ import {
   Avatar,
   makeStyles,
 } from "@material-ui/core";
+import { FaLinkedin, FaGithub, FaSearch } from "react-icons/fa";
 
 export default function CurriculumVitaeList() {
   const [curriculumVitaes, setCurriculumVitaes] = useState([]);
@@ -106,7 +106,7 @@ export default function CurriculumVitaeList() {
                       target={"_blank"}
                       rel="noopener noreferrer"
                     >
-                      <Icon name="github" color="black" size="big" />
+                      <FaGithub color="black" />
                     </a>
                   </TableCell>
                   <TableCell>
@@ -115,7 +115,7 @@ export default function CurriculumVitaeList() {
                       target={"_blank"}
                       rel="noopener noreferrer"
                     >
-                      <Icon name="linkedin" color="blue" size="big" />
+                      <FaLinkedin />
                     </a>
                   </TableCell>
                   <TableCell>
@@ -124,7 +124,7 @@ export default function CurriculumVitaeList() {
                       target={"_blank"}
                       rel="noopener noreferrer"
                     >
-                      <Icon name="search" color="grey" size="big" />
+                      <FaSearch />
                     </a>
                   </TableCell>
                 </TableRow>

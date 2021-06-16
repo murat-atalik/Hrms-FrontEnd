@@ -1,16 +1,15 @@
-import { ButtonGroup, MenuItem } from "@material-ui/core";
+import { Button, MenuItem } from "@material-ui/core";
 import React from "react";
-import { Button, Menu } from "semantic-ui-react";
 
 export default function SignedOut(props) {
   return (
     <div>
       <MenuItem>
-        <Button variant="contained" color="grey" onClick={props.signIn}>
+        <Button variant="contained" color="primary" onClick={props.signIn}>
           Giriş yap
         </Button>
 
-        <Button variant="contained" color="green" href="#contained-buttons">
+        <Button variant="contained" color="secondary" href="#contained-buttons">
           Kayıt Ol
         </Button>
       </MenuItem>

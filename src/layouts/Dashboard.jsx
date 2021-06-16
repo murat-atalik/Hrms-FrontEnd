@@ -20,7 +20,7 @@ export default function DashBoard() {
         justify="space-between"
         alignItems="flex-start"
       >
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <SideMenu />
         </Grid>
         <Grid item xs={8}>

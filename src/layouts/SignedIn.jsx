@@ -1,6 +1,5 @@
 import { Menu, Button, MenuItem, Avatar } from "@material-ui/core";
 import React from "react";
-import Image from "material-ui-image";
 
 export default function SignedIn(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
