@@ -88,12 +88,12 @@ export default function JobAdvertisementList() {
                   <TableCell>{jobAdvert.workProgram?.programName}</TableCell>
                   <TableCell>{jobAdvert.city?.cityName}</TableCell>
                   <TableCell>{jobAdvert.jobPosition?.positionName}</TableCell>
-                  <TableCell>{jobAdvert.typeOfWork.workType}</TableCell>
+                  <TableCell>{jobAdvert.typeOfWork?.workType}</TableCell>
                   <TableCell>
                     {jobAdvert.minSalary + "-" + jobAdvert.maxSalary}
                   </TableCell>
-                  <TableCell>{jobAdvert.openPosition}</TableCell>{" "}
-                  <TableCell>{jobAdvert.applicationDeadline}</TableCell>
+                  <TableCell>{jobAdvert?.openPosition}</TableCell>
+                  <TableCell>{jobAdvert?.applicationDeadline}</TableCell>
                 </TableRow>
               );
             })}
