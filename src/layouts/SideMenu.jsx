@@ -10,7 +10,6 @@ export default function SideMenu() {
       <Paper
         style={{
           backgroundColor: "#1b1b1b",
-          padding: "1em",
         }}
       >
         <MenuList>
@@ -19,12 +18,10 @@ export default function SideMenu() {
             to="/employer"
             style={{
               color: "white",
-              textAlign: "center",
-              justifyContent: "center",
             }}
           >
             <p>
-              <ImBriefcase size="2em" /> <br /> İŞ VERENLER
+              <ImBriefcase size="2em" /> İŞ VERENLER
             </p>
           </MenuItem>
           <MenuItem
@@ -32,12 +29,10 @@ export default function SideMenu() {
             to="/candidate"
             style={{
               color: "white",
-              textAlign: "center",
-              justifyContent: "center",
             }}
           >
             <p>
-              <FaUser size="2em" /> <br /> İŞ ARAYANLAR
+              <FaUser size="2em" /> İŞ ARAYANLAR
             </p>
           </MenuItem>
           <MenuItem
@@ -45,12 +40,10 @@ export default function SideMenu() {
             to="/cv"
             style={{
               color: "white",
-              textAlign: "center",
-              justifyContent: "center",
             }}
           >
             <p>
-              <ImProfile size="2em" /> <br /> ÖZGEÇMİŞLER
+              <ImProfile size="2em" /> ÖZGEÇMİŞLER
             </p>
           </MenuItem>
           <MenuItem
@@ -58,12 +51,10 @@ export default function SideMenu() {
             to="/job"
             style={{
               color: "white",
-              textAlign: "center",
-              justifyContent: "center",
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> <br /> İŞ POZİSYONLARI
+              <FaFileAlt size="2em" /> İŞ POZİSYONLARI
             </p>
           </MenuItem>
           <MenuItem
@@ -71,25 +62,21 @@ export default function SideMenu() {
             to="/staff"
             style={{
               color: "white",
-              textAlign: "center",
-              justifyContent: "center",
             }}
           >
             <p>
-              <FaCogs size="2em" /> <br /> SİSTEM PERSONELLERİ
+              <FaCogs size="2em" /> Sistem Personelleri
             </p>
           </MenuItem>
           <MenuItem
             component={NavLink}
-            to="/jobadvert"
+            to="/jobadvertadd"
             style={{
               color: "white",
-              textAlign: "center",
-              justifyContent: "center",
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> <br /> İŞ İLANI Ekle
+              <FaFileAlt size="2em" /> İŞ İLANI Ekle
             </p>
           </MenuItem>
           <MenuItem
@@ -97,12 +84,10 @@ export default function SideMenu() {
             to="/jobadvertlist"
             style={{
               color: "white",
-              textAlign: "center",
-              justifyContent: "center",
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> <br /> İŞ İLANI Listele
+              <FaFileAlt size="2em" /> İŞ İLANI Ekle
             </p>
           </MenuItem>
         </MenuList>

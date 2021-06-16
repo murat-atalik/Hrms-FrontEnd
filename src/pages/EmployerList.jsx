@@ -73,6 +73,10 @@ export default function EmployeeList() {
                       href={"https://" + employer.company?.webAddress}
                       target={"_blank"}
                       rel="noopener noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                      }}
                     >
                       {employer.company?.webAddress}
                     </a>
@@ -82,6 +86,10 @@ export default function EmployeeList() {
                       href={"mailto:" + employer.email}
                       target={"_blank"}
                       rel="noopener noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                      }}
                     >
                       {employer.email}
                     </a>
@@ -92,6 +100,10 @@ export default function EmployeeList() {
                       href={"https://www.youtube.com"}
                       target={"_blank"}
                       rel="noopener noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                      }}
                     >
                       <CgSearchLoading color="black" size="3em" />
                     </a>

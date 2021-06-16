@@ -72,6 +72,10 @@ export default function CandidateList() {
                       href={"mailto:" + candidate.email}
                       target={"_blank"}
                       rel="noopener noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                      }}
                     >
                       {candidate.email}
                     </a>

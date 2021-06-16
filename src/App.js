@@ -8,19 +8,21 @@ import { useLocation } from "react-router-dom";
 function App() {
   const location = useLocation();
   return (
-    <div>
-      <Navi />
-      <div style={{ minHeight: "100vh" }}>
-        {location.pathname === "/home" || location.pathname === "/" ? (
-          <Home />
-        ) : (
-          <Container style={{ marginTop: "4em" }}>
-            <Dashboard />
-          </Container>
-        )}
-      </div>
-      <div>
-        <FooterBar />
+    <div className="App">
+      <div className="main">
+        <Navi />
+        <div style={{ minHeight: "100vh" }}>
+          {location.pathname === "/home" || location.pathname === "/" ? (
+            <Home />
+          ) : (
+            <Container style={{ marginTop: "6em" }}>
+              <Dashboard />
+            </Container>
+          )}
+        </div>
+        <div>
+          <FooterBar />
+        </div>
       </div>
     </div>
   );

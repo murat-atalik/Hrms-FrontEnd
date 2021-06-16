@@ -71,6 +71,10 @@ export default function StaffList() {
                       href={"mailto:" + staff.email}
                       target={"_blank"}
                       rel="noopener noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                      }}
                     >
                       {staff.email}
                     </a>

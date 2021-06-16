@@ -12,8 +12,8 @@ import {
   Avatar,
   makeStyles,
 } from "@material-ui/core";
-import { FaLinkedin, FaGithub, FaSearch } from "react-icons/fa";
-
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { CgSearchLoading } from "react-icons/cg";
 export default function CurriculumVitaeList() {
   const [curriculumVitaes, setCurriculumVitaes] = useState([]);
   useEffect(() => {
@@ -106,7 +106,7 @@ export default function CurriculumVitaeList() {
                       target={"_blank"}
                       rel="noopener noreferrer"
                     >
-                      <FaGithub color="black" />
+                      <FaGithub color="black" size="3em" />
                     </a>
                   </TableCell>
                   <TableCell>
@@ -115,7 +115,7 @@ export default function CurriculumVitaeList() {
                       target={"_blank"}
                       rel="noopener noreferrer"
                     >
-                      <FaLinkedin />
+                      <FaLinkedin color="#0e76a8" size="3em" />
                     </a>
                   </TableCell>
                   <TableCell>
@@ -124,7 +124,7 @@ export default function CurriculumVitaeList() {
                       target={"_blank"}
                       rel="noopener noreferrer"
                     >
-                      <FaSearch />
+                      <CgSearchLoading color="black" size="3em" />
                     </a>
                   </TableCell>
                 </TableRow>

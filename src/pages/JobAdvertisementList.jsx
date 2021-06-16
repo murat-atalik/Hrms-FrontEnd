@@ -78,6 +78,10 @@ export default function JobAdvertisementList() {
                       href={"https://" + jobAdvert.employer.company?.webAddress}
                       target={"_blank"}
                       rel="noopener noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                      }}
                     >
                       {jobAdvert.employer.company?.webAddress}
                     </a>

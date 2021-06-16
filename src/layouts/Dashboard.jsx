@@ -23,13 +23,13 @@ export default function DashBoard() {
         <Grid item xs={2}>
           <SideMenu />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <Route exact path="/job" component={JobPositionList} />
           <Route exact path="/candidate" component={CandidateList} />
           <Route exact path="/cv" component={CurriculumVitaeList} />
           <Route exact path="/employer" component={EmployerList} />
           <Route exact path="/staff" component={StaffList} />
-          <Route exact path="/jobadvert" component={JobAdvertisementAdd} />
+          <Route exact path="/jobadvertadd" component={JobAdvertisementAdd} />
           <Route exact path="/jobadvertlist" component={JobAdvertisementList} />
         </Grid>
       </Grid>

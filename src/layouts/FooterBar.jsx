@@ -5,15 +5,20 @@ export default function FooterBar() {
   return (
     <div>
       <Paper
-        square
         style={{
           backgroundColor: "#1b1b1b",
           color: "white",
-          padding: "1em",
+          padding: 3,
+          margin: 10,
         }}
       >
         <Container>
-          <List style={{ display: "flex", flexDirection: "row", padding: 0 }}>
+          <List
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
             <ListItem
               component={NavLink}
               to="#"
@@ -22,7 +27,7 @@ export default function FooterBar() {
               Site Map
             </ListItem>
             <ListItem
-              acomponent={NavLink}
+              component={NavLink}
               to="#"
               style={{ color: "whitesmoke" }}
             >

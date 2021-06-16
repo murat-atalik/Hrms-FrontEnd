@@ -36,29 +36,7 @@ export default function Navi() {
   const classes = useStyles();
   return (
     <div>
-      {/* <Menu inverted fixed="top" size="large">
-        <Container>
-          <Menu.Item as={NavLink} to="/home">
-            <Icon name="home" size="large" />
-            Ana sayfa
-          </Menu.Item>
-          <Menu.Item>
-            <Icon name="mail" size="large" />
-            Mesajlar
-          </Menu.Item>
-          <Menu.Menu position="right">
-            <Menu.Item>
-              {isAuthenticated ? (
-                <SignedIn signOut={handleSignOut} />
-              ) : (
-                <SignedOut signIn={handleSignIn} />
-              )}
-            </Menu.Item>
-          </Menu.Menu>
-        </Container>
-      </Menu>*/}
-
-      <AppBar position="static" style={{ backgroundColor: "#1b1b1b" }}>
+      <AppBar position="fixed" style={{ backgroundColor: "#1b1b1b" }}>
         <Toolbar>
           <IconButton
             edge="start"

@@ -77,7 +77,6 @@ export default function JobPositionList() {
                       rel="noopener noreferrer"
                     >
                       <CgSearchLoading color="black" size="3em" />
-                      İncele
                     </a>
                   </TableCell>
                 </TableRow>
