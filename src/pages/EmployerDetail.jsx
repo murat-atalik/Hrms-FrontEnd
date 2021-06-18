@@ -16,6 +16,7 @@ import EmployerService from "../services/employerService";
 import JobAdvertisementService from "../services/jobAdvertisementService";
 
 export default function EmployerDetail() {
+  let { id } = useParams();
   const [employer, setEmployer] = useState({});
   useEffect(() => {
     let employerService = new EmployerService();
@@ -30,7 +31,6 @@ export default function EmployerDetail() {
       .getByEmployerId(id)
       .then((result) => setJobAdverts(result.data.data));
   }, []);
-  let { id } = useParams();
 
   return (
     <div>

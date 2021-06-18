@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-
-import { MenuItem } from "@material-ui/core";
 
 export default function EmployerRegister() {
   const validationSchema = yup.object({
