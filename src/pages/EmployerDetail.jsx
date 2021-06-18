@@ -17,7 +17,6 @@ import { CgSearchLoading } from "react-icons/cg";
 import { Link, useParams } from "react-router-dom";
 import EmployerService from "../services/employerService";
 import JobAdvertisementService from "../services/jobAdvertisementService";
-import { FixedSizeList } from "react-window";
 
 export default function EmployerDetail() {
   const [employer, setEmployer] = useState({});
