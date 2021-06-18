@@ -1,10 +1,7 @@
 import {
   Grid,
-  List,
   Table,
   TableCell,
-  ListItemText,
-  ListItem,
   Paper,
   TableHead,
   TableBody,
