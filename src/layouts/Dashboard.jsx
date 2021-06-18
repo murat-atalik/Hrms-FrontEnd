@@ -9,6 +9,10 @@ import SideMenu from "./SideMenu";
 import { Grid } from "@material-ui/core";
 import JobAdvertisementAdd from "../pages/JobAdvertisementAdd";
 import JobAdvertisementList from "../pages/JobAdvertisementList";
+import CandidateRegister from "../pages/CandidateRegister";
+import StaffRegister from "../pages/StaffRegister";
+import EmployerRegister from "../pages/EmployerRegister";
+import EmployerDetail from "../pages/EmployerDetail";
 
 export default function DashBoard() {
   return (
@@ -27,10 +31,18 @@ export default function DashBoard() {
           <Route exact path="/job" component={JobPositionList} />
           <Route exact path="/candidate" component={CandidateList} />
           <Route exact path="/cv" component={CurriculumVitaeList} />
-          <Route exact path="/employer" component={EmployerList} />
+          <Route exact path="/employers" component={EmployerList} />
+          <Route path="/employers/:id" component={EmployerDetail} />
           <Route exact path="/staff" component={StaffList} />
           <Route exact path="/jobadvertadd" component={JobAdvertisementAdd} />
           <Route exact path="/jobadvertlist" component={JobAdvertisementList} />
+          <Route
+            exact
+            path="/candidateregister"
+            component={CandidateRegister}
+          />
+          <Route exact path="/staffregister" component={StaffRegister} />
+          <Route exact path="/employerregister" component={EmployerRegister} />
         </Grid>
       </Grid>
     </div>

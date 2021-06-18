@@ -10,6 +10,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { CgSearchLoading } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 export default function EmployeeList() {
   const [employers, setEmployers] = useState([]);
@@ -96,17 +97,9 @@ export default function EmployeeList() {
                   </TableCell>
                   <TableCell>{employer.phoneNumber}</TableCell>
                   <TableCell>
-                    <a
-                      href={"https://www.youtube.com"}
-                      target={"_blank"}
-                      rel="noopener noreferrer"
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                      }}
-                    >
+                    <Link to={`/employers/${employer.id}`}>
                       <CgSearchLoading color="black" size="3em" />
-                    </a>
+                    </Link>
                   </TableCell>
                 </TableRow>
               );

@@ -15,7 +15,7 @@ export default function SideMenu() {
         <MenuList>
           <MenuItem
             component={NavLink}
-            to="/employer"
+            to="/employers"
             style={{
               color: "white",
             }}

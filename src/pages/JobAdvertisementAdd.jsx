@@ -6,12 +6,13 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import JobAdvertisementService from "../services/jobAdvertisementService";
 
-import { MenuItem } from "@material-ui/core";
+import { Grid, MenuItem } from "@material-ui/core";
 import CityService from "../services/cityService";
 
 import JobPositionService from "../services/jobPositionService";
 import WorkProgramService from "../services/workProgramService";
 import WorkTypeService from "../services/workTypeService";
+import { Paper } from "@material-ui/core";
 
 export default function JobAdvertisementAdd() {
   const jobService = new JobAdvertisementService();
@@ -147,10 +148,11 @@ export default function JobAdvertisementAdd() {
 
   return (
     <div>
-      <div>
+      <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
         <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
+            multiline
             id="jobDescription"
             name="jobDescription"
             label="İş Açıklaması"
@@ -165,154 +167,219 @@ export default function JobAdvertisementAdd() {
               formik.touched.jobDescription && formik.errors.jobDescription
             }
           />
-          <TextField
-            fullWidth
-            id="minSalary"
-            name="minSalary"
-            type="number"
-            label="En düşük maaş"
-            value={formik.values.minSalary}
-            onChange={formik.handleChange}
-            error={formik.touched.minSalary && Boolean(formik.errors.minSalary)}
-            helperText={formik.touched.minSalary && formik.errors.minSalary}
-          />
-          <TextField
-            fullWidth
-            id="maxSalary"
-            name="maxSalary"
-            type="number"
-            label="En yüksek maaş"
-            value={formik.values.maxSalary}
-            onChange={formik.handleChange}
-            error={formik.touched.maxSalary && Boolean(formik.errors.maxSalary)}
-            helperText={formik.touched.maxSalary && formik.errors.maxSalary}
-          />
-          <TextField
-            fullWidth
-            id="openPosition"
-            name="openPosition"
-            type="number"
-            label="Açık pozisyon sayısı"
-            value={formik.values.openPosition}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.openPosition && Boolean(formik.errors.openPosition)
-            }
-            helperText={
-              formik.touched.openPosition && formik.errors.openPosition
-            }
-          />
-          <TextField
-            fullWidth
-            id="applicationDeadline"
-            name="applicationDeadline"
-            type="date"
-            label="Son Başvuru Tarihi"
-            value={formik.values.applicationDeadline}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.applicationDeadline &&
-              Boolean(formik.errors.applicationDeadline)
-            }
-            helperText={
-              formik.touched.applicationDeadline &&
-              formik.errors.applicationDeadline
-            }
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            fullWidth
-            id="workTypeId"
-            name="workTypeId"
-            select
-            label="Çalışma şekli"
-            value={formik.values.workTypeId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.workTypeId && Boolean(formik.errors.workTypeId)
-            }
-            helperText={formik.touched.workTypeId && formik.errors.workTypeId}
+          <Grid
+            space={2}
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="flex-start"
           >
-            {workTypes.map((workType) => (
-              <MenuItem key={workType.id} value={workType.id}>
-                {workType.workType}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            fullWidth
-            id="workProgramId"
-            name="workProgramId"
-            select
-            label="Çalışma programı"
-            value={formik.values.workProgramId}
-            onChange={formik.handleChange("workProgramId")}
-            error={
-              formik.touched.workProgramId &&
-              Boolean(formik.errors.workProgramId)
-            }
-            helperText={
-              formik.touched.workProgramId && formik.errors.workProgramId
-            }
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                style={{ margin: "1em" }}
+                id="minSalary"
+                name="minSalary"
+                type="number"
+                label="En düşük maaş"
+                value={formik.values.minSalary}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.minSalary && Boolean(formik.errors.minSalary)
+                }
+                helperText={formik.touched.minSalary && formik.errors.minSalary}
+              />
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                style={{ margin: "1em" }}
+                id="maxSalary"
+                name="maxSalary"
+                type="number"
+                label="En yüksek maaş"
+                value={formik.values.maxSalary}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.maxSalary && Boolean(formik.errors.maxSalary)
+                }
+                helperText={formik.touched.maxSalary && formik.errors.maxSalary}
+              />
+            </Grid>
+          </Grid>
+          <Grid
+            space={2}
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="flex-start"
           >
-            {workPrograms.map((workProgram) => (
-              <MenuItem key={workProgram.id} value={workProgram.id}>
-                {workProgram.programName}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            fullWidth
-            id="jobPositionId"
-            name="jobPositionId"
-            select
-            label="İş pozisyonu"
-            value={formik.values.jobPositionId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.jobPositionId &&
-              Boolean(formik.errors.jobPositionId)
-            }
-            helperText={
-              formik.touched.jobPositionId && formik.errors.jobPositionId
-            }
-          >
-            {jobPositions.map((jobPosition) => (
-              <MenuItem key={jobPosition.id} value={jobPosition.id}>
-                {jobPosition.positionName}
-              </MenuItem>
-            ))}
-          </TextField>
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                style={{ margin: "1em" }}
+                id="openPosition"
+                name="openPosition"
+                type="number"
+                label="Açık pozisyon sayısı"
+                value={formik.values.openPosition}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.openPosition &&
+                  Boolean(formik.errors.openPosition)
+                }
+                helperText={
+                  formik.touched.openPosition && formik.errors.openPosition
+                }
+              />
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                style={{ margin: "1em" }}
+                id="jobPositionId"
+                name="jobPositionId"
+                select
+                label="İş pozisyonu"
+                value={formik.values.jobPositionId}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.jobPositionId &&
+                  Boolean(formik.errors.jobPositionId)
+                }
+                helperText={
+                  formik.touched.jobPositionId && formik.errors.jobPositionId
+                }
+              >
+                {jobPositions.map((jobPosition) => (
+                  <MenuItem key={jobPosition.id} value={jobPosition.id}>
+                    {jobPosition.positionName}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
 
-          <TextField
-            fullWidth
-            id="cityPlateNumber"
-            name="cityPlateNumber"
-            select
-            label="Şehir"
-            value={formik.values.cityPlateNumber}
-            onChange={formik.handleChange("cityPlateNumber")}
-            error={
-              formik.touched.cityPlateNumber &&
-              Boolean(formik.errors.cityPlateNumber)
-            }
-            helperText={
-              formik.touched.cityPlateNumber && formik.errors.cityPlateNumber
-            }
+          <Grid
+            space={2}
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="flex-start"
           >
-            {cities.map((city) => (
-              <MenuItem key={city.id} value={city.plateNumber}>
-                {city.cityName}
-              </MenuItem>
-            ))}
-          </TextField>
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                style={{ margin: "1em" }}
+                id="workTypeId"
+                name="workTypeId"
+                select
+                label="Çalışma şekli"
+                value={formik.values.workTypeId}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.workTypeId && Boolean(formik.errors.workTypeId)
+                }
+                helperText={
+                  formik.touched.workTypeId && formik.errors.workTypeId
+                }
+              >
+                {workTypes.map((workType) => (
+                  <MenuItem key={workType.id} value={workType.id}>
+                    {workType.workType}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                style={{ margin: "1em" }}
+                id="workProgramId"
+                name="workProgramId"
+                select
+                label="Çalışma programı"
+                value={formik.values.workProgramId}
+                onChange={formik.handleChange("workProgramId")}
+                error={
+                  formik.touched.workProgramId &&
+                  Boolean(formik.errors.workProgramId)
+                }
+                helperText={
+                  formik.touched.workProgramId && formik.errors.workProgramId
+                }
+              >
+                {workPrograms.map((workProgram) => (
+                  <MenuItem key={workProgram.id} value={workProgram.id}>
+                    {workProgram.programName}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
+          <Grid
+            space={2}
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="flex-start"
+          >
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                style={{ margin: "1em" }}
+                id="cityPlateNumber"
+                name="cityPlateNumber"
+                select
+                label="Şehir"
+                value={formik.values.cityPlateNumber}
+                onChange={formik.handleChange("cityPlateNumber")}
+                error={
+                  formik.touched.cityPlateNumber &&
+                  Boolean(formik.errors.cityPlateNumber)
+                }
+                helperText={
+                  formik.touched.cityPlateNumber &&
+                  formik.errors.cityPlateNumber
+                }
+              >
+                {cities.map((city) => (
+                  <MenuItem key={city.id} value={city.plateNumber}>
+                    {city.cityName}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                style={{ margin: "1em" }}
+                id="applicationDeadline"
+                name="applicationDeadline"
+                type="date"
+                label="Son Başvuru Tarihi"
+                value={formik.values.applicationDeadline}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.applicationDeadline &&
+                  Boolean(formik.errors.applicationDeadline)
+                }
+                helperText={
+                  formik.touched.applicationDeadline &&
+                  formik.errors.applicationDeadline
+                }
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+          </Grid>
+
           <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
+            İş İlanı Oluştur
           </Button>
         </form>
-      </div>
+      </Paper>
     </div>
   );
 }
