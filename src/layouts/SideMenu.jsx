@@ -87,7 +87,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> İŞ İLANILARI
+              <FaFileAlt size="2em" /> İŞ İLANLARI
             </p>
           </MenuItem>
         </MenuList>
