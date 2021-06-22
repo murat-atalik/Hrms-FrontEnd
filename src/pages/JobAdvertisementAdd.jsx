@@ -154,6 +154,7 @@ export default function JobAdvertisementAdd() {
             fullWidth
             multiline
             id="jobDescription"
+            style={{ margin: "1em" }}
             name="jobDescription"
             label="İş Açıklaması"
             type="text"
@@ -375,7 +376,13 @@ export default function JobAdvertisementAdd() {
             </Grid>
           </Grid>
 
-          <Button color="primary" variant="contained" fullWidth type="submit">
+          <Button
+            color="primary"
+            variant="contained"
+            style={{ margin: "1em" }}
+            fullWidth
+            type="submit"
+          >
             İş İlanı Oluştur
           </Button>
         </form>
