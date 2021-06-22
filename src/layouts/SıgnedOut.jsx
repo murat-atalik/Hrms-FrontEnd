@@ -19,7 +19,7 @@ export default function SignedOut(props) {
           variant="contained"
           color="primary"
           component={NavLink}
-          to="/Candidateregister"
+          to="/candidateregister"
           style={{
             color: "white",
           }}
