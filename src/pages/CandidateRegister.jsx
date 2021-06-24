@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import { Form, Formik, useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
-import { MenuItem } from "@material-ui/core";
+import { Grid, MenuItem } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
+import FormikTextField from "../utilities/customFormComponents/FormikTextField";
+import FormikDAtePicker from "../utilities/customFormComponents/FormikDatePicker";
+import FormikButton from "../utilities/customFormComponents/FormikButton";
 
 export default function CandidateRegister() {
   const validationSchema = yup.object({
     email: yup
       .string("E-posta adresinizi girin")
-      .required("E-posta adresi gerekli!"),
+      .required("E-posta adresi gerekli!")
+      .email("Geçersiz e-posta"),
     firstName: yup.string("Adınızı girin").required("Adınız gerekli!"),
     lastName: yup.string("Soyadınızı girin").required("Sayadınız gerekli!"),
 
@@ -27,11 +31,7 @@ export default function CandidateRegister() {
     rePassword: yup
       .string("Şifre ")
       .required("Şifre gerekli")
-      .test(
-        "rePassword equal password",
-        "Girilen şifreler aynı olmak zorunda!",
-        (value) => value === formik.values.password
-      ),
+      .oneOf([yup.ref("password"), null], "şifreler aynı olmak zorunda"),
     birthday: yup
       .string("Doğum tarihiniz")
       .required("Doğum tarihiniz gerekli!"),
@@ -47,12 +47,12 @@ export default function CandidateRegister() {
       nationalityId: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      //jobService.add(values).then((result) => console.log(result.data.data));
-      //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
-    },
   });
+  const handleSubmit = (values) => {
+    alert(JSON.stringify(values, null, 2));
+    //jobService.add(values).then((result) => console.log(result.data.data));
+    //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+  };
 
   return (
     <div>
@@ -62,121 +62,57 @@ export default function CandidateRegister() {
           backgroundColor: "#E5E5E5",
         }}
       >
-        <form onSubmit={formik.handleSubmit}>
-          <TextField
-            fullWidth
-            style={{
-              marginTop: "1em",
-            }}
-            id="email"
-            name="email"
-            label="E-Posta Adresi"
-            type="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-          />
-          <TextField
-            fullWidth
-            style={{
-              marginTop: "1em",
-            }}
-            id="firstName"
-            name="firstName"
-            label="Ad"
-            type="text"
-            value={formik.values.firstName}
-            onChange={formik.handleChange}
-            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-            helperText={formik.touched.firstName && formik.errors.firstName}
-          />
-          <TextField
-            fullWidth
-            style={{
-              marginTop: "1em",
-            }}
-            id="lastName"
-            name="lastName"
-            label="Soyad"
-            type="text"
-            value={formik.values.lastName}
-            onChange={formik.handleChange}
-            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-            helperText={formik.touched.lastName && formik.errors.lastName}
-          />
-          <TextField
-            fullWidth
-            style={{
-              marginTop: "1em",
-            }}
-            id="password"
-            name="password"
-            label="Şifre"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-          <TextField
-            fullWidth
-            style={{
-              marginTop: "1em",
-            }}
-            id="rePassword"
-            name="rePassword"
-            label="Şifre tekrarı"
-            type="password"
-            value={formik.values.rePassword}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.rePassword && Boolean(formik.errors.rePassword)
-            }
-            helperText={formik.touched.rePassword && formik.errors.rePassword}
-          />
-          <TextField
-            fullWidth
-            style={{
-              marginTop: "1em",
-            }}
-            id="nationalityId"
-            name="nationalityId"
-            label="Tc kimlik No"
-            type="number"
-            value={formik.values.nationalityId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.nationalityId &&
-              Boolean(formik.errors.nationalityId)
-            }
-            helperText={
-              formik.touched.nationalityId && formik.errors.nationalityId
-            }
-          />
-          <TextField
-            fullWidth
-            style={{
-              marginTop: "1em",
-              marginBottom: "2em",
-            }}
-            id="birthday"
-            name="birthday"
-            label="Doğum tarihi"
-            type="date"
-            value={formik.values.birthday}
-            onChange={formik.handleChange}
-            error={formik.touched.birthday && Boolean(formik.errors.birthday)}
-            helperText={formik.touched.birthday && formik.errors.birthday}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
+        <Formik
+          initialValues={formik.initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <FormikTextField
+                  name="email"
+                  type="email"
+                  label="E-Posta Adresi"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="firstName" label="Ad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="lastName" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField
+                  name="password"
+                  type="password"
+                  label="Şifre"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField
+                  name="rePassword"
+                  type="password"
+                  label="Şifre tekrarı"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField
+                  name="nationalityId"
+                  type="number"
+                  label="Tc kimlik No"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikDAtePicker name="birthday" label="Doğum tarihi" />
+              </Grid>
 
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Kayıt OL
-          </Button>
-        </form>
+              <Grid item xs={12}>
+                <FormikButton>Kayıt ol</FormikButton>
+              </Grid>
+            </Grid>
+          </Form>
+        </Formik>
       </Paper>
     </div>
   );

@@ -4,7 +4,6 @@ import { TextField } from "@material-ui/core";
 
 export default function FormikTextField({ name, ...props }) {
   const [field, meta] = useField(name);
-  console.log(field);
 
   const configTextField = {
     ...field,

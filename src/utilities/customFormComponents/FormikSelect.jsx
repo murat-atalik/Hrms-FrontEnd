@@ -3,9 +3,8 @@ import { TextField, MenuItem } from "@material-ui/core";
 import { useField, useFormikContext } from "formik";
 
 export default function FormikSelect({ name, options, ...props }) {
-  const [field, meta] = useField(name);
   const { setFieldValue } = useFormikContext();
-  console.log(field);
+  const [field, meta] = useField(name);
 
   const handleChange = (evt) => {
     const { value } = evt.target;
@@ -24,12 +23,13 @@ export default function FormikSelect({ name, options, ...props }) {
     configTextField.error = true;
     configTextField.helperText = meta.error;
   }
+
   return (
     <TextField {...configTextField}>
-      {options.map((item) => {
+      {options.map((option) => {
         return (
-          <MenuItem key={item.id} value={item.roleName}>
-            {item.roleName}
+          <MenuItem key={option.id} value={option.id}>
+            {option.value}
           </MenuItem>
         );
       })}

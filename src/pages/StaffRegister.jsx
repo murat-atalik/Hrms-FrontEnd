@@ -6,15 +6,16 @@ import TextField from "@material-ui/core/TextField";
 
 import { Grid, MenuItem } from "@material-ui/core";
 import RoleService from "../services/roleService";
-import FormikTextField from "../utilities/customFormCom/FormikTextField";
-import FormikSelect from "../utilities/customFormCom/FormikSelect";
-import FormikButton from "../utilities/customFormCom/FormikButton";
+import FormikTextField from "../utilities/customFormComponents/FormikTextField";
+import FormikSelect from "../utilities/customFormComponents/FormikSelect";
+import FormikButton from "../utilities/customFormComponents/FormikButton";
 
 export default function StaffRegister() {
   const validationSchema = yup.object({
     email: yup
       .string("E-posta adresinizi girin")
-      .required("E-posta adresi gerekli!"),
+      .required("E-posta adresi gerekli!")
+      .email("Geçersiz e-posta"),
     firstName: yup.string("Adınızı girin").required("Adınız gerekli!"),
     lastName: yup.string("Soyadınızı girin").required("Sayadınız gerekli!"),
 
@@ -38,30 +39,37 @@ export default function StaffRegister() {
       roleName: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      //jobService.add(values).then((result) => console.log(result.data.data));
-      //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
-    },
   });
   const [roles, setRoles] = useState([]);
   useEffect(() => {
     let roleSeervice = new RoleService();
     roleSeervice.getRoles().then((result) => setRoles(result.data.data));
   }, []);
+  const tRoles = roles.map(({ id, roleName: value }) => ({
+    id,
+    value,
+  }));
+  const handleSubmit = (values) => {
+    alert(JSON.stringify(values, null, 2));
+    //jobService.add(values).then((result) => console.log(result.data.data));
+    //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+  };
+
   return (
     <div>
       <Formik
         initialValues={formik.initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          alert(JSON.stringify(values, null, 2));
-        }}
+        onSubmit={handleSubmit}
       >
         <Form>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <FormikTextField name="email" label="E-Posta Adresi" />
+              <FormikTextField
+                name="email"
+                type="email"
+                label="E-Posta Adresi"
+              />
             </Grid>
             <Grid item xs={12}>
               <FormikTextField name="firstName" label="Ad" />
@@ -83,7 +91,7 @@ export default function StaffRegister() {
               <FormikSelect
                 name="roleName"
                 label="Yönetici Rolü"
-                options={roles}
+                options={tRoles}
               />
             </Grid>
             <Grid item xs={12}>
