@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
+import CandidateService from "../../services/candidateService";
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  TableRow,
+  Paper,
+  makeStyles,
+} from "@material-ui/core";
 
-import StaffService from "../services/staffService";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core";
-
-export default function StaffList() {
-  const [staffs, setStaffs] = useState([]);
+export default function CandidateList() {
+  const [candidates, setCandidates] = useState([]);
   useEffect(() => {
-    let staffService = new StaffService();
-    staffService.getStaffs().then((result) => setStaffs(result.data.data));
+    let candidateService = new CandidateService();
+    candidateService
+      .getCandidate()
+      .then((result) => setCandidates(result.data.data));
   }, []);
-
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, staffs.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, candidates.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -49,26 +51,25 @@ export default function StaffList() {
             <TableRow>
               <TableCell>Adı</TableCell>
               <TableCell>Soyadı</TableCell>
-              <TableCell>E-Posta adresi</TableCell>
-              <TableCell>Yetki Seviyesi</TableCell>
+              <TableCell>Mail adresi</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {(rowsPerPage > 0
-              ? staffs.slice(
+              ? candidates.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
-              : staffs
-            ).map((staff) => {
+              : candidates
+            ).map((candidate) => {
               return (
-                <TableRow key={staff.id}>
-                  <TableCell>{staff.firstName}</TableCell>
-                  <TableCell>{staff.lastName}</TableCell>
+                <TableRow hover key={candidate.id}>
+                  <TableCell>{candidate.firstName}</TableCell>
+                  <TableCell>{candidate.lastName}</TableCell>
                   <TableCell>
                     <a
-                      href={"mailto:" + staff.email}
+                      href={"mailto:" + candidate.email}
                       target={"_blank"}
                       rel="noopener noreferrer"
                       style={{
@@ -76,28 +77,32 @@ export default function StaffList() {
                         color: "black",
                       }}
                     >
-                      {staff.email}
+                      {candidate.email}
                     </a>
                   </TableCell>
-                  <TableCell>{staff.role?.roleName}</TableCell>
                 </TableRow>
               );
             })}
             {/* {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={4} />
+                <TableCell colSpan={3} />
               </TableRow>
             )} */}
           </TableBody>
         </Table>
       </TableContainer>
+
       <Paper>
         <TablePagination
           rowsPerPageOptions={[10, 20, 50, 100, { label: "All", value: -1 }]}
           component="div"
-          count={staffs.length}
+          count={candidates.length}
           rowsPerPage={rowsPerPage}
           page={page}
+          SelectProps={{
+            inputProps: { "aria-label": "rows per page" },
+            native: true,
+          }}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />

@@ -5,12 +5,14 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 import { Grid, MenuItem } from "@material-ui/core";
-import RoleService from "../services/roleService";
-import FormikTextField from "../utilities/customFormComponents/FormikTextField";
-import FormikSelect from "../utilities/customFormComponents/FormikSelect";
-import FormikButton from "../utilities/customFormComponents/FormikButton";
+import RoleService from "../../services/roleService";
+import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
+import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
+import FormikButton from "../../utilities/customFormComponents/FormikButton";
+import StaffService from "../../services/staffService";
 
 export default function StaffRegister() {
+  let staffService = new StaffService();
   const validationSchema = yup.object({
     email: yup
       .string("E-posta adresinizi girin")
@@ -27,7 +29,7 @@ export default function StaffRegister() {
       .string("Şifre ")
       .required("Şifre gerekli")
       .oneOf([yup.ref("password"), null], "şifreler aynı olmak zorunda"),
-    roleName: yup.string("Sistem rolü").required("Sistem rolü gerekli!"),
+    roleId: yup.string("Sistem rolü").required("Sistem rolü gerekli!"),
   });
   const formik = useFormik({
     initialValues: {
@@ -36,14 +38,14 @@ export default function StaffRegister() {
       rePassword: "",
       firstName: "",
       lastName: "",
-      roleName: "",
+      roleId: "",
     },
     validationSchema: validationSchema,
   });
   const [roles, setRoles] = useState([]);
   useEffect(() => {
-    let roleSeervice = new RoleService();
-    roleSeervice.getRoles().then((result) => setRoles(result.data.data));
+    let roleService = new RoleService();
+    roleService.getRoles().then((result) => setRoles(result.data.data));
   }, []);
   const tRoles = roles.map(({ id, roleName: value }) => ({
     id,
@@ -51,7 +53,7 @@ export default function StaffRegister() {
   }));
   const handleSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
-    //jobService.add(values).then((result) => console.log(result.data.data));
+    staffService.add(values).then((result) => console.log(result.data.data));
     //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
   };
 
@@ -89,7 +91,7 @@ export default function StaffRegister() {
             </Grid>
             <Grid item xs={12}>
               <FormikSelect
-                name="roleName"
+                name="roleId"
                 label="Yönetici Rolü"
                 options={tRoles}
               />

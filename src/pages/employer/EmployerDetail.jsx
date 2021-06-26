@@ -12,8 +12,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { CgSearchLoading } from "react-icons/cg";
 import { Link, useParams } from "react-router-dom";
-import EmployerService from "../services/employerService";
-import JobAdvertisementService from "../services/jobAdvertisementService";
+import EmployerService from "../../services/employerService";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
 
 export default function EmployerDetail() {
   let { id } = useParams();

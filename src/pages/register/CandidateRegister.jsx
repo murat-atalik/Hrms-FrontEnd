@@ -6,9 +6,9 @@ import TextField from "@material-ui/core/TextField";
 
 import { Grid, MenuItem } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
-import FormikTextField from "../utilities/customFormComponents/FormikTextField";
-import FormikDAtePicker from "../utilities/customFormComponents/FormikDatePicker";
-import FormikButton from "../utilities/customFormComponents/FormikButton";
+import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
+import FormikDAtePicker from "../../utilities/customFormComponents/FormikDatePicker";
+import FormikButton from "../../utilities/customFormComponents/FormikButton";
 
 export default function CandidateRegister() {
   const validationSchema = yup.object({

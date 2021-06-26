@@ -1,18 +1,25 @@
 import React from "react";
-import JobPositionList from "../pages/JobPositionList";
-import CandidateList from "../pages/CandidateList";
-import CurriculumVitaeList from "../pages/CurriculumVitaeList";
-import EmployerList from "../pages/EmployerList";
-import StaffList from "../pages/StaffList";
 import { Route } from "react-router";
-import SideMenu from "./SideMenu";
 import { Grid } from "@material-ui/core";
-import JobAdvertisementAdd from "../pages/JobAdvertisementAdd";
-import JobAdvertisementList from "../pages/JobAdvertisementList";
-import CandidateRegister from "../pages/CandidateRegister";
-import StaffRegister from "../pages/StaffRegister";
-import EmployerRegister from "../pages/EmployerRegister";
-import EmployerDetail from "../pages/EmployerDetail";
+import SideMenu from "./SideMenu";
+
+import JobPositionList from "../pages/JobPositionList";
+import CandidateList from "../pages/candidate/CandidateList";
+import CurriculumVitaeList from "../pages/curriculumVitae/CurriculumVitaeList";
+
+import StaffList from "../pages/staff/StaffList";
+
+import JobAdvertisementAdd from "../pages/jobAdvertisement/JobAdvertisementAdd";
+import JobAdvertisementList from "../pages/jobAdvertisement/JobAdvertisementList";
+
+import EmployerList from "../pages/employer/EmployerList";
+import EmployerDetail from "../pages/employer/EmployerDetail";
+
+import CandidateRegister from "../pages/register/CandidateRegister";
+import StaffRegister from "../pages/register/StaffRegister";
+import EmployerRegister from "../pages/register/EmployerRegister";
+import CurriculumVitaeCreate from "../pages/curriculumVitae/CurriculumVitaeCreate";
+import StaffUpdate from "../pages/staff/StaffUpdate";
 
 export default function DashBoard() {
   return (
@@ -41,8 +48,10 @@ export default function DashBoard() {
             path="/candidateregister"
             component={CandidateRegister}
           />
-          <Route exact path="/staffregister" component={StaffRegister} />
+          <Route exact path="/staff/register" component={StaffRegister} />
           <Route exact path="/employerregister" component={EmployerRegister} />
+          <Route exact path="/cv-create" component={CurriculumVitaeCreate} />
+          <Route exact path="/staff/update/:id" component={StaffUpdate} />
         </Grid>
       </Grid>
     </div>

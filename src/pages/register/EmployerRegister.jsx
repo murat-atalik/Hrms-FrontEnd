@@ -2,9 +2,9 @@ import React from "react";
 import { Form, Formik, useFormik } from "formik";
 import * as yup from "yup";
 
-import FormikTextField from "../utilities/customFormComponents/FormikTextField";
+import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 import { Grid, Paper } from "@material-ui/core";
-import FormikButton from "../utilities/customFormComponents/FormikButton";
+import FormikButton from "../../utilities/customFormComponents/FormikButton";
 
 export default function EmployerRegister() {
   const validationSchema = yup.object({

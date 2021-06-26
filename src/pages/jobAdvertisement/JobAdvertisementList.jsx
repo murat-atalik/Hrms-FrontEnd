@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import EmployerService from "../services/employerService";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -9,23 +8,22 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { CgSearchLoading } from "react-icons/cg";
-import { Link } from "react-router-dom";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
 
-export default function EmployeeList() {
-  const [employers, setEmployers] = useState([]);
+export default function JobAdvertisementList() {
+  const [jobAdverts, setJobAdverts] = useState([]);
   useEffect(() => {
-    let employerService = new EmployerService();
-    employerService
-      .getEmployer()
-      .then((result) => setEmployers(result.data.data));
+    let jobAdvertisementService = new JobAdvertisementService();
+    jobAdvertisementService
+      .getJobAdvert()
+      .then((result) => setJobAdverts(result.data.data));
   }, []);
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, employers.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, jobAdverts.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -52,26 +50,32 @@ export default function EmployeeList() {
             <TableRow>
               <TableCell>Şirket Adı</TableCell>
               <TableCell>Websitesi</TableCell>
-              <TableCell>Mail adresi</TableCell>
-              <TableCell>Telefon numarası</TableCell>
-              <TableCell>İncele</TableCell>
+              <TableCell>Çalışma programı</TableCell>
+              <TableCell>Şehir</TableCell>
+              <TableCell>Pozisyon</TableCell>
+              <TableCell>Çalışma Türü</TableCell>
+              <TableCell>Maaş</TableCell>
+              <TableCell>Açık Pozisyon</TableCell>
+              <TableCell>son Başvuru</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {(rowsPerPage > 0
-              ? employers.slice(
+              ? jobAdverts.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
-              : employers
-            ).map((employer) => {
+              : jobAdverts
+            ).map((jobAdvert) => {
               return (
-                <TableRow hover key={employer.id}>
-                  <TableCell>{employer.company?.companyName}</TableCell>
+                <TableRow hover key={jobAdvert.id}>
+                  <TableCell>
+                    {jobAdvert.employer.company.companyName}
+                  </TableCell>
                   <TableCell>
                     <a
-                      href={"https://" + employer.company?.webAddress}
+                      href={"https://" + jobAdvert.employer.company?.webAddress}
                       target={"_blank"}
                       rel="noopener noreferrer"
                       style={{
@@ -79,28 +83,18 @@ export default function EmployeeList() {
                         color: "black",
                       }}
                     >
-                      {employer.company?.webAddress}
+                      {jobAdvert.employer.company?.webAddress}
                     </a>
                   </TableCell>
+                  <TableCell>{jobAdvert.workProgram?.programName}</TableCell>
+                  <TableCell>{jobAdvert.city?.cityName}</TableCell>
+                  <TableCell>{jobAdvert.jobPosition?.positionName}</TableCell>
+                  <TableCell>{jobAdvert.typeOfWork?.workType}</TableCell>
                   <TableCell>
-                    <a
-                      href={"mailto:" + employer.email}
-                      target={"_blank"}
-                      rel="noopener noreferrer"
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                      }}
-                    >
-                      {employer.email}
-                    </a>
+                    {jobAdvert.minSalary + "-" + jobAdvert.maxSalary}
                   </TableCell>
-                  <TableCell>{employer.phoneNumber}</TableCell>
-                  <TableCell>
-                    <Link to={`/employers/${employer.id}`}>
-                      <CgSearchLoading color="black" size="3em" />
-                    </Link>
-                  </TableCell>
+                  <TableCell>{jobAdvert?.openPosition}</TableCell>
+                  <TableCell>{jobAdvert?.applicationDeadline}</TableCell>
                 </TableRow>
               );
             })}
@@ -116,7 +110,7 @@ export default function EmployeeList() {
         <TablePagination
           rowsPerPageOptions={[10, 20, 50, 100, { label: "All", value: -1 }]}
           component="div"
-          count={employers.length}
+          count={jobAdverts.length}
           rowsPerPage={rowsPerPage}
           page={page}
           SelectProps={{

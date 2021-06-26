@@ -90,6 +90,17 @@ export default function SideMenu() {
               <FaFileAlt size="2em" /> İŞ İLANLARI
             </p>
           </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/cv-create"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" /> Özgeçmiş oluştur
+            </p>
+          </MenuItem>
         </MenuList>
       </Paper>
     </div>

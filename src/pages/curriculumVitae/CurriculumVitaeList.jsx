@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CurriculumVitaeService from "../services/curriculumVitaeService";
+import CurriculumVitaeService from "../../services/curriculumVitaeService";
 import {
   Table,
   TableHead,
@@ -22,7 +22,7 @@ export default function CurriculumVitaeList() {
   }, []);
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const emptyRows =
     rowsPerPage -
@@ -56,7 +56,6 @@ export default function CurriculumVitaeList() {
 
               <TableCell>Yabancı Diller</TableCell>
               <TableCell>Yetenekler</TableCell>
-
               <TableCell>experience</TableCell>
               <TableCell>educations</TableCell>
               <TableCell>Github</TableCell>

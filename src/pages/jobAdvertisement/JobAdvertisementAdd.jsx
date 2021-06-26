@@ -5,19 +5,20 @@ import * as yup from "yup";
 
 import { Grid, MenuItem, Paper, TextField } from "@material-ui/core";
 
-import FormikButton from "../utilities/customFormComponents/FormikButton";
-import FormikSelect from "../utilities/customFormComponents/FormikSelect";
-import FormikTextField from "../utilities/customFormComponents/FormikTextField";
-import JobAdvertisementService from "../services/jobAdvertisementService";
+import FormikButton from "../../utilities/customFormComponents/FormikButton";
+import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
+import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
+import FormikDAtePicker from "../../utilities/customFormComponents/FormikDatePicker";
 
-import CityService from "../services/cityService";
-import JobPositionService from "../services/jobPositionService";
-import WorkProgramService from "../services/workProgramService";
-import WorkTypeService from "../services/workTypeService";
-import FormikDAtePicker from "../utilities/customFormComponents/FormikDatePicker";
+import JobAdvertisementService from "../../services/jobAdvertisementService";
+import CityService from "../../services/cityService";
+import WorkProgramService from "../../services/workProgramService";
+import JobPositionService from "../../services/jobPositionService";
+import WorkTypeService from "../../services/workTypeService";
 
 export default function JobAdvertisementAdd() {
   const jobService = new JobAdvertisementService();
+
   const [cities, setCities] = useState([]);
   useEffect(() => {
     let cityService = new CityService();
