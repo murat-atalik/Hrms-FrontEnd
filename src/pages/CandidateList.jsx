@@ -39,7 +39,7 @@ export default function CandidateList() {
       width: "100%",
     },
     container: {
-      maxHeight: 600,
+      minHeight: 600,
     },
   });
   const classes = useStyles();
@@ -83,18 +83,18 @@ export default function CandidateList() {
                 </TableRow>
               );
             })}
-            {emptyRows > 0 && (
+            {/* {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={3} />
               </TableRow>
-            )}
+            )} */}
           </TableBody>
         </Table>
       </TableContainer>
 
       <Paper>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+          rowsPerPageOptions={[10, 20, 50, 100, { label: "All", value: -1 }]}
           component="div"
           count={candidates.length}
           rowsPerPage={rowsPerPage}

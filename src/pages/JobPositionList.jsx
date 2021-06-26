@@ -44,7 +44,7 @@ export default function JobPositionList() {
       width: "100%",
     },
     container: {
-      maxHeight: 600,
+      minHeight: 600,
     },
   });
   const classes = useStyles();
