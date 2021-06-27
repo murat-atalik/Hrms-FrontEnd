@@ -20,6 +20,7 @@ import StaffRegister from "../pages/register/StaffRegister";
 import EmployerRegister from "../pages/register/EmployerRegister";
 import CurriculumVitaeCreate from "../pages/curriculumVitae/CurriculumVitaeCreate";
 import StaffUpdate from "../pages/staff/StaffUpdate";
+import FavoriteJobAdvertisementList from "../pages/jobAdvertisement/FavoriteJobAdvertisementList";
 
 export default function DashBoard() {
   return (
@@ -43,6 +44,11 @@ export default function DashBoard() {
           <Route exact path="/staff" component={StaffList} />
           <Route exact path="/jobadvertadd" component={JobAdvertisementAdd} />
           <Route exact path="/jobadvertlist" component={JobAdvertisementList} />
+          <Route
+            exact
+            path="/favoriteJobs"
+            component={FavoriteJobAdvertisementList}
+          />
           <Route
             exact
             path="/candidateregister"

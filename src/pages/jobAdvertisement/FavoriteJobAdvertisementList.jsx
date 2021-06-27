@@ -10,15 +10,13 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 import FavoriteJobService from "../../services/favoriteJobService";
-import { AiFillHeart } from "react-icons/ai";
-import { Button } from "@material-ui/core";
 
-export default function JobAdvertisementList() {
+export default function FavoriteJobAdvertisementList() {
   const [jobAdverts, setJobAdverts] = useState([]);
   useEffect(() => {
-    let jobAdvertisementService = new JobAdvertisementService();
-    jobAdvertisementService
-      .getJobAdvert()
+    let favoriteJobService = new FavoriteJobService();
+    favoriteJobService
+      .getAllByCandidateId(3)
       .then((result) => setJobAdverts(result.data.data));
   }, []);
 
@@ -45,22 +43,10 @@ export default function JobAdvertisementList() {
     },
   });
   const classes = useStyles();
-
-  // function favorites(jobAdvertId) {
-  //   let values = {
-  //     candidateId: 1,
-  //     jobAdvertisementId: jobAdvertId,
-  //   };
-
-  //   // let favoriteJobService = new FavoriteJobService();
-  //   // favoriteJobService
-  //   //   .add(values)
-  //   //   .then((result) => console.log(result.data.data));
-  //   console.log(values);
-  // }
   return (
-    <div>
+    <Paper>
       <TableContainer component={Paper} className={classes.container}>
+        <h1>Favoriler</h1>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
@@ -73,7 +59,6 @@ export default function JobAdvertisementList() {
               <TableCell>Maaş</TableCell>
               <TableCell>Açık Pozisyon</TableCell>
               <TableCell>son Başvuru</TableCell>
-              <TableCell />
             </TableRow>
           </TableHead>
 
@@ -88,11 +73,14 @@ export default function JobAdvertisementList() {
               return (
                 <TableRow hover key={jobAdvert.id}>
                   <TableCell>
-                    {jobAdvert.employer.company.companyName}
+                    {jobAdvert.jobAdvertisement.employer.company.companyName}
                   </TableCell>
                   <TableCell>
                     <a
-                      href={"https://" + jobAdvert.employer.company?.webAddress}
+                      href={
+                        "https://" +
+                        jobAdvert.jobAdvertisement.employer.company?.webAddress
+                      }
                       target={"_blank"}
                       rel="noopener noreferrer"
                       style={{
@@ -100,35 +88,31 @@ export default function JobAdvertisementList() {
                         color: "black",
                       }}
                     >
-                      {jobAdvert.employer.company?.webAddress}
+                      {jobAdvert.jobAdvertisement.employer.company?.webAddress}
                     </a>
                   </TableCell>
-                  <TableCell>{jobAdvert.workProgram?.programName}</TableCell>
-                  <TableCell>{jobAdvert.city?.cityName}</TableCell>
-                  <TableCell>{jobAdvert.jobPosition?.positionName}</TableCell>
-                  <TableCell>{jobAdvert.typeOfWork?.workType}</TableCell>
                   <TableCell>
-                    {jobAdvert.minSalary + "-" + jobAdvert.maxSalary}
+                    {jobAdvert.jobAdvertisement?.workProgram?.programName}
                   </TableCell>
-                  <TableCell>{jobAdvert?.openPosition}</TableCell>
-                  <TableCell>{jobAdvert?.applicationDeadline}</TableCell>
                   <TableCell>
-                    <Button
-                      type="button"
-                      onClick={() => {
-                        let values = {
-                          candidateId: 3,
-                          jobAdvertisementId: jobAdvert.id,
-                        };
-
-                        let favoriteJobService = new FavoriteJobService();
-                        favoriteJobService
-                          .add(values)
-                          .then((result) => console.log(result.data.data));
-                      }}
-                    >
-                      <AiFillHeart color="black" size="3em" />
-                    </Button>
+                    {jobAdvert.jobAdvertisement?.city?.cityName}
+                  </TableCell>
+                  <TableCell>
+                    {jobAdvert.jobAdvertisement?.jobPosition?.positionName}
+                  </TableCell>
+                  <TableCell>
+                    {jobAdvert.jobAdvertisement?.typeOfWork?.workType}
+                  </TableCell>
+                  <TableCell>
+                    {jobAdvert.jobAdvertisement.minSalary +
+                      "-" +
+                      jobAdvert.jobAdvertisement.maxSalary}
+                  </TableCell>
+                  <TableCell>
+                    {jobAdvert.jobAdvertisement?.openPosition}
+                  </TableCell>
+                  <TableCell>
+                    {jobAdvert.jobAdvertisement?.applicationDeadline}
                   </TableCell>
                 </TableRow>
               );
@@ -156,6 +140,6 @@ export default function JobAdvertisementList() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-    </div>
+    </Paper>
   );
 }
