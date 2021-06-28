@@ -11,6 +11,7 @@ import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import StaffService from "../../services/staffService";
 import { useParams } from "react-router-dom";
+import StafffSideMenu from "../staff/StaffSideMenu";
 
 export default function StaffUpdate() {
   let staffService = new StaffService();
@@ -71,59 +72,74 @@ export default function StaffUpdate() {
     //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
   };
   return (
-    <div>
-      <Formik
-        enableReinitialize={true}
-        initialValues={{
-          id: id,
-          email: staff?.email || "",
-          firstName: staff?.firstName || "",
-          lastName: staff?.lastName || "",
-          password: staff?.password || "",
-          rePassword: staff?.password || "",
-          roleId: staff?.role?.id || "",
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <FormikTextField
-                name="email"
-                type="email"
-                label="E-Posta Adresi"
-              />
+    <Grid
+      space={1}
+      container
+      direction="row"
+      justify="space-between"
+      alignItems="flex-start"
+    >
+      <Grid item xs={2}>
+        <StafffSideMenu />
+      </Grid>
+      <Grid item xs={9}>
+        <Formik
+          enableReinitialize={true}
+          initialValues={{
+            id: id,
+            email: staff?.email || "",
+            firstName: staff?.firstName || "",
+            lastName: staff?.lastName || "",
+            password: "",
+            rePassword: "",
+            roleId: staff?.role?.id || "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <FormikTextField
+                  name="email"
+                  type="email"
+                  label="E-Posta Adresi"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="firstName" label="Ad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="lastName" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField
+                  name="password"
+                  type="password"
+                  label="Şifre"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField
+                  name="rePassword"
+                  type="password"
+                  label="Şifre tekrarı"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikSelect
+                  name="roleId"
+                  label="Yönetici Rolü"
+                  options={tRoles}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikButton>Güncelle</FormikButton>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="firstName" label="Ad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="lastName" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="password" type="password" label="Şifre" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField
-                name="rePassword"
-                type="password"
-                label="Şifre tekrarı"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikSelect
-                name="roleId"
-                label="Yönetici Rolü"
-                options={tRoles}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikButton>Güncelle</FormikButton>
-            </Grid>
-          </Grid>
-        </Form>
-      </Formik>
-    </div>
+          </Form>
+        </Formik>
+      </Grid>
+    </Grid>
   );
 }

@@ -16,6 +16,8 @@ import WorkProgramService from "../../services/workProgramService";
 import JobPositionService from "../../services/jobPositionService";
 import WorkTypeService from "../../services/workTypeService";
 
+import EmployerSideMenu from "../employer/EmployerSideMenu";
+
 export default function JobAdvertisementAdd() {
   const jobService = new JobAdvertisementService();
 
@@ -169,76 +171,90 @@ export default function JobAdvertisementAdd() {
   };
 
   return (
-    <div>
-      <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
-        <Formik
-          initialValues={formik.initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          <Form>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <FormikTextField name="jobDescription" label="İş Açıklaması" />
-              </Grid>{" "}
-              <Grid item xs={12}>
-                <FormikDAtePicker
-                  name="applicationDeadline"
-                  label="Son başvuru tarihi"
-                />
+    <Grid
+      space={1}
+      container
+      direction="row"
+      justify="space-between"
+      alignItems="flex-start"
+    >
+      <Grid item xs={3}>
+        <EmployerSideMenu />
+      </Grid>
+      <Grid item xs={8}>
+        <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
+          <Formik
+            initialValues={formik.initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            <Form>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <FormikTextField
+                    name="jobDescription"
+                    label="İş Açıklaması"
+                  />
+                </Grid>{" "}
+                <Grid item xs={12}>
+                  <FormikDAtePicker
+                    name="applicationDeadline"
+                    label="Son başvuru tarihi"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormikTextField
+                    name="minSalary"
+                    type="number"
+                    label="Minimum maaş"
+                  />
+                </Grid>{" "}
+                <Grid item xs={6}>
+                  <FormikTextField
+                    name="maxSalary"
+                    type="number"
+                    label="Maksimum maaş"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormikTextField
+                    name="openPosition"
+                    type="number"
+                    label="Açık pozisyon"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormikSelect
+                    name="jobPositionId"
+                    label="Çalışma pozisyonu"
+                    options={tJobPositions}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormikSelect
+                    name="workTypeId"
+                    label="Çalışma programı"
+                    options={tWorkTypes}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormikSelect
+                    name="workProgramId"
+                    label="Çalışma programı"
+                    options={tWorkPrograms}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormikSelect name="cityId" label="Şehir" options={tCities} />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormikButton> İş İlanı Oluştur</FormikButton>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <FormikTextField
-                  name="minSalary"
-                  type="number"
-                  label="Minimum maaş"
-                />
-              </Grid>{" "}
-              <Grid item xs={6}>
-                <FormikTextField
-                  name="maxSalary"
-                  type="number"
-                  label="Maksimum maaş"
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <FormikTextField
-                  name="openPosition"
-                  type="number"
-                  label="Açık pozisyon"
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <FormikSelect
-                  name="jobPositionId"
-                  label="Çalışma pozisyonu"
-                  options={tJobPositions}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <FormikSelect
-                  name="workTypeId"
-                  label="Çalışma programı"
-                  options={tWorkTypes}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <FormikSelect
-                  name="workProgramId"
-                  label="Çalışma programı"
-                  options={tWorkPrograms}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <FormikSelect name="cityId" label="Şehir" options={tCities} />
-              </Grid>
-              <Grid item xs={12}>
-                <FormikButton> İş İlanı Oluştur</FormikButton>
-              </Grid>
-            </Grid>
-          </Form>
-        </Formik>
-      </Paper>
-    </div>
+            </Form>
+          </Formik>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }

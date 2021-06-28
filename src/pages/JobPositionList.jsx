@@ -14,6 +14,8 @@ import {
 } from "@material-ui/core";
 
 import { CgSearchLoading } from "react-icons/cg";
+import { Grid } from "@material-ui/core";
+import SideMenu from "../layouts/SideMenu";
 
 export default function JobPositionList() {
   const [jobPositions, setJobPositions] = useState([]);
@@ -49,58 +51,69 @@ export default function JobPositionList() {
   });
   const classes = useStyles();
   return (
-    <div>
-      <TableContainer component={Paper} className={classes.container}>
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell>İş Pozisyonu</TableCell>
-              <TableCell>İncele</TableCell>
-            </TableRow>
-          </TableHead>
-
-          <TableBody>
-            {(rowsPerPage > 0
-              ? jobPositions.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : jobPositions
-            ).map((job) => {
-              return (
-                <TableRow hover key={job.id}>
-                  <TableCell>{job.positionName}</TableCell>
-                  <TableCell>
-                    <a
-                      href={job.id}
-                      target={"_blank"}
-                      rel="noopener noreferrer"
-                    >
-                      <CgSearchLoading color="black" size="3em" />
-                    </a>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={2} />
+    <Grid
+      space={1}
+      container
+      direction="row"
+      justify="space-between"
+      alignItems="flex-start"
+    >
+      <Grid item xs={2}>
+        <SideMenu />
+      </Grid>
+      <Grid item xs={9}>
+        <TableContainer component={Paper} className={classes.container}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell>İş Pozisyonu</TableCell>
+                <TableCell>İncele</TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Paper>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-          component="div"
-          count={jobPositions.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </div>
+            </TableHead>
+
+            <TableBody>
+              {(rowsPerPage > 0
+                ? jobPositions.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : jobPositions
+              ).map((job) => {
+                return (
+                  <TableRow hover key={job.id}>
+                    <TableCell>{job.positionName}</TableCell>
+                    <TableCell>
+                      <a
+                        href={job.id}
+                        target={"_blank"}
+                        rel="noopener noreferrer"
+                      >
+                        <CgSearchLoading color="black" size="3em" />
+                      </a>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={2} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Paper>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+            component="div"
+            count={jobPositions.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }

@@ -5,7 +5,7 @@ import Image from "material-ui-image";
 export default function Home() {
   const history = useHistory();
   const handleOnClick = useCallback(
-    () => history.push("/dashboard"),
+    () => history.push("/jobadvertlist"),
     [history]
   );
   return (

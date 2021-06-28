@@ -15,6 +15,17 @@ export default function SideMenu() {
         <MenuList>
           <MenuItem
             component={NavLink}
+            to="/jobadvertlist"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" /> İŞ İLANLARI
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
             to="/employers"
             style={{
               color: "white",
@@ -59,35 +70,13 @@ export default function SideMenu() {
           </MenuItem>
           <MenuItem
             component={NavLink}
-            to="/staff"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <FaCogs size="2em" /> Sistem Personelleri
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
             to="/jobadvertadd"
             style={{
               color: "white",
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> İŞ İLANI EKLE
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/jobadvertlist"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <FaFileAlt size="2em" /> İŞ İLANLARI
+              <FaFileAlt size="2em" /> İş Verene Görünümü
             </p>
           </MenuItem>
           <MenuItem
@@ -98,7 +87,18 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> Özgeçmiş oluştur
+              <FaFileAlt size="2em" /> İş Arayan Görünümü
+            </p>
+          </MenuItem>{" "}
+          <MenuItem
+            component={NavLink}
+            to="/staff"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" /> Yönetici Görünümü
             </p>
           </MenuItem>
         </MenuList>

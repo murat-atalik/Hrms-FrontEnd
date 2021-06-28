@@ -5,6 +5,7 @@ import * as yup from "yup";
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 import CurriculumVitaeService from "../../services/curriculumVitaeService";
+import CandidateSideMenu from "../candidate/CandidateSideMenu";
 
 export default function CurriculumVitaeCreate() {
   let cvService = new CurriculumVitaeService();
@@ -61,59 +62,70 @@ export default function CurriculumVitaeCreate() {
   };
 
   return (
-    <div>
-      <Formik
-        initialValues={formik.initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <FormikTextField name="coverLetter" label="Soyad" />
+    <Grid
+      space={1}
+      container
+      direction="row"
+      justify="space-between"
+      alignItems="flex-start"
+    >
+      <Grid item xs={2}>
+        <CandidateSideMenu />
+      </Grid>
+      <Grid item xs={9}>
+        <Formik
+          initialValues={formik.initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <FormikTextField name="coverLetter" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="github" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="linkedin" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="imageUrl" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="schoolName" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="educationStartDate" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="graduationDate" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="businessName" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="workStartDate" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="workQuitDate" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="languageName" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="languageDegree" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikTextField name="ability" label="Soyad" />
+              </Grid>
+              <Grid item xs={12}>
+                <FormikButton>Kayıt ol</FormikButton>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="github" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="linkedin" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="imageUrl" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="schoolName" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="educationStartDate" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="graduationDate" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="businessName" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="workStartDate" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="workQuitDate" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="languageName" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="languageDegree" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikTextField name="ability" label="Soyad" />
-            </Grid>
-            <Grid item xs={12}>
-              <FormikButton>Kayıt ol</FormikButton>
-            </Grid>
-          </Grid>
-        </Form>
-      </Formik>
-    </div>
+          </Form>
+        </Formik>
+      </Grid>
+    </Grid>
   );
 }

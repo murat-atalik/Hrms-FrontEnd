@@ -9,10 +9,11 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 
 import { FaUserEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import StafffSideMenu from "../staff/StaffSideMenu";
 
 export default function StaffList() {
   const [staffs, setStaffs] = useState([]);
@@ -45,72 +46,83 @@ export default function StaffList() {
   });
   const classes = useStyles();
   return (
-    <div>
-      <TableContainer component={Paper} className={classes.container}>
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell>Adı</TableCell>
-              <TableCell>Soyadı</TableCell>
-              <TableCell>E-Posta adresi</TableCell>
-              <TableCell>Yetki Seviyesi</TableCell>
-              <TableCell />
-            </TableRow>
-          </TableHead>
+    <Grid
+      space={1}
+      container
+      direction="row"
+      justify="space-between"
+      alignItems="flex-start"
+    >
+      <Grid item xs={2}>
+        <StafffSideMenu />
+      </Grid>
+      <Grid item xs={9}>
+        <TableContainer component={Paper} className={classes.container}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell>Adı</TableCell>
+                <TableCell>Soyadı</TableCell>
+                <TableCell>E-Posta adresi</TableCell>
+                <TableCell>Yetki Seviyesi</TableCell>
+                <TableCell />
+              </TableRow>
+            </TableHead>
 
-          <TableBody>
-            {(rowsPerPage > 0
-              ? staffs.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : staffs
-            ).map((staff) => {
-              return (
-                <TableRow key={staff.id}>
-                  <TableCell>{staff.firstName}</TableCell>
-                  <TableCell>{staff.lastName}</TableCell>
-                  <TableCell>
-                    <a
-                      href={"mailto:" + staff.email}
-                      target={"_blank"}
-                      rel="noopener noreferrer"
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                      }}
-                    >
-                      {staff.email}
-                    </a>
-                  </TableCell>
-                  <TableCell>{staff.role?.roleName}</TableCell>
-                  <TableCell>
-                    <Link to={`/staff/update/${staff.id}`}>
-                      <FaUserEdit color="black" size="3em" />
-                    </Link>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-            {/* {emptyRows > 0 && (
+            <TableBody>
+              {(rowsPerPage > 0
+                ? staffs.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : staffs
+              ).map((staff) => {
+                return (
+                  <TableRow key={staff.id}>
+                    <TableCell>{staff.firstName}</TableCell>
+                    <TableCell>{staff.lastName}</TableCell>
+                    <TableCell>
+                      <a
+                        href={"mailto:" + staff.email}
+                        target={"_blank"}
+                        rel="noopener noreferrer"
+                        style={{
+                          textDecoration: "none",
+                          color: "black",
+                        }}
+                      >
+                        {staff.email}
+                      </a>
+                    </TableCell>
+                    <TableCell>{staff.role?.roleName}</TableCell>
+                    <TableCell>
+                      <Link to={`/staff/update/${staff.id}`}>
+                        <FaUserEdit color="black" size="3em" />
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+              {/* {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={4} />
               </TableRow>
             )} */}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Paper>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 50, 100, { label: "All", value: -1 }]}
-          component="div"
-          count={staffs.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </div>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Paper>
+          <TablePagination
+            rowsPerPageOptions={[10, 20, 50, 100, { label: "All", value: -1 }]}
+            component="div"
+            count={staffs.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
