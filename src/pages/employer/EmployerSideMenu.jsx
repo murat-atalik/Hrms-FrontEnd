@@ -23,7 +23,7 @@ export default function EmployerPage() {
         </MenuItem>
         <MenuItem
           component={NavLink}
-          to="/updateCompany"
+          to="/company/update"
           style={{
             color: "white",
           }}

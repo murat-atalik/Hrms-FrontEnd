@@ -23,6 +23,8 @@ import StaffUpdate from "../pages/staff/StaffUpdate";
 import FavoriteJobAdvertisementList from "../pages/jobAdvertisement/FavoriteJobAdvertisementList";
 import CurriculumVitaeUpdate from "../pages/curriculumVitae/CurriculumVitaeUpdate";
 import CompanyUpdate from "../pages/employer/CompanyUpdate";
+import UpdateCompanyConfirm from "../pages/employer/UpdateCompanyConfirm";
+import JobFilter from "../pages/jobAdvertisement/JobFilter";
 
 export default function DashBoard() {
   return (
@@ -48,7 +50,15 @@ export default function DashBoard() {
       <Route exact path="/cv-update" component={CurriculumVitaeUpdate} />
       <Route exact path="/staff/update/:id" component={StaffUpdate} />
 
-      <Route exact path="/updateCompany" component={CompanyUpdate} />
+      <Route exact path="/company/update" component={CompanyUpdate} />
+      <Route exact path="/cv/update" component={CurriculumVitaeUpdate} />
+      <Route exact path="/filter" component={JobFilter} />
+
+      <Route
+        exact
+        path="/company/update-confirm"
+        component={UpdateCompanyConfirm}
+      />
     </div>
   );
 }

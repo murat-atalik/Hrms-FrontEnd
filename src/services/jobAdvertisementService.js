@@ -17,4 +17,10 @@ export default class JobAdvertisementService {
       "http://localhost:8080/api/jobadvertisement/getByEmployer?id=" + id
     );
   }
+  getFilteredJobs(filterOption) {
+    return axios.post(
+      "http://localhost:8080/api/jobadvertisement/getAllFiltered",
+      filterOption
+    );
+  }
 }

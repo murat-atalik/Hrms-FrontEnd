@@ -35,7 +35,7 @@ export default function StaffSideMenu() {
         </MenuItem>
         <MenuItem
           component={NavLink}
-          to="/updateCompany"
+          to="/company/update"
           style={{
             color: "white",
           }}
@@ -57,7 +57,7 @@ export default function StaffSideMenu() {
         </MenuItem>
         <MenuItem
           component={NavLink}
-          to="/updateCompany"
+          to="/company/update-confirm"
           style={{
             color: "white",
           }}

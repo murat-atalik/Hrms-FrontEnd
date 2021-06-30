@@ -14,9 +14,11 @@ import { AiFillHeart } from "react-icons/ai";
 import { Button } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
+import JobFilter from "./JobFilter";
 
 export default function JobAdvertisementList() {
   const [jobAdverts, setJobAdverts] = useState([]);
+
   useEffect(() => {
     let jobAdvertisementService = new JobAdvertisementService();
     jobAdvertisementService
@@ -48,18 +50,6 @@ export default function JobAdvertisementList() {
   });
   const classes = useStyles();
 
-  // function favorites(jobAdvertId) {
-  //   let values = {
-  //     candidateId: 1,
-  //     jobAdvertisementId: jobAdvertId,
-  //   };
-
-  //   // let favoriteJobService = new FavoriteJobService();
-  //   // favoriteJobService
-  //   //   .add(values)
-  //   //   .then((result) => console.log(result.data.data));
-  //   console.log(values);
-  // }
   return (
     <Grid
       space={1}
@@ -71,10 +61,14 @@ export default function JobAdvertisementList() {
       <Grid item xs={2}>
         <SideMenu />
       </Grid>
+
       <Grid item xs={9}>
+        <JobFilter setJobAdverts={setJobAdverts} />
+
         <TableContainer component={Paper} className={classes.container}>
           <Table stickyHeader>
             <TableHead>
+              <TableRow></TableRow>
               <TableRow>
                 <TableCell>Şirket Adı</TableCell>
 

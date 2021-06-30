@@ -22,8 +22,12 @@ export default function CompanyUpdate() {
   const validationSchema = yup.object({
     companyId: yup.number(),
     employerId: yup.number(),
-    companyName: yup.string("Şirket Adı").required("Şirket Adı Gerekli!"),
-    webAddress: yup
+    newCompanyName: yup.string("Şirket Adı").required("Şirket Adı Gerekli!"),
+    newWebAddress: yup
+      .string("Şirket Web Adresi")
+      .required("Şirket Web Adresi Gerekli!"),
+    oldCompanyName: yup.string("Şirket Adı").required("Şirket Adı Gerekli!"),
+    oldWebAddress: yup
       .string("Şirket Web Adresi")
       .required("Şirket Web Adresi Gerekli!"),
     waitingUpdate: yup.boolean(),
@@ -35,14 +39,12 @@ export default function CompanyUpdate() {
       .getByEmployerId(id)
       .then((result) => setEmployer(result.data.data));
   }, []);
-  console.log(employer.company);
 
   const handleSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
     updateCompanyService
       .add(values)
-      .then((result) => console.log(result.data.message));
-    alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+      .then((result) => alert(result.data.message));
   };
   return (
     <Grid
@@ -62,8 +64,10 @@ export default function CompanyUpdate() {
             initialValues={{
               companyId: employer?.company?.id || "",
               employerId: id || "",
-              companyName: employer?.company?.companyName || "",
-              webAddress: employer?.company?.webAddress || "",
+              newCompanyName: employer?.company?.companyName || "",
+              oldCompanyName: employer?.company?.companyName || "",
+              newWebAddress: employer?.company?.webAddress || "",
+              oldWebAddress: employer?.company?.webAddress || "",
               waitingUpdate: true,
             }}
             validationSchema={validationSchema}
@@ -72,14 +76,10 @@ export default function CompanyUpdate() {
             <Form>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <FormikTextField
-                    name="companyName"
-                    type="email"
-                    label="Şirket Adı"
-                  />
+                  <FormikTextField name="newCompanyName" label="Şirket Adı" />
                 </Grid>
                 <Grid item xs={12}>
-                  <FormikTextField name="webAddress" label="Web Adresi" />
+                  <FormikTextField name="newWebAddress" label="Web Adresi" />
                 </Grid>
 
                 <Grid item xs={12}>

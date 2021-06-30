@@ -113,19 +113,23 @@ export default function EmployerDetail() {
             </Paper>
           </Grid>
           <Grid item xs={5}>
-            {jobAdverts.length > 0 ? (
+            {employer?.company?.waitingUpdate ? (
               <Paper
                 style={{
-                  backgroundColor: "#e3e3e3",
+                  backgroundColor: "#ff6961",
                   padding: "2em",
-                  marginTop: "3em",
                 }}
               >
-                Şirkette yer alan meslekler Eklenecek
+                Güncelleme İçin Onay Bekleniyor
               </Paper>
             ) : (
-              <Paper>
-                <h1>Bu şşirkete ait Herhangi bir bilgi bulunmamaktadır</h1>
+              <Paper
+                style={{
+                  backgroundColor: "#ACD1AF",
+                  padding: "2em",
+                }}
+              >
+                Şirket Bilgileri Güncel
               </Paper>
             )}
           </Grid>
