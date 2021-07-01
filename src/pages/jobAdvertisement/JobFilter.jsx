@@ -5,7 +5,7 @@ import WorkTypeService from "../../services/workTypeService";
 import WorkProgramService from "../../services/workProgramService";
 import { Button, Grid } from "@material-ui/core";
 import Select from "react-select";
-import { BsSearch } from "react-icons/bs";
+import { FcFilledFilter, FcClearFilters } from "react-icons/fc";
 import JobAdvertisementService from "../../services/jobAdvertisementService.js";
 
 export default function JobFilter({ setJobAdverts }) {
@@ -60,40 +60,56 @@ export default function JobFilter({ setJobAdverts }) {
   const [selectedWorkPrograms, setSelectedWorkProgramsOption] = useState(null);
   const [selectedJobPositions, setSelectedJobPositionsOption] = useState(null);
 
-  function myFunction() {
-    const filter = {
-      cityId: null,
-      jobPositionId: null,
-      workProgramId: null,
-      workTypeId: null,
-    };
-    if (selectedCities !== null && selectedCities.length > 0) {
-      filter.cityId = selectedCities.map((x) => {
-        return x.value;
-      });
-    } else filter.cityId = null;
-    if (selectedWorkTypes !== null && selectedWorkTypes.length > 0) {
-      filter.workTypeId = selectedWorkTypes.map((x) => {
-        return x.value;
-      });
-    } else filter.workTypeId = null;
-    if (selectedWorkPrograms !== null && selectedWorkPrograms.length > 0) {
-      filter.workProgramId = selectedWorkPrograms.map((x) => {
-        return x.value;
-      });
-    } else filter.workProgramId = null;
-    if (selectedJobPositions !== null && selectedJobPositions.length > 0) {
-      filter.jobPositionId = selectedJobPositions.map((x) => {
-        return x.value;
-      });
-    } else filter.jobPositionId = null;
+  const filter = {
+    cityId: null,
+    jobPositionId: null,
+    workProgramId: null,
+    workTypeId: null,
+  };
+  const handleFilter = () => {
+    selectedCities !== null && selectedCities.length > 0
+      ? (filter.cityId = selectedCities.map((x) => {
+          return x.value;
+        }))
+      : (filter.cityId = null);
+
+    selectedWorkTypes !== null && selectedWorkTypes.length > 0
+      ? (filter.workTypeId = selectedWorkTypes.map((x) => {
+          return x.value;
+        }))
+      : (filter.workTypeId = null);
+
+    selectedWorkPrograms !== null && selectedWorkPrograms.length > 0
+      ? (filter.workProgramId = selectedWorkPrograms.map((x) => {
+          return x.value;
+        }))
+      : (filter.workProgramId = null);
+    selectedJobPositions !== null && selectedJobPositions.length > 0
+      ? (filter.jobPositionId = selectedJobPositions.map((x) => {
+          return x.value;
+        }))
+      : (filter.jobPositionId = null);
 
     alert(JSON.stringify(filter, null, 2));
     jobAdvertisementService
       .getFilteredJobs(filter)
       .then((result) => setJobAdverts(result.data.data));
-  }
+  };
+  // const clearFilter = () => {
+  //   filter.cityId = null;
+  //   filter.jobPositionId = null;
+  //   filter.workProgramId = null;
+  //   filter.workTypeId = null;
+  //   //setSelectedCititesOption(null);
+  //   // this.setState({ setSselectedWorkTypesOption: [] });
+  //   // this.setState({ setSelectedWorkProgramsOption: [] });
+  //   // this.setState({ setSelectedJobPositionsOption: [] });
 
+  //   alert(JSON.stringify(filter, null, 2));
+  //   jobAdvertisementService
+  //     .getFilteredJobs(filter)
+  //     .then((result) => setJobAdverts(result.data.data));
+  // };
   return (
     <div>
       <Grid
@@ -142,7 +158,7 @@ export default function JobFilter({ setJobAdverts }) {
             options={tJobPositions}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Select
             styles={{
               // Fixes the overlapping problem of the component
@@ -182,10 +198,13 @@ export default function JobFilter({ setJobAdverts }) {
             options={tWorkTypes}
           />
         </Grid>
-        <Grid item xs={1}>
-          <Button color="primary" onClick={myFunction}>
-            <BsSearch color="black" size="2em" />
+        <Grid item xs={2}>
+          <Button color="primary" onClick={handleFilter}>
+            <FcFilledFilter color="black" size="2em" />
           </Button>
+          {/* <Button color="primary" onClick={clearFilter}>
+            <FcClearFilters color="black" size="2em" />
+          </Button> */}
         </Grid>
       </Grid>
     </div>

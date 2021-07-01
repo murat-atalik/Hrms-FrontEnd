@@ -6,6 +6,7 @@ import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 import CurriculumVitaeService from "../../services/curriculumVitaeService";
 import CandidateSideMenu from "../candidate/CandidateSideMenu";
+import CVAbilityUpdate from "./curriculumVitaeUpdate/CVAbilityUpdate";
 
 export default function CurriculumVitaeUpdate() {
   let id = 17;
@@ -106,29 +107,11 @@ export default function CurriculumVitaeUpdate() {
           <Paper
             style={{ backgroundColor: "red", padding: "4em", marginTop: "2em" }}
           >
-            {curriculumVitaes?.abilities !== undefined
-              ? curriculumVitaes?.abilities.map((ability) => {
-                  <Formik
-                    enableReinitialize
-                    initialValues={{
-                      id: ability?.id,
-                      abilityName: ability?.abilityName || "",
-                    }}
-                    validationSchema={validationSchema}
-                  >
-                    <Form>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                          <FormikTextField name="firstName" label="Ad" />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <FormikButton>Güncelle</FormikButton>
-                        </Grid>
-                      </Grid>
-                    </Form>
-                  </Formik>;
-                })
-              : "cccccc"}
+            {curriculumVitaes?.abilities !== undefined ? (
+              curriculumVitaes?.abilities.map((ability) => {})
+            ) : (
+              <div />
+            )}
           </Paper>
         </Paper>
       </Grid>
