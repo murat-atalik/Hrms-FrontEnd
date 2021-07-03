@@ -1,7 +1,5 @@
 import React from "react";
 import { Route } from "react-router";
-import { Grid } from "@material-ui/core";
-import SideMenu from "./SideMenu";
 
 import JobPositionList from "../pages/JobPositionList";
 import CandidateList from "../pages/candidate/CandidateList";

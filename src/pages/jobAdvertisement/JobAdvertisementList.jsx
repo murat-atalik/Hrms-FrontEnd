@@ -29,8 +29,8 @@ export default function JobAdvertisementList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, jobAdverts.length - page * rowsPerPage);
+  // const emptyRows =
+  //   rowsPerPage - Math.min(rowsPerPage, jobAdverts.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

@@ -8,7 +8,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import JobAdvertisementService from "../../services/jobAdvertisementService";
 import FavoriteJobService from "../../services/favoriteJobService";
 import { Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
@@ -25,8 +24,8 @@ export default function FavoriteJobAdvertisementList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, jobAdverts.length - page * rowsPerPage);
+  // const emptyRows =
+  //   rowsPerPage - Math.min(rowsPerPage, jobAdverts.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

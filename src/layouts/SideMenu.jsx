@@ -1,7 +1,7 @@
 import React from "react";
 import { Paper, MenuItem, MenuList } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import { FaCogs, FaFileAlt, FaUser } from "react-icons/fa";
+import { FaFileAlt, FaUser } from "react-icons/fa";
 
 import { ImProfile, ImBriefcase } from "react-icons/im";
 export default function SideMenu() {

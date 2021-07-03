@@ -1,10 +1,8 @@
-import { Grid, MenuItem, MenuList, Paper } from "@material-ui/core";
+import { MenuItem, MenuList, Paper } from "@material-ui/core";
 import React from "react";
-import { NavLink, Route } from "react-router-dom";
-import JobAdvertisementAdd from "../jobAdvertisement/JobAdvertisementAdd";
-import SideMenu from "../../layouts/SideMenu";
+import { NavLink } from "react-router-dom";
+
 import { ImBriefcase } from "react-icons/im";
-import Home from "../../layouts/Home";
 
 export default function EmployerPage() {
   return (

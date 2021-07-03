@@ -5,7 +5,7 @@ import WorkTypeService from "../../services/workTypeService";
 import WorkProgramService from "../../services/workProgramService";
 import { Button, Grid } from "@material-ui/core";
 import Select from "react-select";
-import { FcFilledFilter, FcClearFilters } from "react-icons/fc";
+import { FcFilledFilter } from "react-icons/fc";
 import JobAdvertisementService from "../../services/jobAdvertisementService.js";
 
 export default function JobFilter({ setJobAdverts }) {

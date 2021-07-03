@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Form, Formik, useFormik } from "formik";
+import { Form, Formik } from "formik";
 import * as yup from "yup";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 
-import { Grid, MenuItem, Paper } from "@material-ui/core";
-import RoleService from "../../services/roleService";
+import { Grid, Paper } from "@material-ui/core";
+
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
-import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
+
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
-import StaffService from "../../services/staffService";
-import { useParams } from "react-router-dom";
+
 import EmployerService from "../../services/employerService";
 import UpdateCompanyService from "../../services/updateCompanyService";
 import EmployerSideMenu from "../employer/EmployerSideMenu";

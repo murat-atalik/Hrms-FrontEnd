@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import EmployerService from "../../services/employerService";
+
 import {
   Table,
   TableHead,
@@ -15,7 +15,6 @@ import {
 
 import { GiConfirmed } from "react-icons/gi";
 import { MdDeleteForever } from "react-icons/md";
-import { Link } from "react-router-dom";
 
 import UpdateCompanyService from "../../services/updateCompanyService";
 import StaffSideMenu from "../staff/StaffSideMenu";
@@ -33,8 +32,8 @@ export default function UpdateCompanyConfirm() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, companies.length - page * rowsPerPage);
+  // const emptyRows =
+  //   rowsPerPage - Math.min(rowsPerPage, companies.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

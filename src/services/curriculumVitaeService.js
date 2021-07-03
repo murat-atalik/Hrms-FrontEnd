@@ -8,6 +8,9 @@ export default class CurriculumVitaeService {
     return axios.get("http://localhost:8080/api/cv/getbyid?id=" + id);
   }
   addCv(values) {
-    return axios.post("http://localhost:8080/api/cv/addsa", values);
+    return axios.post("http://localhost:8080/api/cv/add", values);
+  }
+  addImage(file) {
+    return axios.post("http://localhost:8080/api/cv/addFile", file);
   }
 }

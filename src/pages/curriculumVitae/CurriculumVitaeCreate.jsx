@@ -1,24 +1,30 @@
-import { Button, Grid, Paper, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import { Form, useFormik, Formik, FieldArray } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 import CurriculumVitaeService from "../../services/curriculumVitaeService";
 import CandidateSideMenu from "../candidate/CandidateSideMenu";
-import CVAbilityUpdate from "./curriculumVitaeUpdate/CVAbilityUpdate";
-import { TextField } from "@material-ui/core";
+
 import FormikDAtePicker from "../../utilities/customFormComponents/FormikDatePicker";
 import { AiFillDelete, AiOutlinePlusCircle } from "react-icons/ai";
 
+import "react-dropzone-uploader/dist/styles.css";
+import { DropzoneArea } from "material-ui-dropzone";
+import { IoIosRemoveCircle } from "react-icons/io";
+
 export default function CurriculumVitaeUpdate() {
   let cvService = new CurriculumVitaeService();
-  const [curriculumVitaes, setCurriculumVitaes] = useState([]);
-  // useEffect(() => {
-  //   cvService
-  //     .getById(id)
-  //     .then((result) => setCurriculumVitaes(result.data.data));
-  // }, []);
+  const [imageUrl, setImageUrl] = useState();
+  let file = new FormData();
   const validationSchema = yup.object({
     candidateId: yup.number().required(),
     firstName: yup.string("Ad").required("Ad gerekli!"),
@@ -30,7 +36,7 @@ export default function CurriculumVitaeUpdate() {
     coverLetter: yup
       .string("Ön yazı")
 
-      .required("Ö yazı gerekli!"),
+      .required("Ön yazı gerekli!"),
 
     github: yup
       .string("Github hesabınız girin")
@@ -55,6 +61,7 @@ export default function CurriculumVitaeUpdate() {
           .required("İşe başlama tarihi gerekli!"),
       })
     ),
+
     languages: yup.array().of(
       yup.object().shape({
         languageDegree: yup
@@ -67,11 +74,9 @@ export default function CurriculumVitaeUpdate() {
           .required("Yabancı dil gerekli!"),
       })
     ),
-    //  imageUrl: yup
-    //    .string("Şifre ")
-    //   .required("Şifre gerekli"),
+    imageUrl: yup.string("Fotoğraf"),
   });
-  const formik = useFormik({
+  const cvAdd = useFormik({
     initialValues: {
       candidateId: 3,
       firstName: "",
@@ -102,17 +107,24 @@ export default function CurriculumVitaeUpdate() {
           languageName: "",
         },
       ],
-      //  imageUrl: yup
-      //    .string("Şifre ")
-      //   .required("Şifre gerekli"),
-      // schoolName: "",
+      imageUrl: imageUrl || "",
     },
     validationSchema: validationSchema,
   });
 
-  const handleSubmit = (values) => {
+  const handleCvAdd = (values) => {
     alert(JSON.stringify(values, null, 2));
     cvService.addCv(values).then((result) => alert(result.data.message));
+  };
+
+  const upload = (data) => {
+    file.append("file", data[0]);
+    cvService
+      .addImage(file)
+      .then(
+        (result) => setImageUrl(result.data.data),
+        alert("Lütfen fotoğraf yükleme işlemi bitene kadar bekleyiniz")
+      );
   };
 
   return (
@@ -120,19 +132,111 @@ export default function CurriculumVitaeUpdate() {
       space={1}
       container
       direction="row"
-      justify="space-between"
+      justify="space-around"
       alignItems="flex-start"
     >
       <Grid item xs={2}>
         <CandidateSideMenu />
       </Grid>
-      <Grid item xs={9}>
+      <Grid
+        container
+        direction="row"
+        justify="space-around"
+        alignItems="flex-start"
+        item
+        xs={9}
+      >
         <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
+          <Grid justify="center" item xs={12}>
+            {imageUrl === "" || imageUrl === undefined ? (
+              <Paper
+                style={{
+                  backgroundColor: "#f5f5f5",
+                  width: "16em",
+                  height: "16em",
+                  padding: "1em",
+                  margin: "auto",
+                  marginBottom: "2em",
+                }}
+              >
+                <DropzoneArea
+                  acceptedFiles={["image/*"]}
+                  showPreviewsInDropzone={false}
+                  filesLimit={1}
+                  onDelete={() => setImageUrl(null)}
+                  dropzoneText={"Fotoğraf sürükle veya seç"}
+                  onChange={(files) =>
+                    files.length > 0 ? upload(files) : null
+                  }
+                />
+              </Paper>
+            ) : (
+              <Paper
+                style={{
+                  backgroundColor: "#f5f5f5",
+                  width: "16em",
+                  height: "16em",
+                  padding: "1em",
+                  margin: "auto",
+                  marginBottom: "2em",
+                }}
+              >
+                <Grid item container>
+                  <Grid item xs={10}>
+                    <Avatar
+                      src={imageUrl}
+                      style={{ width: "13em", height: "13em" }}
+                      variant="rounded"
+                    />
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Button
+                      style={{ backgroundColor: "transparent" }}
+                      onClick={() => setImageUrl("")}
+                    >
+                      <IoIosRemoveCircle size="2em" color="red" />
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Paper>
+            )}
+          </Grid>
           <Formik
-            enableReinitialize
-            initialValues={formik.initialValues}
+            enableReinitialize={true}
+            initialValues={{
+              candidateId: 3,
+              firstName: "",
+              lastName: "",
+              email: "",
+              coverLetter: "",
+              github: "",
+              linkedin: "",
+              abilities: [{ abilityName: "" }],
+              educations: [
+                {
+                  educationStartDate: "",
+                  graduationDate: "",
+                  schoolName: "",
+                },
+              ],
+              experiences: [
+                {
+                  businessName: "",
+                  position: "",
+                  workQuitDate: "",
+                  workStartDate: "",
+                },
+              ],
+              languages: [
+                {
+                  languageDegree: "",
+                  languageName: "",
+                },
+              ],
+              imageUrl: imageUrl || "",
+            }}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={handleCvAdd}
           >
             {({ values, errors }) => (
               <Form>
@@ -143,6 +247,7 @@ export default function CurriculumVitaeUpdate() {
                   <Grid item xs={6}>
                     <FormikTextField name="lastName" label="Soyad" />
                   </Grid>
+
                   <Grid item xs={12}>
                     <FormikTextField name="email" label="E-Posta" />
                   </Grid>
@@ -200,7 +305,6 @@ export default function CurriculumVitaeUpdate() {
                         </Paper>
                       )}
                     </FieldArray>
-
                     <FieldArray name="languages">
                       {({ push, remove }) => (
                         <Paper
@@ -455,7 +559,6 @@ export default function CurriculumVitaeUpdate() {
                     <FormikButton>Kaydet</FormikButton>
                   </Grid>
                 </Grid>
-                <pre>{JSON.stringify({ values, errors }, null, 4)}</pre>
               </Form>
             )}
           </Formik>
