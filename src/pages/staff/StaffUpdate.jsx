@@ -48,20 +48,6 @@ export default function StaffUpdate() {
     staffService.getById(id).then((result) => setStaff(result.data.data));
   }, []);
 
-  const formik = useFormik({
-    initialValues: {
-      id: "",
-      email: staff?.email ?? "aaa",
-      password: "",
-      rePassword: "",
-      firstName: "",
-      lastName: "",
-      roleId: "",
-    },
-    validationSchema: validationSchema,
-    values: staff,
-  });
-
   const handleSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
     staffService

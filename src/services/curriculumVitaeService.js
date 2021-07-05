@@ -10,6 +10,9 @@ export default class CurriculumVitaeService {
   addCv(values) {
     return axios.post("http://localhost:8080/api/cv/add", values);
   }
+  update(values) {
+    return axios.post("http://localhost:8080/api/cv/update", values);
+  }
   addImage(file) {
     return axios.post("http://localhost:8080/api/cv/addFile", file);
   }

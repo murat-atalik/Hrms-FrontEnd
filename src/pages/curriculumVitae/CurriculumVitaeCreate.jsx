@@ -55,23 +55,31 @@ export default function CurriculumVitaeUpdate() {
         position: yup
           .string("Pozisyon bilgisi")
           .required("Pozisyon bilgisi gerekli!"),
-        workQuitDate: yup.date("İşten ayrılma tarihi"),
-        workStartDate: yup
+        quitDate: yup.date("İşten ayrılma tarihi"),
+        startingDate: yup
           .date("İşe başlama tarihi")
           .required("İşe başlama tarihi gerekli!"),
+      })
+    ),
+    educations: yup.array().of(
+      yup.object().shape({
+        id: yup.number(),
+        schoolName: yup.string("Okul adı").required("Okul adıgerekli!"),
+        startingDate: yup
+          .date("Eğitim başlangıç tarihi")
+          .required("Eğitim başlangıç tarihi gerekli!"),
+        graduationDate: yup.date("Mezuniyet tarihi."),
       })
     ),
 
     languages: yup.array().of(
       yup.object().shape({
-        languageDegree: yup
+        degree: yup
           .number("Dil seviyesi")
           .required("Dil seviyesi gerekli!")
           .min(1, "Minimum değer 1")
           .max(5, "Maximum değer 5"),
-        languageName: yup
-          .string("Yabancı dil")
-          .required("Yabancı dil gerekli!"),
+        language: yup.string("Yabancı dil").required("Yabancı dil gerekli!"),
       })
     ),
     imageUrl: yup.string("Fotoğraf"),
@@ -88,7 +96,7 @@ export default function CurriculumVitaeUpdate() {
       abilities: [{ abilityName: "" }],
       educations: [
         {
-          educationStartDate: "",
+          startingDate: "",
           graduationDate: "",
           schoolName: "",
         },
@@ -97,14 +105,14 @@ export default function CurriculumVitaeUpdate() {
         {
           businessName: "",
           position: "",
-          workQuitDate: "",
-          workStartDate: "",
+          quitDate: "",
+          startingDate: "",
         },
       ],
       languages: [
         {
-          languageDegree: "",
-          languageName: "",
+          degree: "",
+          language: "",
         },
       ],
       imageUrl: imageUrl || "",
@@ -147,7 +155,7 @@ export default function CurriculumVitaeUpdate() {
         xs={9}
       >
         <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
-          <Grid justify="center" item xs={12}>
+          <Grid item xs={12}>
             {imageUrl === "" || imageUrl === undefined ? (
               <Paper
                 style={{
@@ -203,63 +211,67 @@ export default function CurriculumVitaeUpdate() {
           </Grid>
           <Formik
             enableReinitialize={true}
-            initialValues={{
-              candidateId: 3,
-              firstName: "",
-              lastName: "",
-              email: "",
-              coverLetter: "",
-              github: "",
-              linkedin: "",
-              abilities: [{ abilityName: "" }],
-              educations: [
-                {
-                  educationStartDate: "",
-                  graduationDate: "",
-                  schoolName: "",
-                },
-              ],
-              experiences: [
-                {
-                  businessName: "",
-                  position: "",
-                  workQuitDate: "",
-                  workStartDate: "",
-                },
-              ],
-              languages: [
-                {
-                  languageDegree: "",
-                  languageName: "",
-                },
-              ],
-              imageUrl: imageUrl || "",
-            }}
+            initialValues={cvAdd.initialValues}
             validationSchema={validationSchema}
             onSubmit={handleCvAdd}
           >
             {({ values, errors }) => (
               <Form>
                 <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <FormikTextField name="firstName" label="Ad" />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <FormikTextField name="lastName" label="Soyad" />
+                  <Grid item xs={12}>
+                    <Paper
+                      style={{
+                        backgroundColor: "#f5f5f5",
+                        padding: "2em",
+                      }}
+                    >
+                      <Grid item>
+                        <Typography variant="h5">Kişisel bilgiler:</Typography>
+                      </Grid>
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        style={{ marginTop: "1em", marginBottom: "1em" }}
+                      >
+                        <Grid item xs={6}>
+                          <FormikTextField name="firstName" label="Ad" />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <FormikTextField name="lastName" label="Soyad" />
+                        </Grid>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        style={{ marginTop: "1em", marginBottom: "1em" }}
+                      >
+                        <FormikTextField name="email" label="E-Posta" />
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        style={{ marginTop: "1em", marginBottom: "1em" }}
+                      >
+                        <FormikTextField name="github" label="Github" />
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        style={{ marginTop: "1em", marginBottom: "1em" }}
+                      >
+                        <FormikTextField name="linkedin" label="LinkedIn" />
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        style={{ marginTop: "1em", marginBottom: "1em" }}
+                      >
+                        <FormikTextField name="coverLetter" label="Ön Yazı" />
+                      </Grid>
+                    </Paper>
                   </Grid>
 
-                  <Grid item xs={12}>
-                    <FormikTextField name="email" label="E-Posta" />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormikTextField name="github" label="Github" />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormikTextField name="linkedin" label="LinkedIn" />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormikTextField name="coverLetter" label="Ön Yazı" />
-                  </Grid>
                   <Grid item xs={12}>
                     <FieldArray name="abilities">
                       {({ push, remove }) => (
@@ -329,13 +341,13 @@ export default function CurriculumVitaeUpdate() {
                             >
                               <Grid item xs={5}>
                                 <FormikTextField
-                                  name={`languages[${index}].languageName`}
+                                  name={`languages[${index}].language`}
                                   label="Yabancı Dil"
                                 />
                               </Grid>
                               <Grid item xs={5}>
                                 <FormikTextField
-                                  name={`languages[${index}].languageDegree`}
+                                  name={`languages[${index}].degree`}
                                   label="Dil Seviyesi (1-5)"
                                 />
                               </Grid>
@@ -349,9 +361,7 @@ export default function CurriculumVitaeUpdate() {
                           <Button
                             fullWidth
                             variant="contained"
-                            onClick={() =>
-                              push({ languageDegree: "", languageName: "" })
-                            }
+                            onClick={() => push({ degree: "", language: "" })}
                           >
                             <AiOutlinePlusCircle color="black" size="2em" />
                             Ekle
@@ -409,7 +419,7 @@ export default function CurriculumVitaeUpdate() {
                                 </Grid>
                                 <Grid item xs={6} style={{ marginTop: "1em" }}>
                                   <FormikDAtePicker
-                                    name={`experiences[${index}].workStartDate`}
+                                    name={`experiences[${index}].startingDate`}
                                     label="İşe Başlangıç tarihi"
                                   />
                                 </Grid>
@@ -421,7 +431,7 @@ export default function CurriculumVitaeUpdate() {
                                   }}
                                 >
                                   <FormikDAtePicker
-                                    name={`experiences[${index}].workQuitDate`}
+                                    name={`experiences[${index}].quitDate`}
                                     label="İşten Ayrılma tarihi"
                                   />
                                 </Grid>
@@ -448,8 +458,8 @@ export default function CurriculumVitaeUpdate() {
                               push({
                                 businessName: "",
                                 position: "",
-                                workQuitDate: "",
-                                workStartDate: "",
+                                quitDate: "",
+                                startingDate: "",
                               })
                             }
                           >
@@ -504,7 +514,7 @@ export default function CurriculumVitaeUpdate() {
 
                                 <Grid item xs={6} style={{ marginTop: "1em" }}>
                                   <FormikDAtePicker
-                                    name={`educations[${index}].educationStartDate`}
+                                    name={`educations[${index}].startingDate`}
                                     label="Okula Başlangıç Tarihi"
                                   />
                                 </Grid>
@@ -541,7 +551,7 @@ export default function CurriculumVitaeUpdate() {
                             fullWidth
                             onClick={() =>
                               push({
-                                educationStartDate: "",
+                                startingDate: "",
                                 graduationDate: "",
                                 schoolName: "",
                               })
