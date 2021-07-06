@@ -34,13 +34,13 @@ export default function StaffSideMenu() {
         </MenuItem>
         <MenuItem
           component={NavLink}
-          to="/company/update"
+          to="/register/staff"
           style={{
             color: "white",
           }}
         >
           <p>
-            <ImBriefcase size="2em" /> Şirket Bilgisi Güncelle
+            <ImBriefcase size="2em" /> Yeni Yönetici Kaydı
           </p>
         </MenuItem>
         <MenuItem

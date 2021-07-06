@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import JobPositionService from "../services/jobPositionService";
+import JobPositionService from "../../services/jobPositionService";
 import {
   Table,
   TableHead,
@@ -15,7 +15,7 @@ import {
 
 import { CgSearchLoading } from "react-icons/cg";
 import { Grid } from "@material-ui/core";
-import SideMenu from "../layouts/SideMenu";
+import SideMenu from "../../layouts/SideMenu";
 
 export default function JobPositionList() {
   const [jobPositions, setJobPositions] = useState([]);

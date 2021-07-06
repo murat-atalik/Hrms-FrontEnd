@@ -2,12 +2,36 @@ import React from "react";
 import { Form, Formik, useFormik } from "formik";
 import * as yup from "yup";
 
-import { Grid } from "@material-ui/core";
-import { Paper } from "@material-ui/core";
+import {
+  Grid,
+  Link,
+  Typography,
+  makeStyles,
+  Avatar,
+  CssBaseline,
+  Box,
+  Paper,
+} from "@material-ui/core";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 import FormikDAtePicker from "../../utilities/customFormComponents/FormikDatePicker";
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+
+import { NavLink } from "react-router-dom";
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://www.muratatalik.com">
+        Murat Atalık
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 export default function CandidateRegister() {
   const validationSchema = yup.object({
     email: yup
@@ -51,67 +75,160 @@ export default function CandidateRegister() {
     //jobService.add(values).then((result) => console.log(result.data.data));
     //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
   };
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      height: "90vh",
+    },
+    image: {
+      backgroundImage: "url(https://source.unsplash.com/random)",
+      backgroundRepeat: "no-repeat",
+      backgroundColor:
+        theme.palette.type === "light"
+          ? theme.palette.grey[50]
+          : theme.palette.grey[900],
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    },
+    paper: {
+      margin: theme.spacing(8, 4),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
 
+  const classes = useStyles();
   return (
-    <div>
-      <Paper
-        style={{
-          padding: "4em",
-          backgroundColor: "#E5E5E5",
-        }}
-      >
-        <Formik
-          initialValues={formik.initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          <Form>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <FormikTextField
-                  name="email"
-                  type="email"
-                  label="E-Posta Adresi"
-                />
+    <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            İş Arayan Kayıt Formu
+          </Typography>
+          <Formik
+            initialValues={formik.initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            <Form className={classes.form} noValidate>
+              <Grid container spacing={2}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  style={{ marginTop: "1em", marginBottom: "1em" }}
+                >
+                  <FormikTextField name="firstName" label="Ad" />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  style={{ marginTop: "1em", marginBottom: "1em" }}
+                >
+                  <FormikTextField name="lastName" label="Soyad" />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormikTextField
+                    name="email"
+                    type="email"
+                    label="E-Posta Adresi"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: "1em", marginBottom: "1em" }}
+                >
+                  <FormikTextField
+                    name="password"
+                    type="password"
+                    label="Şifre"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: "1em", marginBottom: "1em" }}
+                >
+                  <FormikTextField
+                    name="rePassword"
+                    type="password"
+                    label="Şifre tekrarı"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: "1em", marginBottom: "1em" }}
+                >
+                  <FormikTextField
+                    name="nationalityId"
+                    type="number"
+                    label="Tc kimlik No"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: "1em", marginBottom: "1em" }}
+                >
+                  <FormikDAtePicker name="birthday" label="Doğum tarihi" />
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <FormikTextField name="firstName" label="Ad" />
+              <FormikButton style={{ marginTop: "1em", marginBottom: "1em" }}>
+                Kayıt ol
+              </FormikButton>
+              <Grid
+                item
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="flex-end"
+                style={{ marginTop: "1em", marginBottom: "1em" }}
+              >
+                <Grid item xs>
+                  <NavLink
+                    to="/register/employer"
+                    variant="body2"
+                    style={{ color: "blue" }}
+                  >
+                    İş Veren Kayıt Formu
+                  </NavLink>
+                </Grid>
+                <Grid item>
+                  <NavLink
+                    to="/login"
+                    variant="body2"
+                    style={{ color: "blue" }}
+                  >
+                    Zaten hesabınız var mı? Oturum aç
+                  </NavLink>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <FormikTextField name="lastName" label="Soyad" />
-              </Grid>
-              <Grid item xs={12}>
-                <FormikTextField
-                  name="password"
-                  type="password"
-                  label="Şifre"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormikTextField
-                  name="rePassword"
-                  type="password"
-                  label="Şifre tekrarı"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormikTextField
-                  name="nationalityId"
-                  type="number"
-                  label="Tc kimlik No"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormikDAtePicker name="birthday" label="Doğum tarihi" />
-              </Grid>
-
-              <Grid item xs={12}>
-                <FormikButton>Kayıt ol</FormikButton>
-              </Grid>
-            </Grid>
-          </Form>
-        </Formik>
-      </Paper>
-    </div>
+            </Form>
+          </Formik>
+        </div>
+        <Box>
+          <Copyright />
+        </Box>
+      </Grid>
+    </Grid>
   );
 }

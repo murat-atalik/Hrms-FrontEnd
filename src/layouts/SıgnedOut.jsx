@@ -9,8 +9,10 @@ export default function SignedOut(props) {
         <Button
           variant="contained"
           color="inherit"
-          onClick={props.signIn}
+          //onClick={props.signIn}
           style={{ backgroundColor: "green" }}
+          component={NavLink}
+          to="/login"
         >
           Giriş yap
         </Button>
@@ -19,10 +21,7 @@ export default function SignedOut(props) {
           variant="contained"
           color="primary"
           component={NavLink}
-          to="/candidateregister"
-          style={{
-            color: "white",
-          }}
+          to="/register/candidate"
         >
           Kayıt Ol
         </Button>
