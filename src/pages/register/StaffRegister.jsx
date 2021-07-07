@@ -4,12 +4,10 @@ import * as yup from "yup";
 
 import {
   Grid,
-  Link,
   Typography,
   makeStyles,
   Avatar,
   CssBaseline,
-  Box,
   Paper,
 } from "@material-ui/core";
 import RoleService from "../../services/roleService";
@@ -19,18 +17,7 @@ import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import StaffService from "../../services/staffService";
 import StaffSideMenu from "../staff/StaffSideMenu";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://www.muratatalik.com">
-        Murat Atalık
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+
 export default function StaffRegister() {
   let staffService = new StaffService();
   const validationSchema = yup.object({

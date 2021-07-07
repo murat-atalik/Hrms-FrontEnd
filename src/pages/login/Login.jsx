@@ -132,7 +132,7 @@ export default function Login() {
                     variant="body2"
                     style={{ color: "blue" }}
                   >
-                    {"Hesabınız yok mu? Kaydol"}
+                    {"Hesabınız yok mu? Kayıt Ol"}
                   </NavLink>
                 </Grid>
               </Grid>
