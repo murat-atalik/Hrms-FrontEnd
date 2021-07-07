@@ -1,7 +1,10 @@
 import axios from "axios";
+import { endpoints } from "../endpoints";
 
 export default class RoleService {
+  apiUrl = endpoints.apiUrl;
+
   getRoles() {
-    return axios.get("http://localhost:8080/api/roles/getall");
+    return axios.get(this.apiUrl + "/roles/getall");
   }
 }

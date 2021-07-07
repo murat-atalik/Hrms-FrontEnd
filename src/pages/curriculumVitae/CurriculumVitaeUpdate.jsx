@@ -38,7 +38,7 @@ export default function CurriculumVitaeUpdate() {
   useEffect(() => {
     cvService.getById(id).then((result) => {
       setCurriculumVitae(result.data.data);
-      setImageUrl(result.data.data.imageUrl);
+      setImageUrl(result.data.data?.imageUrl);
     });
   }, []);
 
@@ -164,7 +164,7 @@ export default function CurriculumVitaeUpdate() {
               abilities: curriculumVitae?.abilities || [
                 { id: "", abilityName: "" },
               ],
-              educations: curriculumVitae.educations || [
+              educations: curriculumVitae?.educations || [
                 {
                   id: "",
                   startingDate: "",
@@ -172,7 +172,7 @@ export default function CurriculumVitaeUpdate() {
                   schoolName: "",
                 },
               ],
-              experiences: curriculumVitae.experiences || [
+              experiences: curriculumVitae?.experiences || [
                 {
                   id: "",
                   businessName: "",
@@ -182,7 +182,7 @@ export default function CurriculumVitaeUpdate() {
                 },
               ],
 
-              languages: curriculumVitae.languages || [
+              languages: curriculumVitae?.languages || [
                 {
                   id: "",
                   degree: "",

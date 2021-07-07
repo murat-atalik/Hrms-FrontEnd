@@ -27,6 +27,7 @@ import FavoriteJobAdvertisementList from "../pages/jobAdvertisement/FavoriteJobA
 import JobFilter from "../pages/jobAdvertisement/JobFilter";
 import JobAdvertisementAdd from "../pages/jobAdvertisement/JobAdvertisementAdd";
 import JobAdvertisementList from "../pages/jobAdvertisement/JobAdvertisementList";
+import JobAdvertConfirm from "../pages/jobAdvertisement/JobAdvertConfirm";
 
 //Register
 import CandidateRegister from "../pages/register/CandidateRegister";
@@ -45,6 +46,7 @@ export default function DashBoard() {
       <Route path="/employers/:id" component={EmployerDetail} />
       <Route exact path="/staff" component={StaffList} />
       <Route exact path="/jobadvertadd" component={JobAdvertisementAdd} />
+      <Route exact path="/jobadvert-confirm" component={JobAdvertConfirm} />
       <Route exact path="/jobadvertlist" component={JobAdvertisementList} />
       <Route
         exact

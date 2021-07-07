@@ -1,18 +1,18 @@
 import axios from "axios";
+import { endpoints } from "../endpoints";
 
 export default class FavoriteJobService {
+  apiUrl = endpoints.apiUrl;
   getAll() {
-    return axios.get("http://localhost:8080/api/favoriteJob/getall");
+    return axios.get(this.apiUrl + "/favoriteJob/getall");
   }
   add(values) {
-    return axios.post("http://localhost:8080/api/favoriteJob/add", values);
+    return axios.post(this.apiUrl + "/favoriteJob/add", values);
   }
   delete(id) {
-    return axios.post("http://localhost:8080/api/favoriteJob/delete?id=");
+    return axios.post(this.apiUrl + "/favoriteJob/delete?id=");
   }
   getAllByCandidateId(id) {
-    return axios.get(
-      "http://localhost:8080/api/favoriteJob/getallbycandidateid?id=" + id
-    );
+    return axios.get(this.apiUrl + "/favoriteJob/getallbycandidateid?id=" + id);
   }
 }

@@ -1,19 +1,21 @@
 import axios from "axios";
+import { endpoints } from "../endpoints";
 
 export default class CurriculumVitaeService {
+  apiUrl = endpoints.apiUrl;
   getCv() {
-    return axios.get("http://localhost:8080/api/cv/getAll");
+    return axios.get(this.apiUrl + "/cv/getAll");
   }
   getById(id) {
-    return axios.get("http://localhost:8080/api/cv/getbyid?id=" + id);
+    return axios.get(this.apiUrl + "/cv/getbyid?id=" + id);
   }
   addCv(values) {
-    return axios.post("http://localhost:8080/api/cv/add", values);
+    return axios.post(this.apiUrl + "/cv/add", values);
   }
   update(values) {
-    return axios.post("http://localhost:8080/api/cv/update", values);
+    return axios.post(this.apiUrl + "/cv/update", values);
   }
   addImage(file) {
-    return axios.post("http://localhost:8080/api/cv/addFile", file);
+    return axios.post(this.apiUrl + "/cv/addFile", file);
   }
 }

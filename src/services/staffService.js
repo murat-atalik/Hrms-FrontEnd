@@ -1,16 +1,18 @@
 import axios from "axios";
+import { endpoints } from "../endpoints";
 
 export default class StaffService {
+  apiUrl = endpoints.apiUrl;
   getStaffs() {
-    return axios.get("http://localhost:8080/api/staff/getall");
+    return axios.get(this.apiUrl + "/staff/getall");
   }
   getById(id) {
-    return axios.get("http://localhost:8080/api/staff/getbyid?id=" + id);
+    return axios.get(this.apiUrl + "/staff/getbyid?id=" + id);
   }
   update(values) {
-    return axios.post("http://localhost:8080/api/staff/update", values);
+    return axios.post(this.apiUrl + "/staff/update", values);
   }
   add(values) {
-    return axios.post("http://localhost:8080/api/staff/add", values);
+    return axios.post(this.apiUrl + "/staff/add", values);
   }
 }

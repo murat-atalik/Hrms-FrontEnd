@@ -64,12 +64,12 @@ export default function CurriculumVitaeList() {
             <TableHead>
               <TableRow>
                 <TableCell>Ad Soyad</TableCell>
-                <TableCell>cover letter</TableCell>
+                <TableCell>Ön Yazı</TableCell>
 
                 <TableCell>Yabancı Diller</TableCell>
                 <TableCell>Yetenekler</TableCell>
-                <TableCell>experience</TableCell>
-                <TableCell>educations</TableCell>
+                <TableCell>Deneyimler</TableCell>
+                <TableCell>Eğitim</TableCell>
                 <TableCell>Github</TableCell>
                 <TableCell>LinkedIn</TableCell>
                 <TableCell>İncele</TableCell>

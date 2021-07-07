@@ -107,13 +107,8 @@ export default function JobAdvertisementAdd() {
         }
       ),
     workTypeId: yup
-      .string("Açık Pozisyon")
-      .required("Açık pozisyon sayısı gerekli!")
-      .test(
-        "Is grater than 0",
-        "En az açık pozisyon sayısı 1!",
-        (value) => value > 0
-      ),
+      .string("Çalışma Biçimi")
+      .required("Çalışma Biçimi gerekli!"),
     active: yup.string("İş ilanı durumu").required("iş ilanı durumu gerekli"),
     employerId: yup
       .string("Employer id")
@@ -125,12 +120,7 @@ export default function JobAdvertisementAdd() {
       ),
     workProgramId: yup
       .string("Çalışma programı")
-      .required("Çalışma programıgerekli!")
-      .test(
-        "Is grater than 0",
-        "En az açık pozisyon sayısı 1!",
-        (value) => value > 0
-      ),
+      .required("Çalışma programı gerekli!"),
     jobPositionId: yup
       .string("Çalışma Pozisyon")
       .required("Çalışma pozisyonu gerekli!")
@@ -233,7 +223,7 @@ export default function JobAdvertisementAdd() {
                 <Grid item xs={6}>
                   <FormikSelect
                     name="workTypeId"
-                    label="Çalışma programı"
+                    label="Çalışma biçimi "
                     options={tWorkTypes}
                   />
                 </Grid>

@@ -23,7 +23,7 @@ export default function StaffList() {
   }, []);
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   // const emptyRows =
   //   rowsPerPage - Math.min(rowsPerPage, staffs.length - page * rowsPerPage);

@@ -1,25 +1,23 @@
 import axios from "axios";
+import { endpoints } from "../endpoints";
 
 export default class JobAdvertisementService {
+  apiUrl = endpoints.apiUrl;
   getJobAdvert() {
-    return axios.get("http://localhost:8080/api/jobadvertisement/getAll");
+    return axios.get(this.apiUrl + "/jobadvertisement/getAll");
   }
   add(values) {
-    return axios.post("http://localhost:8080/api/jobadvertisement/add", values);
+    return axios.post(this.apiUrl + "/jobadvertisement/add", values);
   }
   getByCompanyId(id) {
-    return axios.get(
-      "http://localhost:8080/api/jobadvertisement/getByCompany?id=" + id
-    );
+    return axios.get(this.apiUrl + "/jobadvertisement/getByCompany?id=" + id);
   }
   getByEmployerId(id) {
-    return axios.get(
-      "http://localhost:8080/api/jobadvertisement/getByEmployer?id=" + id
-    );
+    return axios.get(this.apiUrl + "/jobadvertisement/getByEmployer?id=" + id);
   }
   getFilteredJobs(filterOption) {
     return axios.post(
-      "http://localhost:8080/api/jobadvertisement/getAllFiltered",
+      this.apiUrl + "/jobadvertisement/getAllFiltered",
       filterOption
     );
   }

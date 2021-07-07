@@ -23,7 +23,7 @@ export default function StaffSideMenu() {
         </MenuItem>
         <MenuItem
           component={NavLink}
-          to="/jobadvertadd"
+          to="/jobadvert-confirm"
           style={{
             color: "white",
           }}
@@ -62,7 +62,7 @@ export default function StaffSideMenu() {
           }}
         >
           <p>
-            <ImBriefcase size="2em" /> Kurumsal Hesap Onayla
+            <ImBriefcase size="2em" /> Kurumsal Hesap Güncelleme
           </p>
         </MenuItem>
 
