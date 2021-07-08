@@ -9,7 +9,7 @@ export default function Home() {
     [history]
   );
   return (
-    <div style={{ marginTop: "4em" }}>
+    <div>
       <Image
         src="https://res.cloudinary.com/eacth/image/upload/v1623616722/home_zcbdse.jpg"
         onClick={handleOnClick}

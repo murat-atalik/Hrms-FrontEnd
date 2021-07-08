@@ -38,7 +38,7 @@ import EmployerRegister from "../pages/register/EmployerRegister";
 import Login from "../pages/login/Login";
 export default function DashBoard() {
   return (
-    <div>
+    <div style={{ minHeight: "85vh" }}>
       <Route exact path="/job" component={JobPositionList} />
       <Route exact path="/candidate" component={CandidateList} />
       <Route exact path="/cv" component={CurriculumVitaeList} />

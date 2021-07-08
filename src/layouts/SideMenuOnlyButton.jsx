@@ -12,24 +12,24 @@ import { NavLink } from "react-router-dom";
 import { FaFileAlt, FaUser } from "react-icons/fa";
 
 import { ImProfile, ImBriefcase } from "react-icons/im";
-export default function SideMenu() {
+export default function SideMenuOnlyButton() {
   const drawerWidth = 240;
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
     },
     appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${65}px)`,
 
       marginLeft: drawerWidth,
     },
     drawer: {
-      width: drawerWidth,
+      width: "65px",
       zIndex: 100,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: "65px",
 
       backgroundColor: "#607d8b",
     },
@@ -66,7 +66,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> İŞ İLANLARI
+              <FaFileAlt size="2em" />
             </p>
           </MenuItem>
           <MenuItem
@@ -77,7 +77,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <ImBriefcase size="2em" /> İŞ VERENLER
+              <ImBriefcase size="2em" />
             </p>
           </MenuItem>
           <MenuItem
@@ -88,7 +88,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <FaUser size="2em" /> İŞ ARAYANLAR
+              <FaUser size="2em" />
             </p>
           </MenuItem>
           <MenuItem
@@ -99,7 +99,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <ImProfile size="2em" /> ÖZGEÇMİŞLER
+              <ImProfile size="2em" />
             </p>
           </MenuItem>
           <MenuItem
@@ -110,7 +110,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> İŞ POZİSYONLARI
+              <FaFileAlt size="2em" />
             </p>
           </MenuItem>
           <MenuItem
@@ -121,7 +121,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> İş Verene Görünümü
+              <FaFileAlt size="2em" />
             </p>
           </MenuItem>
           <MenuItem
@@ -132,7 +132,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> İş Arayan Görünümü
+              <FaFileAlt size="2em" />
             </p>
           </MenuItem>{" "}
           <MenuItem
@@ -143,7 +143,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <FaFileAlt size="2em" /> Yönetici Görünümü
+              <FaFileAlt size="2em" />
             </p>
           </MenuItem>
           <Divider />

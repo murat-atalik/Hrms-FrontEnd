@@ -6,4 +6,7 @@ export default class WorkTypeService {
   getWorkTypes() {
     return axios.get(this.apiUrl + "/worktype/getall");
   }
+  addWorkType(values) {
+    return axios.get(this.apiUrl + "/worktype/add", values);
+  }
 }

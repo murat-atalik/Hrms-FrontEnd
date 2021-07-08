@@ -7,4 +7,7 @@ export default class RoleService {
   getRoles() {
     return axios.get(this.apiUrl + "/roles/getall");
   }
+  addRole(values) {
+    return axios.get(this.apiUrl + "/roles/add", values);
+  }
 }

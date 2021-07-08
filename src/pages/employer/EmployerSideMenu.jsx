@@ -6,7 +6,7 @@ import { ImBriefcase } from "react-icons/im";
 
 export default function EmployerPage() {
   return (
-    <Paper style={{ backgroundColor: "black" }}>
+    <Paper style={{ backgroundColor: "#263238" }}>
       <MenuList>
         <MenuItem
           component={NavLink}

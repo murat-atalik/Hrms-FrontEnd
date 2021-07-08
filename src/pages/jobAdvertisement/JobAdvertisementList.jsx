@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -11,11 +11,11 @@ import Paper from "@material-ui/core/Paper";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 import FavoriteJobService from "../../services/favoriteJobService";
 import { AiFillHeart } from "react-icons/ai";
-import { Button } from "@material-ui/core";
+import { Button, Hidden, Typography } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
 import JobFilter from "./JobFilter";
-
+import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
 export default function JobAdvertisementList() {
   const [jobAdverts, setJobAdverts] = useState([]);
 
@@ -40,29 +40,53 @@ export default function JobAdvertisementList() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
     },
     container: {
       minHeight: 600,
     },
-  });
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+  }));
   const classes = useStyles();
 
   return (
     <Grid
-      space={1}
+      space={2}
       container
       direction="row"
-      justify="space-between"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={2}>
-        <SideMenu />
-      </Grid>
-
-      <Grid item xs={9}>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <SideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <SideMenuOnlyButton />
+        </Grid>
+      </div>
+      <Grid item xs={10} lg={8}>
         <JobFilter setJobAdverts={setJobAdverts} />
 
         <TableContainer component={Paper} className={classes.container}>

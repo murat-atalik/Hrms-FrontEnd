@@ -1,36 +1,62 @@
 import React from "react";
-import { Paper, Container, List, ListItem } from "@material-ui/core";
+import {
+  Paper,
+  Container,
+  List,
+  ListItem,
+  makeStyles,
+  Typography,
+  Link,
+  CssBaseline,
+} from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-export default function FooterBar() {
+function Copyright() {
   return (
-    <Paper
-      style={{
-        backgroundColor: "#1b1b1b",
-        color: "white",
-        padding: 10,
-      }}
+    <Typography
+      variant="body2"
+      color="initial"
+      style={{ color: "white " }}
+      align="center"
     >
-      <Container>
-        <List
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <ListItem component={NavLink} to="#" style={{ color: "whitesmoke" }}>
-            Site Map
-          </ListItem>
-          <ListItem component={NavLink} to="#" style={{ color: "whitesmoke" }}>
-            Contact Us
-          </ListItem>
-          <ListItem component={NavLink} to="#" style={{ color: "whitesmoke" }}>
-            Terms and Conditions
-          </ListItem>
-          <ListItem component={NavLink} to="#" style={{ color: "whitesmoke" }}>
-            Privacy Policy
-          </ListItem>
-        </List>
-      </Container>
-    </Paper>
+      {"Copyright © "}
+      <Link color="inherit" href="https://www.muratatalik.com">
+        Murat Atalık
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+export default function FooterBar() {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: "flex",
+      flexDirection: "column",
+      marginTop: "10vh",
+
+      backgroundColor: "#eceff1",
+      zIndex: 1301,
+    },
+
+    footer: {
+      padding: "1.5em",
+
+      backgroundColor: "#263238",
+      zIndex: 1301,
+    },
+  }));
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+
+      <footer className={classes.footer}>
+        <Container maxWidth="sm">
+          <Copyright />
+        </Container>
+      </footer>
+    </div>
   );
 }

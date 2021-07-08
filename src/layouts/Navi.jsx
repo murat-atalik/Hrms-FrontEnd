@@ -25,6 +25,8 @@ export default function Navi() {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
+      zIndex: theme.zIndex.drawer + 1,
+      backgroundColor: "#263238",
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -36,7 +38,7 @@ export default function Navi() {
   const classes = useStyles();
   return (
     <div>
-      <AppBar position="fixed" style={{ backgroundColor: "#1b1b1b" }}>
+      <AppBar position="fixed" className={classes.root}>
         <Toolbar>
           <IconButton
             edge="start"

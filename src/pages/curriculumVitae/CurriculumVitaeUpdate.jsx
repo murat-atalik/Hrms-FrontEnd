@@ -1,4 +1,14 @@
-import { Avatar, Button, Grid, Paper, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  makeStyles,
+  Paper,
+  Typography,
+} from "@material-ui/core";
+import Image from "material-ui-image";
 import { Form, Formik, FieldArray } from "formik";
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
@@ -17,12 +27,14 @@ import { AiFillDelete, AiOutlinePlusCircle } from "react-icons/ai";
 
 import { DropzoneArea } from "material-ui-dropzone";
 import { IoIosRemoveCircle } from "react-icons/io";
+import DeleteIcon from "@material-ui/icons/Delete";
 import "alertifyjs/build/css/alertify.css";
 import alertify from "alertifyjs";
 
 import CandidateSideMenu from "../candidate/CandidateSideMenu";
 
 import "react-dropzone-uploader/dist/styles.css";
+import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
 
 export default function CurriculumVitaeUpdate() {
   let cvService = new CurriculumVitaeService();
@@ -129,26 +141,64 @@ export default function CurriculumVitaeUpdate() {
     educationService.delete(values.id);
     alertify.error(values.schoolName + " : eğitim silindi");
   };
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: "100%",
+    },
+    container: {
+      minHeight: 600,
+    },
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+  }));
+  const classes = useStyles();
 
   return (
     <Grid
-      space={1}
+      space={2}
       container
       direction="row"
-      justify="space-around"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={2}>
-        <CandidateSideMenu />
-      </Grid>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <CandidateSideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <CandidateSideMenuButton />
+        </Grid>
+      </div>
       <Grid
         container
         direction="row"
         justify="space-around"
         alignItems="flex-start"
         item
-        xs={9}
+        xs={10}
+        lg={8}
       >
+        <Grid item>
+          <Typography variant="h5">Özgeçmiş Güncelleme:</Typography>
+        </Grid>
         <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
           <Formik
             enableReinitialize={true}
@@ -197,64 +247,6 @@ export default function CurriculumVitaeUpdate() {
             {({ values, errors }) => (
               <Form>
                 <Grid item xs={12}>
-                  {values.imageUrl === "" || values.imageUrl === undefined ? (
-                    <Paper
-                      style={{
-                        backgroundColor: "#f5f5f5",
-                        width: "16em",
-                        height: "16em",
-                        padding: "1em",
-                        margin: "auto",
-                        marginBottom: "2em",
-                      }}
-                    >
-                      <DropzoneArea
-                        acceptedFiles={["image/*"]}
-                        showPreviewsInDropzone={false}
-                        filesLimit={1}
-                        onDelete={() => setImageUrl(null)}
-                        dropzoneText={"Fotoğraf sürükle veya seç"}
-                        onChange={(files) =>
-                          files.length > 0 ? upload(files) : null
-                        }
-                      />
-                    </Paper>
-                  ) : (
-                    <Paper
-                      style={{
-                        backgroundColor: "#f5f5f5",
-                        width: "16em",
-                        height: "16em",
-                        padding: "1em",
-                        margin: "auto",
-                        marginBottom: "2em",
-                      }}
-                    >
-                      <Grid item container>
-                        <Grid item xs={10}>
-                          <Avatar
-                            src={
-                              imageUrl === "" || imageUrl === undefined
-                                ? curriculumVitae?.imageUrl
-                                : imageUrl
-                            }
-                            style={{ width: "13em", height: "13em" }}
-                            variant="rounded"
-                          />
-                        </Grid>
-                        <Grid item xs={1}>
-                          <Button
-                            style={{ backgroundColor: "transparent" }}
-                            onClick={() => setImageUrl("")}
-                          >
-                            <IoIosRemoveCircle size="2em" color="red" />
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
                   <Paper
                     style={{
                       backgroundColor: "#f5f5f5",
@@ -262,28 +254,98 @@ export default function CurriculumVitaeUpdate() {
                       marginTop: "2em",
                     }}
                   >
-                    <Grid item>
+                    <Grid
+                      item
+                      style={{
+                        backgroundColor: "#f5f5f5",
+                        marginBottom: "2em",
+                      }}
+                    >
                       <Typography variant="h5">Kişisel bilgiler:</Typography>
                     </Grid>
                     <Grid
                       container
+                      spacing={2}
                       item
                       xs={12}
-                      style={{ marginTop: "1em", marginBottom: "1em" }}
+                      direction="row"
+                      justify="space-around"
+                      alignItems="center"
                     >
-                      <Grid item xs={6}>
-                        <FormikTextField name="firstName" label="Ad" />
+                      <Grid item xs={3}>
+                        {imageUrl === "" || imageUrl === undefined ? (
+                          <DropzoneArea
+                            fullWidth="false"
+                            acceptedFiles={["image/*"]}
+                            showPreviewsInDropzone={false}
+                            filesLimit={1}
+                            onDelete={() => setImageUrl(null)}
+                            dropzoneText={"Fotoğraf sürükle veya seç"}
+                            onChange={(files) =>
+                              files.length > 0 ? upload(files) : null
+                            }
+                          />
+                        ) : (
+                          <Box>
+                            <Grid
+                              container
+                              item
+                              xs={6}
+                              direction="row"
+                              justify="space-between"
+                              alignItems="flex-start"
+                            >
+                              <Grid item xs={11}>
+                                <Image
+                                  src={imageUrl}
+                                  style={{
+                                    width: "10em",
+                                    height: "10em",
+                                  }}
+                                />
+                              </Grid>
+                              <Grid item xs={1}>
+                                <IconButton
+                                  aria-label="delete"
+                                  onClick={() => setImageUrl("")}
+                                >
+                                  <DeleteIcon />
+                                </IconButton>
+                              </Grid>
+                            </Grid>
+                          </Box>
+                        )}
                       </Grid>
-                      <Grid item xs={6}>
-                        <FormikTextField name="lastName" label="Soyad" />
+                      <Grid
+                        container
+                        item
+                        xs={9}
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                      >
+                        <Grid
+                          item
+                          xs={12}
+                          style={{ marginTop: "1em", marginBottom: "1em" }}
+                        >
+                          <FormikTextField name="firstName" label="Ad" />
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          style={{ marginTop: "1em", marginBottom: "1em" }}
+                        >
+                          <FormikTextField name="lastName" label="Soyad" />
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          style={{ marginTop: "1em", marginBottom: "1em" }}
+                        >
+                          <FormikTextField name="email" label="E-Posta" />
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      style={{ marginTop: "1em", marginBottom: "1em" }}
-                    >
-                      <FormikTextField name="email" label="E-Posta" />
                     </Grid>
                     <Grid
                       item

@@ -8,7 +8,7 @@ import { FaCogs } from "react-icons/fa";
 
 export default function StaffSideMenu() {
   return (
-    <Paper style={{ backgroundColor: "black" }}>
+    <Paper style={{ backgroundColor: "#263238" }}>
       <MenuList>
         <MenuItem
           component={NavLink}

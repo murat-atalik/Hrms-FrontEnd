@@ -12,24 +12,24 @@ import { NavLink } from "react-router-dom";
 import { RiFileUserLine, RiFileAddLine } from "react-icons/ri";
 import { ImHome } from "react-icons/im";
 
-export default function CandidateSideMenu() {
+export default function CandidateSideMenuButton() {
   const drawerWidth = 240;
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
     },
     appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${65}px)`,
 
       marginLeft: drawerWidth,
     },
     drawer: {
-      width: drawerWidth,
+      width: "65px",
       zIndex: 100,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: "65px",
 
       backgroundColor: "#607d8b",
     },
@@ -65,9 +65,7 @@ export default function CandidateSideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <RiFileAddLine size="2em" /> Öz Geçmiş Oluştur
-            </p>
+            <RiFileAddLine size="2em" />
           </MenuItem>
 
           <MenuItem
@@ -77,9 +75,7 @@ export default function CandidateSideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <RiFileUserLine size="2em" /> Öz Geçmiş Güncelle
-            </p>
+            <RiFileUserLine size="2em" />
           </MenuItem>
 
           <MenuItem
@@ -89,11 +85,10 @@ export default function CandidateSideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImHome size="2em" /> Ana Sayfa
-            </p>
+            <ImHome size="2em" />
           </MenuItem>
-        </MenuList>{" "}
+          <Divider />
+        </MenuList>
       </Drawer>
     </div>
   );
