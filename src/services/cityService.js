@@ -6,7 +6,10 @@ export default class CityService {
   getCities() {
     return axios.get(this.apiUrl + "/cities/getall");
   }
-  addCities(values) {
+  add(values) {
     return axios.get(this.apiUrl + "/cities/add", values);
+  }
+  update(values) {
+    return axios.get(this.apiUrl + "/cities/update", values);
   }
 }

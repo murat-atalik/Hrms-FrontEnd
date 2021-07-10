@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Formik, useFormik } from "formik";
 import * as yup from "yup";
 
-import { Grid, makeStyles, Paper } from "@material-ui/core";
+import { Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
@@ -18,8 +18,6 @@ export default function CityAdd() {
   const alert = useAlert();
   let cityService = new CityService();
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
   const validationSchema = yup.object({
     cityName: yup.string("Şehir adı").required("Şehir adı gerekli!"),
   });
@@ -85,6 +83,9 @@ export default function CityAdd() {
       </div>
       <Grid item xs={10} lg={8}>
         <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
+          <Typography component="h1" variant="h5">
+            Şehir Oluştur
+          </Typography>
           <Formik
             initialValues={formik.initialValues}
             validationSchema={validationSchema}
@@ -92,11 +93,19 @@ export default function CityAdd() {
           >
             <Form>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: "2em", marginBottom: "1em" }}
+                >
                   <FormikTextField name="cityName" label="Şehir" />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: "1em", marginBottom: "1em" }}
+                >
                   <FormikButton> Şehir Oluştur</FormikButton>
                 </Grid>
               </Grid>

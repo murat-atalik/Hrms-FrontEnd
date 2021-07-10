@@ -6,7 +6,10 @@ export default class WorkProgramService {
   getWorkPrograms() {
     return axios.get(this.apiUrl + "/workprogram/getall");
   }
-  addWorkProgram(values) {
+  add(values) {
     return axios.get(this.apiUrl + "/workprogram/add", values);
+  }
+  update(values) {
+    return axios.get(this.apiUrl + "/workprogram/update", values);
   }
 }

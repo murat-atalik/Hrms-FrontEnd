@@ -10,9 +10,9 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { ImBriefcase } from "react-icons/im";
-import { FaCogs } from "react-icons/fa";
+import { FaCogs, FaUserTag } from "react-icons/fa";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
-import { MdLocationCity } from "react-icons/md";
+import { MdLocationCity, MdWork } from "react-icons/md";
 
 export default function SideMenu() {
   const drawerWidth = 240;
@@ -105,6 +105,7 @@ export default function SideMenu() {
           >
             <ImBriefcase size="2em" />
           </MenuItem>
+          <Divider />
           <MenuItem
             component={NavLink}
             to="/add/jobPosition"
@@ -114,7 +115,6 @@ export default function SideMenu() {
           >
             <ImBriefcase size="2em" />
           </MenuItem>
-
           <MenuItem
             component={NavLink}
             to="/add/city"
@@ -124,6 +124,80 @@ export default function SideMenu() {
           >
             <MdLocationCity size="2em" />
           </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/add/role"
+            style={{
+              color: "white",
+            }}
+          >
+            <FaUserTag size="2em" color="white" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/add/work-program"
+            style={{
+              color: "white",
+            }}
+          >
+            <MdWork size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/add/work-type"
+            style={{
+              color: "white",
+            }}
+          >
+            <MdWork size="2em" />
+          </MenuItem>
+          <Divider />
+          <MenuItem
+            component={NavLink}
+            to="/update/jobPosition"
+            style={{
+              color: "white",
+            }}
+          >
+            <ImBriefcase size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/update/city"
+            style={{
+              color: "white",
+            }}
+          >
+            <MdLocationCity size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/update/role"
+            style={{
+              color: "white",
+            }}
+          >
+            <FaUserTag size="2em" color="white" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/update/work-program"
+            style={{
+              color: "white",
+            }}
+          >
+            <MdWork size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/update/work-type"
+            style={{
+              color: "white",
+            }}
+          >
+            <MdWork size="2em" />
+          </MenuItem>
+          <Divider />
           <MenuItem
             component={NavLink}
             to="/jobadvertlist"

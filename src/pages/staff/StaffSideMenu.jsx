@@ -115,6 +115,7 @@ export default function SideMenu() {
               <ImBriefcase size="2em" /> Kurumsal Hesap Güncelleme
             </p>
           </MenuItem>
+          <Divider />
           <MenuItem
             component={NavLink}
             to="/add/jobPosition"
@@ -170,6 +171,63 @@ export default function SideMenu() {
               <MdWork size="2em" /> Çalışma Biçimi Ekle
             </p>
           </MenuItem>
+          <Divider />
+          <MenuItem
+            component={NavLink}
+            to="/update/jobPosition"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <ImBriefcase size="2em" /> İş Pozisyonu Güncelle
+            </p>
+          </MenuItem>{" "}
+          <MenuItem
+            component={NavLink}
+            to="/update/city"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <MdLocationCity size="2em" /> Şehir Güncelle
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/update/role"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaUserTag size="2em" color="white" /> Rol Güncelle
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/update/work-program"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <MdWork size="2em" /> Çalışma Programı Güncelle
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/update/work-type"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <MdWork size="2em" /> Çalışma Biçimi Güncelle
+            </p>
+          </MenuItem>
+          <Divider />
           <MenuItem
             component={NavLink}
             to="/jobadvertlist"
