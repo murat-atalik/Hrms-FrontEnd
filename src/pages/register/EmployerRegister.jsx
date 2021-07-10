@@ -15,6 +15,8 @@ import FormikTextField from "../../utilities/customFormComponents/FormikTextFiel
 import { NavLink } from "react-router-dom";
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { useAlert } from "react-alert";
+import EmployerService from "../../services/employerService";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -28,6 +30,8 @@ function Copyright() {
   );
 }
 export default function EmployerRegister() {
+  const alert = useAlert();
+  const employerService = new EmployerService();
   const validationSchema = yup.object({
     companyName: yup.string("Şirket adı").required("Şirket adı gerekli!"),
     webAddress: yup.string("Web adresi").required("Web adresi gerekli!"),
@@ -60,8 +64,11 @@ export default function EmployerRegister() {
   });
   const handleSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
-    //jobService.add(values).then((result) => console.log(result.data.data));
-    //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+    employerService.add(values).then((result) => {
+      result.data.success
+        ? alert.success("KULLANICI OLUŞTURULDU")
+        : alert.error(result.data.message);
+    });
   };
   const useStyles = makeStyles((theme) => ({
     root: {

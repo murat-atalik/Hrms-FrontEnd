@@ -35,8 +35,10 @@ import CandidateSideMenu from "../candidate/CandidateSideMenu";
 
 import "react-dropzone-uploader/dist/styles.css";
 import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
+import { useAlert } from "react-alert";
 
 export default function CurriculumVitaeUpdate() {
+  const alert = useAlert();
   let cvService = new CurriculumVitaeService();
   let abilityService = new AbilityService();
   let educationService = new EducationService();
@@ -112,34 +114,29 @@ export default function CurriculumVitaeUpdate() {
     imageUrl: yup.string("Fotoğraf"),
   });
   const handleUpdate = (values) => {
-    alert(JSON.stringify(values, null, 2));
-    cvService.update(values).then((result) => alert(result.data.message));
+    cvService.update(values);
+    alert.success("ÖZGEÇMİŞ GÜNCELLENDİ");
   };
   const upload = (data) => {
     file.append("file", data[0]);
-    cvService
-      .addImage(file)
-      .then(
-        (result) => setImageUrl(result.data.data),
-        alert("Lütfen fotoğraf yükleme işlemi bitene kadar bekleyiniz")
-      );
+    cvService.addImage(file).then((result) => setImageUrl(result.data.data));
   };
 
   const deleteAbility = (values) => {
     abilityService.delete(values.id);
-    alertify.error(values.abilityName + " : yeteneği silindi");
+    alert.error("YETENEK SİLİNDİ");
   };
   const deleteLanguage = (values) => {
     languageService.delete(values.id);
-    alertify.error(values.language + " : yabancı dil silindi");
+    alert.error("YABANCI DİL BİLGİSİ SİLİNDİ");
   };
   const deleteExperience = (values) => {
     experienceService.delete(values.id);
-    alertify.error(values.businessName + " : çalışma deneyimi silindi");
+    alert.error("ÇALIŞMA DENEYİMİ SİLİNDİ");
   };
   const deleteEducation = (values) => {
     educationService.delete(values.id);
-    alertify.error(values.schoolName + " : eğitim silindi");
+    alert.error("EĞİTİM SİLİNDİ!");
   };
   const useStyles = makeStyles((theme) => ({
     root: {

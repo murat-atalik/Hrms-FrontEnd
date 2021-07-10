@@ -10,9 +10,9 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { ImBriefcase } from "react-icons/im";
-import { RiAdminLine } from "react-icons/ri";
-import { MdLocationCity, MdWork } from "react-icons/md";
-import { FaUserTag } from "react-icons/fa";
+import { FaCogs } from "react-icons/fa";
+import LocationCityIcon from "@material-ui/icons/LocationCity";
+import { MdLocationCity } from "react-icons/md";
 
 export default function SideMenu() {
   const drawerWidth = 240;
@@ -21,17 +21,17 @@ export default function SideMenu() {
       display: "flex",
     },
     appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${65}px)`,
 
       marginLeft: drawerWidth,
     },
     drawer: {
-      width: drawerWidth,
+      width: "65px",
       zIndex: 100,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: "65px",
 
       backgroundColor: "#607d8b",
     },
@@ -67,9 +67,7 @@ export default function SideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <RiAdminLine size="2em" color="white" /> Sistem Personelleri
-            </p>
+            <FaCogs size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -78,9 +76,7 @@ export default function SideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> İş İlanı Onayla
-            </p>
+            <ImBriefcase size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -89,9 +85,7 @@ export default function SideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> Yeni Yönetici Kaydı
-            </p>
+            <ImBriefcase size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -100,9 +94,7 @@ export default function SideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> Bilgileri Güncelle
-            </p>
+            <ImBriefcase size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -111,9 +103,7 @@ export default function SideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> Kurumsal Hesap Güncelleme
-            </p>
+            <ImBriefcase size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -122,10 +112,9 @@ export default function SideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> İş Pozisyonu ekleme
-            </p>
-          </MenuItem>{" "}
+            <ImBriefcase size="2em" />
+          </MenuItem>
+
           <MenuItem
             component={NavLink}
             to="/add/city"
@@ -133,42 +122,7 @@ export default function SideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <MdLocationCity size="2em" /> Şehir Ekle
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/add/role"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <FaUserTag size="2em" color="white" /> Rol Ekle
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/add/work-program"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <MdWork size="2em" /> Çalışma Programı Ekle
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/add/work-type"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <MdWork size="2em" /> Çalışma Biçimi Ekle
-            </p>
+            <MdLocationCity size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -177,9 +131,7 @@ export default function SideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> Ana Sayfa
-            </p>
+            <ImBriefcase size="2em" />
           </MenuItem>
           <Divider />
         </MenuList>

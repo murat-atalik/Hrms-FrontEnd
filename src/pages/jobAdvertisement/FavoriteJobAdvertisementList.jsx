@@ -9,13 +9,19 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import FavoriteJobService from "../../services/favoriteJobService";
-import { Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
+import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
+import { AiFillDelete } from "react-icons/ai";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 
 export default function FavoriteJobAdvertisementList() {
+  const history = useHistory();
+  const alert = useAlert();
   const [jobAdverts, setJobAdverts] = useState([]);
+  let favoriteJobService = new FavoriteJobService();
   useEffect(() => {
-    let favoriteJobService = new FavoriteJobService();
     favoriteJobService
       .getAllByCandidateId(3)
       .then((result) => setJobAdverts(result.data.data));
@@ -35,27 +41,62 @@ export default function FavoriteJobAdvertisementList() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const useStyles = makeStyles({
+  const deleteFavorite = (id) => {
+    favoriteJobService.delete(id).then(() => {
+      alert.error("FAVORİ SİLİNDİ");
+      favoriteJobService
+        .getAllByCandidateId(3)
+        .then((result) => setJobAdverts(result.data.data));
+    });
+  };
+
+  const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
     },
     container: {
       minHeight: 600,
     },
-  });
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+  }));
   const classes = useStyles();
+
   return (
     <Grid
-      space={1}
+      space={2}
       container
       direction="row"
-      justify="space-between"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={2}>
-        <SideMenu />
-      </Grid>
-      <Grid item xs={9}>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <SideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <SideMenuOnlyButton />
+        </Grid>
+      </div>
+      <Grid item xs={10} lg={8}>
         <Paper>
           <TableContainer component={Paper} className={classes.container}>
             <h1>Favoriler</h1>
@@ -71,6 +112,7 @@ export default function FavoriteJobAdvertisementList() {
                   <TableCell>Maaş</TableCell>
                   <TableCell>Açık Pozisyon</TableCell>
                   <TableCell>son Başvuru</TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
 
@@ -132,6 +174,14 @@ export default function FavoriteJobAdvertisementList() {
                       </TableCell>
                       <TableCell>
                         {jobAdvert.jobAdvertisement?.applicationDeadline}
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          type="button"
+                          onClick={() => deleteFavorite(jobAdvert.id)}
+                        >
+                          <AiFillDelete color="black" size="2em" />
+                        </Button>
                       </TableCell>
                     </TableRow>
                   );

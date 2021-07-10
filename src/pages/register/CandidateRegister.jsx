@@ -19,6 +19,8 @@ import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { NavLink } from "react-router-dom";
+import { useAlert } from "react-alert";
+import CandidateService from "../../services/candidateService";
 
 function Copyright() {
   return (
@@ -33,6 +35,8 @@ function Copyright() {
   );
 }
 export default function CandidateRegister() {
+  const alert = useAlert();
+  const candidateService = new CandidateService();
   const validationSchema = yup.object({
     email: yup
       .string("E-posta adresinizi girin")
@@ -72,8 +76,11 @@ export default function CandidateRegister() {
   });
   const handleSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
-    //jobService.add(values).then((result) => console.log(result.data.data));
-    //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+    candidateService.add(values).then((result) => {
+      result.data.success
+        ? alert.success("KULLANICI OLUŞTURULDU")
+        : alert.error(result.data.message);
+    });
   };
   const useStyles = makeStyles((theme) => ({
     root: {

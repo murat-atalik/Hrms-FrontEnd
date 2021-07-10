@@ -13,8 +13,8 @@ import { Grid, makeStyles } from "@material-ui/core";
 
 import { FaUserEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import StafffSideMenu from "../staff/StaffSideMenu";
-
+import StaffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenuButton from "../staff/StaffSideMenuButton";
 export default function StaffList() {
   const [staffs, setStaffs] = useState([]);
   useEffect(() => {
@@ -36,27 +36,52 @@ export default function StaffList() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
     },
     container: {
       minHeight: 600,
     },
-  });
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+  }));
   const classes = useStyles();
   return (
     <Grid
-      space={1}
+      space={2}
       container
       direction="row"
-      justify="space-between"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={2}>
-        <StafffSideMenu />
-      </Grid>
-      <Grid item xs={9}>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <StaffSideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <StaffSideMenuButton />
+        </Grid>
+      </div>
+      <Grid item xs={10} lg={8}>
         <TableContainer component={Paper} className={classes.container}>
           <Table stickyHeader>
             <TableHead>

@@ -18,9 +18,11 @@ import { MdDeleteForever } from "react-icons/md";
 
 import UpdateCompanyService from "../../services/updateCompanyService";
 import StaffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenuButton from "../staff/StaffSideMenuButton";
 import { Button } from "@material-ui/core";
-
+import { useAlert } from "react-alert";
 export default function UpdateCompanyConfirm() {
+  const alert = useAlert();
   let updateCompanyService = new UpdateCompanyService();
   const [companies, setCompanies] = useState([]);
   useEffect(() => {
@@ -43,37 +45,73 @@ export default function UpdateCompanyConfirm() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const useStyles = makeStyles({
+
+  const handleUpdate = (id) => {
+    updateCompanyService
+      .update(id)
+      .then(() =>
+        updateCompanyService
+          .getAll()
+          .then((result) => setCompanies(result.data.data))
+      );
+    alert.success("GÜNCELLENDİ");
+  };
+  const handleDelete = (id) => {
+    updateCompanyService
+      .delete(id)
+      .then(() =>
+        updateCompanyService
+          .getAll()
+          .then((result) => setCompanies(result.data.data))
+      );
+    alert.error("SİLİNDİ");
+  };
+  const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
     },
     container: {
       minHeight: 600,
     },
-  });
-  const handleUpdate = (id) => {
-    updateCompanyService
-      .update(id)
-      .then((result) => alert(result.data.message));
-  };
-  const handleDelete = (id) => {
-    updateCompanyService
-      .delete(id)
-      .then((result) => alert(result.data.message));
-  };
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+  }));
   const classes = useStyles();
   return (
     <Grid
-      space={1}
+      space={2}
       container
       direction="row"
-      justify="space-between"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={2}>
-        <StaffSideMenu />
-      </Grid>
-      <Grid item xs={9}>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <StaffSideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <StaffSideMenuButton />
+        </Grid>
+      </div>
+      <Grid item xs={10} lg={8}>
         <TableContainer component={Paper} className={classes.container}>
           <Table stickyHeader>
             <TableHead>

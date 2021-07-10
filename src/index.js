@@ -4,10 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+const options = {
+  timeout: 3000,
+  position: positions.BOTTOM_RIGHT,
+};
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <AlertProvider template={AlertTemplate} {...options}>
+      <App />
+    </AlertProvider>
   </BrowserRouter>,
 
   document.getElementById("root")

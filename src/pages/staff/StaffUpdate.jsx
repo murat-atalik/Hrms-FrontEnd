@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Form, Formik, useFormik } from "formik";
 import * as yup from "yup";
 
-import { Grid } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import RoleService from "../../services/roleService";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import StaffService from "../../services/staffService";
 import { useParams } from "react-router-dom";
-import StafffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenuButton from "../staff/StaffSideMenuButton";
+import { useAlert } from "react-alert";
 
 export default function StaffUpdate() {
+  const alert = useAlert();
   let staffService = new StaffService();
   let { id } = useParams();
   const validationSchema = yup.object({
@@ -22,15 +25,6 @@ export default function StaffUpdate() {
       .email("Geçersiz e-posta"),
     firstName: yup.string("Adınızı girin").required("Adınız gerekli!"),
     lastName: yup.string("Soyadınızı girin").required("Sayadınız gerekli!"),
-
-    password: yup
-      .string("Şifre ")
-      .required("Şifre gerekli")
-      .min(8, "Şifre en az 8 karakter olmalı"),
-    rePassword: yup
-      .string("Şifre ")
-      .required("Şifre gerekli")
-      .oneOf([yup.ref("password"), null], "şifreler aynı olmak zorunda"),
     roleId: yup.string("Sistem rolü").required("Sistem rolü gerekli!"),
   });
 
@@ -49,24 +43,55 @@ export default function StaffUpdate() {
   }, []);
 
   const handleSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
-    staffService
-      .update(values)
-      .then((result) => console.log(result.data.message));
-    //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+    staffService.update(values);
+    alert.success("BİLGİLER GÜNCELLENDİ");
   };
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: "100%",
+    },
+    container: {
+      minHeight: 600,
+    },
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+  }));
+  const classes = useStyles();
   return (
     <Grid
-      space={1}
+      space={2}
       container
       direction="row"
-      justify="space-between"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={2}>
-        <StafffSideMenu />
-      </Grid>
-      <Grid item xs={9}>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <StaffSideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <StaffSideMenuButton />
+        </Grid>
+      </div>
+      <Grid item xs={10} lg={8}>
         <Formik
           enableReinitialize={true}
           initialValues={{
@@ -74,8 +99,6 @@ export default function StaffUpdate() {
             email: staff?.email || "",
             firstName: staff?.firstName || "",
             lastName: staff?.lastName || "",
-            password: "",
-            rePassword: "",
             roleId: staff?.role?.id || "",
           }}
           validationSchema={validationSchema}
@@ -96,20 +119,7 @@ export default function StaffUpdate() {
               <Grid item xs={12}>
                 <FormikTextField name="lastName" label="Soyad" />
               </Grid>
-              <Grid item xs={12}>
-                <FormikTextField
-                  name="password"
-                  type="password"
-                  label="Şifre"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormikTextField
-                  name="rePassword"
-                  type="password"
-                  label="Şifre tekrarı"
-                />
-              </Grid>
+
               <Grid item xs={12}>
                 <FormikSelect
                   name="roleId"

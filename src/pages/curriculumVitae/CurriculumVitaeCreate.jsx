@@ -24,6 +24,7 @@ import { DropzoneArea } from "material-ui-dropzone";
 import { IoIosRemoveCircle } from "react-icons/io";
 
 export default function CurriculumVitaeUpdate() {
+  let id = 0;
   let cvService = new CurriculumVitaeService();
   const [imageUrl, setImageUrl] = useState();
   let file = new FormData();
@@ -88,7 +89,7 @@ export default function CurriculumVitaeUpdate() {
   });
   const cvAdd = useFormik({
     initialValues: {
-      candidateId: 3,
+      candidateId: id,
       firstName: "",
       lastName: "",
       email: "",
@@ -123,18 +124,12 @@ export default function CurriculumVitaeUpdate() {
   });
 
   const handleCvAdd = (values) => {
-    alert(JSON.stringify(values, null, 2));
-    cvService.addCv(values).then((result) => alert(result.data.message));
+    cvService.addCv(values);
   };
 
   const upload = (data) => {
     file.append("file", data[0]);
-    cvService
-      .addImage(file)
-      .then(
-        (result) => setImageUrl(result.data.data),
-        alert("Lütfen fotoğraf yükleme işlemi bitene kadar bekleyiniz")
-      );
+    cvService.addImage(file).then((result) => setImageUrl(result.data.data));
   };
   const useStyles = makeStyles((theme) => ({
     root: {

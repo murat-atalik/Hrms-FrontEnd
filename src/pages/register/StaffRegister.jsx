@@ -16,9 +16,12 @@ import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import StaffService from "../../services/staffService";
 import StaffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenuButton from "../staff/StaffSideMenuButton";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { useAlert } from "react-alert";
 
 export default function StaffRegister() {
+  const alert = useAlert();
   let staffService = new StaffService();
   const validationSchema = yup.object({
     email: yup
@@ -63,14 +66,13 @@ export default function StaffRegister() {
     value,
   }));
   const handleSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
-    staffService.add(values).then((result) => console.log(result.data.data));
-    //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+    staffService.add(values).then((result) => {
+      result.data.success
+        ? alert.success("KULLANICI OLUŞTURULDU")
+        : alert.error(result.data.message);
+    });
   };
   const useStyles = makeStyles((theme) => ({
-    root: {
-      height: "80vh",
-    },
     paper: {
       marginTop: theme.spacing(8),
       display: "flex",
@@ -88,24 +90,52 @@ export default function StaffRegister() {
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    root: {
+      width: "100%",
+    },
+    container: {
+      minHeight: 600,
+    },
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
   }));
 
   const classes = useStyles();
-
   return (
     <Grid
-      space={1}
+      space={2}
       container
-      component="main"
-      className={classes.root}
       direction="row"
-      justify="space-between"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={2}>
-        <StaffSideMenu />
-      </Grid>
-      <Grid item xs={9}>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <StaffSideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <StaffSideMenuButton />
+        </Grid>
+      </div>
+      <Grid item xs={10} lg={8}>
         <CssBaseline />
         <Grid
           container

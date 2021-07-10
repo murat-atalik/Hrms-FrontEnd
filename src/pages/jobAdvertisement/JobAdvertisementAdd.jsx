@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Formik, useFormik } from "formik";
 import * as yup from "yup";
 
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, makeStyles, Paper } from "@material-ui/core";
 
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
@@ -17,8 +17,12 @@ import JobPositionService from "../../services/jobPositionService";
 import WorkTypeService from "../../services/workTypeService";
 
 import EmployerSideMenu from "../employer/EmployerSideMenu";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
+import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
 
 export default function JobAdvertisementAdd() {
+  const alert = useAlert();
   const jobService = new JobAdvertisementService();
 
   const [cities, setCities] = useState([]);
@@ -147,31 +151,60 @@ export default function JobAdvertisementAdd() {
       cityId: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      jobService.add(values).then((result) => console.log(result.data.data));
-      alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
-    },
   });
-
+  const history = useHistory();
   const handleSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
-    console.log(values);
     jobService.add(values).then((result) => console.log(result.data.data));
-    alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
-  };
 
+    alert.info("İŞ İLANI EKLENDİ ONAY BEKLENİYOR");
+    history.push("/");
+  };
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: "100%",
+    },
+    container: {
+      minHeight: 600,
+    },
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+  }));
+  const classes = useStyles();
   return (
     <Grid
-      space={1}
+      space={2}
       container
       direction="row"
-      justify="space-between"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={3}>
-        <EmployerSideMenu />
-      </Grid>
-      <Grid item xs={8}>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <EmployerSideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <EmployerSideMenuButton />
+        </Grid>
+      </div>
+      <Grid item xs={10} lg={8}>
         <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
           <Formik
             initialValues={formik.initialValues}

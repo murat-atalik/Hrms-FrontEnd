@@ -3,6 +3,8 @@ import { Route } from "react-router";
 
 //JobPosition
 import JobPositionList from "../pages/jobPosition/JobPositionList";
+import JobPositionAdd from "../pages/jobPosition/JobPositionAdd";
+import JobPositionUpdate from "../pages/jobPosition/JobPositionUpdate";
 
 //Staff
 import StaffUpdate from "../pages/staff/StaffUpdate";
@@ -34,8 +36,22 @@ import CandidateRegister from "../pages/register/CandidateRegister";
 import StaffRegister from "../pages/register/StaffRegister";
 import EmployerRegister from "../pages/register/EmployerRegister";
 
+//City
+import CityAdd from "../pages/city/CityAdd";
+import CityUpdate from "../pages/city/CityUpdate";
+
+//WorkType
+import WorkTypeAdd from "../pages/workType/WorkTypeAdd";
+import WorkTypeUpdate from "../pages/workType/WorkTypeUpdate";
+//WorkProgram
+import WorkProgramAdd from "../pages/workProgram/WorkProgramAdd";
+import WorkProgramUpdate from "../pages/workProgram/WorkProgramUpdate";
+//Role
+import RoleAdd from "../pages/role/RoleAdd";
+import RoleUpdate from "../pages/role/RoleUpdate";
 //Login
 import Login from "../pages/login/Login";
+
 export default function DashBoard() {
   return (
     <div style={{ minHeight: "85vh" }}>
@@ -56,20 +72,29 @@ export default function DashBoard() {
       <Route exact path="/register/candidate" component={CandidateRegister} />
       <Route exact path="/register/staff" component={StaffRegister} />
       <Route exact path="/register/employer" component={EmployerRegister} />
-
       <Route exact path="/cv-create" component={CurriculumVitaeCreate} />
       <Route exact path="/cv-update" component={CurriculumVitaeUpdate} />
       <Route exact path="/staff/update/:id" component={StaffUpdate} />
-
       <Route exact path="/company/update" component={CompanyUpdate} />
       <Route exact path="/cv/update" component={CurriculumVitaeUpdate} />
       <Route exact path="/filter" component={JobFilter} />
-
       <Route
         exact
         path="/company/update-confirm"
         component={UpdateCompanyConfirm}
       />
+
+      <Route exact path="/add/jobPosition" component={JobPositionAdd} />
+      <Route exact path="/add/city" component={CityAdd} />
+      <Route exact path="/add/role" component={RoleAdd} />
+      <Route exact path="/add/work-program" component={WorkProgramAdd} />
+      <Route exact path="/add/work-type" component={WorkTypeAdd} />
+
+      <Route exact path="/update/jobPosition" component={JobPositionUpdate} />
+      <Route exact path="/update/city" component={CityUpdate} />
+      <Route exact path="/update/role" component={RoleUpdate} />
+      <Route exact path="/update/work-program" component={WorkProgramUpdate} />
+      <Route exact path="/update/work-type" component={WorkTypeUpdate} />
 
       <Route exact path="/login" component={Login} />
     </div>

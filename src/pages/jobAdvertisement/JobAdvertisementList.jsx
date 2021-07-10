@@ -16,7 +16,9 @@ import { Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
 import JobFilter from "./JobFilter";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
+import { useAlert } from "react-alert";
 export default function JobAdvertisementList() {
+  const alert = useAlert();
   const [jobAdverts, setJobAdverts] = useState([]);
 
   useEffect(() => {
@@ -139,9 +141,11 @@ export default function JobAdvertisementList() {
                           };
 
                           let favoriteJobService = new FavoriteJobService();
-                          favoriteJobService
-                            .add(values)
-                            .then((result) => console.log(result.data.data));
+                          favoriteJobService.add(values).then((result) => {
+                            result.data.success
+                              ? alert.success("FAVORİLERE EKLENDİ")
+                              : alert.error("HATA");
+                          });
                         }}
                       >
                         <AiFillHeart color="black" size="3em" />

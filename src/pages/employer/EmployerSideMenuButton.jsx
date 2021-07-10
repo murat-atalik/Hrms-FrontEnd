@@ -9,26 +9,27 @@ import {
   CssBaseline,
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+
 import { ImBriefcase } from "react-icons/im";
 
-export default function EmployerSideMenu() {
+export default function EmployerSideMenuButton() {
   const drawerWidth = 240;
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
     },
     appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${65}px)`,
 
       marginLeft: drawerWidth,
     },
     drawer: {
-      width: drawerWidth,
+      width: "65px",
       zIndex: 100,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: "65px",
 
       backgroundColor: "#607d8b",
     },
@@ -64,9 +65,7 @@ export default function EmployerSideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> İş İlanı Ekle
-            </p>
+            <ImBriefcase size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -75,9 +74,7 @@ export default function EmployerSideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> Şirket Bilgilerini Güncelle
-            </p>
+            <ImBriefcase size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -86,11 +83,10 @@ export default function EmployerSideMenu() {
               color: "white",
             }}
           >
-            <p>
-              <ImBriefcase size="2em" /> Ana Sayfa
-            </p>
+            <ImBriefcase size="2em" />
           </MenuItem>
-        </MenuList>{" "}
+          <Divider />
+        </MenuList>
       </Drawer>
     </div>
   );

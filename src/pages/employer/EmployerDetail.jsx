@@ -7,12 +7,14 @@ import {
   TableBody,
   TableRow,
   TableContainer,
+  makeStyles,
 } from "@material-ui/core";
 
 import React, { useEffect, useState } from "react";
 import { CgSearchLoading } from "react-icons/cg";
 import { Link, useParams } from "react-router-dom";
 import SideMenu from "../../layouts/SideMenu";
+import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
 import EmployerService from "../../services/employerService";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 
@@ -33,18 +35,52 @@ export default function EmployerDetail() {
       .then((result) => setJobAdverts(result.data.data));
   }, []);
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: "100%",
+    },
+    container: {
+      minHeight: 600,
+    },
+    sideMenu: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "block",
+      },
+    },
+    sideMenuOnlyButton: {
+      padding: theme.spacing(1),
+      [theme.breakpoints.down("lg")]: {
+        display: "block",
+      },
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+  }));
+  const classes = useStyles();
   return (
     <Grid
-      space={1}
+      space={2}
       container
       direction="row"
-      justify="space-between"
+      justify="center"
       alignItems="flex-start"
     >
-      <Grid item xs={2}>
-        <SideMenu />
-      </Grid>
-      <Grid item xs={9}>
+      <div className={classes.sideMenu}>
+        <Grid item lg={2}>
+          <SideMenu />
+        </Grid>
+      </div>
+      <div className={classes.sideMenuOnlyButton}>
+        <Grid item xs={1}>
+          <SideMenuOnlyButton />
+        </Grid>
+      </div>
+      <Grid item xs={10} lg={8}>
         <Grid
           space={2}
           container
