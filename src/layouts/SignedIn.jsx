@@ -30,7 +30,15 @@ export default function SignedIn(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem
+          component={NavLink}
+          to="/cv-candidate"
+          style={{
+            color: "black",
+          }}
+        >
+          Bilgilerim
+        </MenuItem>
         <MenuItem
           component={NavLink}
           to="/favoriteJobs"
@@ -38,11 +46,10 @@ export default function SignedIn(props) {
             color: "black",
           }}
         >
-          <AiFillHeart color="red" size="1em" />
           Favoriler
         </MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={props.signOut}>Logout</MenuItem>
+
+        <MenuItem onClick={props.signOut}>Çıkış Yap</MenuItem>
       </Menu>
     </div>
   );

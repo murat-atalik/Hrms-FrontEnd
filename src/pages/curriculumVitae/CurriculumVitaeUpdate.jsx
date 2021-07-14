@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   Button,
+  ButtonBase,
   Grid,
   IconButton,
   makeStyles,
@@ -36,6 +37,7 @@ import CandidateSideMenu from "../candidate/CandidateSideMenu";
 import "react-dropzone-uploader/dist/styles.css";
 import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
 import { useAlert } from "react-alert";
+import { useParams } from "react-router-dom";
 
 export default function CurriculumVitaeUpdate() {
   const alert = useAlert();
@@ -44,7 +46,7 @@ export default function CurriculumVitaeUpdate() {
   let educationService = new EducationService();
   let languageService = new LanguageService();
   let experienceService = new ExperienceService();
-  let id = 30;
+  let { id } = useParams();
 
   const [imageUrl, setImageUrl] = useState("");
   const [curriculumVitae, setCurriculumVitae] = useState([]);
@@ -165,7 +167,53 @@ export default function CurriculumVitaeUpdate() {
     },
   }));
   const classes = useStyles();
+  const imgStyle = makeStyles((theme) => ({
+    root: {
+      display: "flex",
+      flexWrap: "wrap",
+      minWidth: 300,
+      width: "100%",
+    },
+    image: {
+      position: "relative",
+      height: 200,
+      [theme.breakpoints.down("xs")]: {
+        width: "100% !important", // Overrides inline-style
+        height: 100,
+      },
+      "&:hover, &$focusVisible": {
+        zIndex: 1,
+      },
+    },
+    focusVisible: {},
+    imageButton: {
+      position: "absolute",
 
+      right: 0,
+      top: 0,
+
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: theme.palette.common.white,
+    },
+    imageSrc: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      backgroundSize: "cover",
+      backgroundPosition: "center 40%",
+    },
+
+    imageTitle: {
+      position: "relative",
+      padding: "1em",
+      color: "red",
+    },
+  }));
+  const imgClass = imgStyle();
   return (
     <Grid
       space={2}
@@ -283,34 +331,36 @@ export default function CurriculumVitaeUpdate() {
                             }
                           />
                         ) : (
-                          <Box>
-                            <Grid
-                              container
-                              item
-                              xs={6}
-                              direction="row"
-                              justify="space-between"
-                              alignItems="flex-start"
+                          <Grid item xs={12}>
+                            <ButtonBase
+                              onClick={() => setImageUrl("")}
+                              focusRipple
+                              className={imgClass.image}
+                              focusVisibleClassName={imgClass.focusVisible}
+                              style={{
+                                width: "100%",
+                                heigth: "auto",
+                              }}
                             >
-                              <Grid item xs={11}>
-                                <Image
-                                  src={imageUrl}
-                                  style={{
-                                    width: "10em",
-                                    height: "10em",
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={1}>
-                                <IconButton
-                                  aria-label="delete"
-                                  onClick={() => setImageUrl("")}
+                              <span
+                                className={imgClass.imageSrc}
+                                style={{
+                                  backgroundImage: `url(${imageUrl})`,
+                                }}
+                              />
+                              <span className={imgClass.imageBackdrop} />
+                              <span className={imgClass.imageButton}>
+                                <Typography
+                                  component="span"
+                                  variant="subtitle1"
+                                  color="inherit"
+                                  className={imgClass.imageTitle}
                                 >
                                   <DeleteIcon />
-                                </IconButton>
-                              </Grid>
-                            </Grid>
-                          </Box>
+                                </Typography>
+                              </span>
+                            </ButtonBase>
+                          </Grid>
                         )}
                       </Grid>
                       <Grid

@@ -106,13 +106,24 @@ export default function SideMenu() {
           </MenuItem>
           <MenuItem
             component={NavLink}
+            to="/employer/confirm"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <ImBriefcase size="2em" /> Kurumsal Hesap Onayla
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
             to="/company/update-confirm"
             style={{
               color: "white",
             }}
           >
             <p>
-              <ImBriefcase size="2em" /> Kurumsal Hesap Güncelleme
+              <ImBriefcase size="2em" /> Kurumsal Hesap Güncelle
             </p>
           </MenuItem>
           <Divider />
@@ -124,7 +135,7 @@ export default function SideMenu() {
             }}
           >
             <p>
-              <ImBriefcase size="2em" /> İş Pozisyonu ekleme
+              <ImBriefcase size="2em" /> İş Pozisyonu Ekle
             </p>
           </MenuItem>{" "}
           <MenuItem

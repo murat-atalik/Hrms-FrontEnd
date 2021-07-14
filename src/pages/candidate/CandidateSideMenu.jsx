@@ -60,6 +60,17 @@ export default function CandidateSideMenu() {
         <MenuList>
           <MenuItem
             component={NavLink}
+            to="/cv-candidate"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <RiFileUserLine size="2em" /> Öz Geçmişlerim
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
             to="/cv-create"
             style={{
               color: "white",
@@ -67,18 +78,6 @@ export default function CandidateSideMenu() {
           >
             <p>
               <RiFileAddLine size="2em" /> Öz Geçmiş Oluştur
-            </p>
-          </MenuItem>
-
-          <MenuItem
-            component={NavLink}
-            to="/cv-update"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <RiFileUserLine size="2em" /> Öz Geçmiş Güncelle
             </p>
           </MenuItem>
 

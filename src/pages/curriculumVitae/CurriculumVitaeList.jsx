@@ -17,6 +17,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { CgSearchLoading } from "react-icons/cg";
 import SideMenu from "../../layouts/SideMenu";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
+import { Link } from "react-router-dom";
 export default function CurriculumVitaeList() {
   const [curriculumVitaes, setCurriculumVitaes] = useState([]);
   useEffect(() => {
@@ -114,7 +115,7 @@ export default function CurriculumVitaeList() {
                   <TableRow hover key={cv.id}>
                     <TableCell>
                       <Avatar src={cv.imageUrl} />
-                      {cv.candidate?.firstName + "  " + cv.candidate?.lastName}
+                      {cv.firstName + "  " + cv.lastName}
                     </TableCell>
                     <TableCell>{cv.coverLetter}</TableCell>
                     <TableCell>
@@ -156,13 +157,9 @@ export default function CurriculumVitaeList() {
                       </a>
                     </TableCell>
                     <TableCell>
-                      <a
-                        href={"https://" + cv.linkedin}
-                        target={"_blank"}
-                        rel="noopener noreferrer"
-                      >
+                      <Link to={`/cv/${cv.id}`}>
                         <CgSearchLoading color="black" size="3em" />
-                      </a>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 );

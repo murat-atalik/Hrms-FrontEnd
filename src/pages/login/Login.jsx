@@ -18,6 +18,8 @@ import { NavLink } from "react-router-dom";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
+import UserService from "../../services/userService";
+import { useAlert } from "react-alert";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -31,6 +33,8 @@ function Copyright() {
   );
 }
 export default function Login() {
+  const alert = useAlert();
+  const userService = new UserService();
   const validationSchema = yup.object({
     email: yup
       .string("E-posta adresinizi girin")
@@ -49,9 +53,13 @@ export default function Login() {
     validationSchema: validationSchema,
   });
   const handleLogin = (values) => {
-    alert(JSON.stringify(values, null, 2));
-    //jobService.add(values).then((result) => console.log(result.data.data));
-    //alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+    userService.login(values).then((result) => {
+      if (result.data.success) {
+        alert.success("GİRİŞ BAŞARILI");
+      } else {
+        alert.error("ŞİFRE VEYA KULLANICI ADI HATALI");
+      }
+    });
   };
   const useStyles = makeStyles((theme) => ({
     root: {

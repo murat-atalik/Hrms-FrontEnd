@@ -60,6 +60,15 @@ export default function CandidateSideMenuButton() {
         <MenuList>
           <MenuItem
             component={NavLink}
+            to="/cv-candidate"
+            style={{
+              color: "white",
+            }}
+          >
+            <RiFileUserLine size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
             to="/cv-create"
             style={{
               color: "white",
@@ -68,16 +77,7 @@ export default function CandidateSideMenuButton() {
             <RiFileAddLine size="2em" />
           </MenuItem>
 
-          <MenuItem
-            component={NavLink}
-            to="/cv-update"
-            style={{
-              color: "white",
-            }}
-          >
-            <RiFileUserLine size="2em" />
-          </MenuItem>
-
+          <Divider />
           <MenuItem
             component={NavLink}
             to="/jobadvertlist"

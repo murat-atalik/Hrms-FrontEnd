@@ -90,26 +90,11 @@ export default function JobFilter({ setJobAdverts }) {
         }))
       : (filter.jobPositionId = null);
 
-    alert(JSON.stringify(filter, null, 2));
     jobAdvertisementService
       .getFilteredJobs(filter)
       .then((result) => setJobAdverts(result.data.data));
   };
-  // const clearFilter = () => {
-  //   filter.cityId = null;
-  //   filter.jobPositionId = null;
-  //   filter.workProgramId = null;
-  //   filter.workTypeId = null;
-  //   //setSelectedCititesOption(null);
-  //   // this.setState({ setSselectedWorkTypesOption: [] });
-  //   // this.setState({ setSelectedWorkProgramsOption: [] });
-  //   // this.setState({ setSelectedJobPositionsOption: [] });
 
-  //   alert(JSON.stringify(filter, null, 2));
-  //   jobAdvertisementService
-  //     .getFilteredJobs(filter)
-  //     .then((result) => setJobAdverts(result.data.data));
-  // };
   return (
     <div>
       <Grid

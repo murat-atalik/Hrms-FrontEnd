@@ -28,18 +28,13 @@ export default function JobPositionList() {
   }, []);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const emptyRows =
-    rowsPerPage -
-    Math.min(rowsPerPage, jobPositions.length - page * rowsPerPage);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
 
   const useStyles = makeStyles((theme) => ({
@@ -120,17 +115,12 @@ export default function JobPositionList() {
                   </TableRow>
                 );
               })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={2} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </TableContainer>
         <Paper>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+            rowsPerPageOptions={[10, 20, 50, 100, { label: "All", value: -1 }]}
             component="div"
             count={jobPositions.length}
             rowsPerPage={rowsPerPage}
