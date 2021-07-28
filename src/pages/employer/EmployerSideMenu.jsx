@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { ImBriefcase } from "react-icons/im";
+import { FaFileAlt, FaFileMedical } from "react-icons/fa";
 
 export default function EmployerSideMenu() {
   const drawerWidth = 240;
@@ -59,13 +60,47 @@ export default function EmployerSideMenu() {
         <MenuList>
           <MenuItem
             component={NavLink}
+            to="/jobadvertlist"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" /> Tüm İş İlanları
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/employers"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <ImBriefcase size="2em" /> İş Verenler
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/jobadvert-status"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" />
+              Şirket İş İlanları
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
             to="/jobadvertadd"
             style={{
               color: "white",
             }}
           >
             <p>
-              <ImBriefcase size="2em" /> İş İlanı Ekle
+              <FaFileMedical size="2em" /> İş İlanı Ekle
             </p>
           </MenuItem>
           <MenuItem
@@ -79,18 +114,7 @@ export default function EmployerSideMenu() {
               <ImBriefcase size="2em" /> Şirket Bilgilerini Güncelle
             </p>
           </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/jobadvertlist"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <ImBriefcase size="2em" /> Ana Sayfa
-            </p>
-          </MenuItem>
-        </MenuList>{" "}
+        </MenuList>
       </Drawer>
     </div>
   );

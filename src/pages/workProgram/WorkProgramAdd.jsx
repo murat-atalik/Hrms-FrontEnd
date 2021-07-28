@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Form, Formik, useFormik } from "formik";
 import * as yup from "yup";
 
-import { Grid, makeStyles, Paper } from "@material-ui/core";
+import { Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
@@ -85,6 +85,9 @@ export default function WorkProgramAdd() {
       </div>
       <Grid item xs={10} lg={8}>
         <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
+          <Typography component="h1" variant="h5">
+            Çalışma Programı Oluştur
+          </Typography>
           <Formik
             initialValues={formik.initialValues}
             validationSchema={validationSchema}

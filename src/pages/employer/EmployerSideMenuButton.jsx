@@ -11,6 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 
 import { ImBriefcase } from "react-icons/im";
+import { FaFileAlt, FaFileMedical } from "react-icons/fa";
 
 export default function EmployerSideMenuButton() {
   const drawerWidth = 240;
@@ -57,6 +58,33 @@ export default function EmployerSideMenuButton() {
       >
         <div className={classes.toolbar} />
         <Divider />
+        <MenuItem
+          component={NavLink}
+          to="/jobadvertlist"
+          style={{
+            color: "white",
+          }}
+        >
+          <FaFileAlt size="2em" />
+        </MenuItem>
+        <MenuItem
+          component={NavLink}
+          to="/employers"
+          style={{
+            color: "white",
+          }}
+        >
+          <ImBriefcase size="2em" />
+        </MenuItem>
+        <MenuItem
+          component={NavLink}
+          to="/jobAdvert-status"
+          style={{
+            color: "white",
+          }}
+        >
+          <FaFileAlt size="2em" />
+        </MenuItem>
         <MenuList>
           <MenuItem
             component={NavLink}
@@ -65,7 +93,7 @@ export default function EmployerSideMenuButton() {
               color: "white",
             }}
           >
-            <ImBriefcase size="2em" />
+            <FaFileMedical size="2em" />
           </MenuItem>
           <MenuItem
             component={NavLink}
@@ -76,16 +104,6 @@ export default function EmployerSideMenuButton() {
           >
             <ImBriefcase size="2em" />
           </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/jobadvertlist"
-            style={{
-              color: "white",
-            }}
-          >
-            <ImBriefcase size="2em" />
-          </MenuItem>
-          <Divider />
         </MenuList>
       </Drawer>
     </div>

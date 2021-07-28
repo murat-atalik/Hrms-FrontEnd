@@ -20,10 +20,12 @@ import EmployerSideMenu from "../employer/EmployerSideMenu";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
+import { useSelector } from "react-redux";
 
 export default function JobAdvertisementAdd() {
   const alert = useAlert();
   const jobService = new JobAdvertisementService();
+  const { authItem } = useSelector((state) => state.auth);
 
   const [cities, setCities] = useState([]);
   useEffect(() => {
@@ -145,7 +147,7 @@ export default function JobAdvertisementAdd() {
       applicationDeadline: "",
       active: true,
       workTypeId: "",
-      employerId: 1,
+      employerId: authItem[0].user.id,
       workProgramId: "",
       jobPositionId: "",
       cityId: "",

@@ -6,4 +6,7 @@ export default class CandidateService {
   getCandidate() {
     return axios.get(this.apiUrl + "/candidates/getall");
   }
+  add(values) {
+    return axios.post(this.apiUrl + "/candidates/add", values);
+  }
 }

@@ -6,29 +6,32 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import { configureStore } from "./store/configureStore";
+import { Provider } from "react-redux";
+import { saveState } from "./localStorage";
+
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_RIGHT,
 };
 
-ReactDOM.render(
-  <BrowserRouter>
-    <AlertProvider template={AlertTemplate} {...options}>
-      <App />
-    </AlertProvider>
-  </BrowserRouter>,
+const store = configureStore();
+store.subscribe(() => {
+  saveState({
+    auth: store.getState().auth,
+  });
+});
 
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <AlertProvider template={AlertTemplate} {...options}>
+        <App />
+      </AlertProvider>
+    </BrowserRouter>
+    ,
+  </Provider>,
   document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-/*
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-  */

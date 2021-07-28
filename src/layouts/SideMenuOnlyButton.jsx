@@ -80,72 +80,7 @@ export default function SideMenuOnlyButton() {
               <ImBriefcase size="2em" />
             </p>
           </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/candidate"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <FaUser size="2em" />
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/cv"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <ImProfile size="2em" />
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/job"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <FaFileAlt size="2em" />
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/jobadvertadd"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <FaFileAlt size="2em" />
-            </p>
-          </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to="/cv-create"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <FaFileAlt size="2em" />
-            </p>
-          </MenuItem>{" "}
-          <MenuItem
-            component={NavLink}
-            to="/staff"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <FaFileAlt size="2em" />
-            </p>
-          </MenuItem>
+
           <Divider />
         </MenuList>
       </Drawer>

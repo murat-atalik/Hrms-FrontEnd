@@ -1,10 +1,16 @@
-import { Menu, Button, MenuItem, Avatar } from "@material-ui/core";
+import { Menu, Button, MenuItem, Avatar, styled } from "@material-ui/core";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+
+import { userLogout } from "../store/actions/authActions";
 
 export default function SignedIn(props) {
+  const { authItem } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -13,14 +19,17 @@ export default function SignedIn(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleLogout = (user) => {
+    dispatch(userLogout(user));
+    history.push("/");
+  };
   return (
     <div>
-      <Button>
-        <Avatar
-          spaced="right"
-          src="https://avatarfiles.alphacoders.com/198/thumb-198784.png"
-          onClick={handleClick}
-        />
+      <Button
+        style={{ background: "grey", color: "white" }}
+        onClick={handleClick}
+      >
+        Hesabım
       </Button>
 
       <Menu
@@ -30,7 +39,7 @@ export default function SignedIn(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem
+        {/* <MenuItem
           component={NavLink}
           to="/cv-candidate"
           style={{
@@ -38,18 +47,9 @@ export default function SignedIn(props) {
           }}
         >
           Bilgilerim
-        </MenuItem>
-        <MenuItem
-          component={NavLink}
-          to="/favoriteJobs"
-          style={{
-            color: "black",
-          }}
-        >
-          Favoriler
-        </MenuItem>
+        </MenuItem> */}
 
-        <MenuItem onClick={props.signOut}>Çıkış Yap</MenuItem>
+        <MenuItem onClick={handleLogout}>Çıkış Yap</MenuItem>
       </Menu>
     </div>
   );

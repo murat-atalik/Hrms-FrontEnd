@@ -14,12 +14,13 @@ import EmployerSideMenu from "../employer/EmployerSideMenu";
 import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function CompanyUpdate() {
   const alert = useAlert();
   let employerService = new EmployerService();
   let updateCompanyService = new UpdateCompanyService();
-  let id = 1;
+  const { authItem } = useSelector((state) => state.auth);
   const validationSchema = yup.object({
     companyId: yup.number(),
     employerId: yup.number(),
@@ -37,7 +38,7 @@ export default function CompanyUpdate() {
   const [employer, setEmployer] = useState([]);
   useEffect(() => {
     employerService
-      .getByEmployerId(id)
+      .getByEmployerId(authItem[0].user.id)
       .then((result) => setEmployer(result.data.data));
   }, []);
   const history = useHistory();
@@ -96,7 +97,7 @@ export default function CompanyUpdate() {
             enableReinitialize={true}
             initialValues={{
               companyId: employer?.company?.id || "",
-              employerId: id || "",
+              employerId: authItem[0].user.id || "",
               newCompanyName: employer?.company?.companyName || "",
               oldCompanyName: employer?.company?.companyName || "",
               newWebAddress: employer?.company?.webAddress || "",

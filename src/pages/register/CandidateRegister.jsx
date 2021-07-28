@@ -18,7 +18,7 @@ import FormikButton from "../../utilities/customFormComponents/FormikButton";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import CandidateService from "../../services/candidateService";
 
@@ -35,6 +35,7 @@ function Copyright() {
   );
 }
 export default function CandidateRegister() {
+  const history = useHistory();
   const alert = useAlert();
   const candidateService = new CandidateService();
   const validationSchema = yup.object({
@@ -75,11 +76,11 @@ export default function CandidateRegister() {
     validationSchema: validationSchema,
   });
   const handleSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
     candidateService.add(values).then((result) => {
-      result.data.success
-        ? alert.success("KULLANICI OLUŞTURULDU")
-        : alert.error(result.data.message);
+      if (result.data.success) {
+        alert.success("KULLANICI OLUŞTURULDU");
+        history.push("/");
+      } else alert.error(result.data.message);
     });
   };
   const useStyles = makeStyles((theme) => ({

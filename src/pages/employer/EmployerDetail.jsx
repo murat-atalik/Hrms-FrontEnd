@@ -31,7 +31,7 @@ export default function EmployerDetail() {
   useEffect(() => {
     let jobAdvertService = new JobAdvertisementService();
     jobAdvertService
-      .getByEmployerId(id)
+      .getByEmployerIdActive(id)
       .then((result) => setJobAdverts(result.data.data));
   }, []);
 
@@ -169,7 +169,7 @@ export default function EmployerDetail() {
               </Paper>
             )}
           </Grid>
-          <Grid item>
+          <Grid item xs={12}>
             {jobAdverts.length > 0 ? (
               <Paper
                 style={{
@@ -233,7 +233,7 @@ export default function EmployerDetail() {
                               {jobAdvert?.applicationDeadline}
                             </TableCell>
                             <TableCell>
-                              <Link to={`/employers`}>
+                              <Link to={`/jobadvert-details/${jobAdvert.id}`}>
                                 <CgSearchLoading color="black" size="2em" />
                               </Link>
                             </TableCell>
@@ -245,7 +245,13 @@ export default function EmployerDetail() {
                 </TableContainer>
               </Paper>
             ) : (
-              <Paper>
+              <Paper
+                style={{
+                  backgroundColor: "#e3e3e3",
+                  padding: "2em",
+                  marginTop: "4em",
+                }}
+              >
                 <h1>Bu şirketin aktif ilanı bulunmamaktadır</h1>
               </Paper>
             )}

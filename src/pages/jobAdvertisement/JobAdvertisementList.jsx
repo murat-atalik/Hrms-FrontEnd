@@ -14,11 +14,22 @@ import { AiFillHeart } from "react-icons/ai";
 import { Button, Hidden, Typography } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
-import JobFilter from "./JobFilter";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
+import CandidateSideMenu from "../candidate/CandidateSideMenu";
+import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
+import EmployerSideMenu from "../employer/EmployerSideMenu";
+import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
+import StaffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenuButton from "../staff/StaffSideMenuButton";
+import JobFilter from "./JobFilter";
+
 import { useAlert } from "react-alert";
+import { Link } from "react-router-dom";
+import { CgSearchLoading } from "react-icons/cg";
+import { useSelector } from "react-redux";
 export default function JobAdvertisementList() {
   const alert = useAlert();
+  const { authItem } = useSelector((state) => state.auth);
   const [jobAdverts, setJobAdverts] = useState([]);
 
   useEffect(() => {
@@ -80,12 +91,32 @@ export default function JobAdvertisementList() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          <SideMenu />
+          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+            <StaffSideMenu />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType == "employer" ? (
+            <EmployerSideMenu />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType == "candidate" ? (
+            <CandidateSideMenu />
+          ) : (
+            <SideMenu />
+          )}
         </Grid>
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          <SideMenuOnlyButton />
+          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+            <StaffSideMenuButton />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType == "employer" ? (
+            <EmployerSideMenuButton />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType == "candidate" ? (
+            <CandidateSideMenuButton />
+          ) : (
+            <SideMenuOnlyButton />
+          )}
         </Grid>
       </div>
       <Grid item xs={10} lg={8}>
@@ -103,9 +134,11 @@ export default function JobAdvertisementList() {
                 <TableCell>Pozisyon</TableCell>
                 <TableCell>Çalışma Türü</TableCell>
                 <TableCell>Maaş</TableCell>
-
                 <TableCell>son Başvuru Tarihi</TableCell>
-                <TableCell />
+                <TableCell>İncele</TableCell>
+                {authItem[0].user.userType == "candidate" ? (
+                  <TableCell>Favori</TableCell>
+                ) : null}
               </TableRow>
             </TableHead>
 
@@ -132,25 +165,33 @@ export default function JobAdvertisementList() {
                     </TableCell>
                     <TableCell>{jobAdvert?.applicationDeadline}</TableCell>
                     <TableCell>
-                      <Button
-                        type="button"
-                        onClick={() => {
-                          let values = {
-                            candidateId: 3,
-                            jobAdvertisementId: jobAdvert.id,
-                          };
-
-                          let favoriteJobService = new FavoriteJobService();
-                          favoriteJobService.add(values).then((result) => {
-                            result.data.success
-                              ? alert.success("FAVORİLERE EKLENDİ")
-                              : alert.error("HATA");
-                          });
-                        }}
-                      >
-                        <AiFillHeart color="black" size="3em" />
-                      </Button>
+                      <Link to={`/jobadvert-details/${jobAdvert.id}`}>
+                        <CgSearchLoading color="black" size="3em" />
+                      </Link>
                     </TableCell>
+
+                    {authItem[0].user.userType == "candidate" ? (
+                      <TableCell>
+                        <Button
+                          type="button"
+                          onClick={() => {
+                            let values = {
+                              candidateId: 3,
+                              jobAdvertisementId: jobAdvert.id,
+                            };
+
+                            let favoriteJobService = new FavoriteJobService();
+                            favoriteJobService.add(values).then((result) => {
+                              result.data.success
+                                ? alert.success("FAVORİLERE EKLENDİ")
+                                : alert.error("HATA");
+                            });
+                          }}
+                        >
+                          <AiFillHeart color="black" size="3em" />
+                        </Button>
+                      </TableCell>
+                    ) : null}
                   </TableRow>
                 );
               })}

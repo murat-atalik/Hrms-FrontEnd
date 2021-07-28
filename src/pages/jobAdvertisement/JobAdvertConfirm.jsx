@@ -17,7 +17,7 @@ import StaffSideMenu from "../../pages/staff/StaffSideMenu";
 import JobFilter from "./JobFilter";
 import StaffSideMenuButton from "../../pages/staff/StaffSideMenuButton";
 import { useAlert } from "react-alert";
-export default function JobAdverConfirm() {
+export default function JobAdvertConfirm() {
   const alert = useAlert();
   const [jobAdverts, setJobAdverts] = useState([]);
   const jobAdvertisementService = new JobAdvertisementService();

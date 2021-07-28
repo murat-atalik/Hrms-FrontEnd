@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 import { ImBriefcase } from "react-icons/im";
 import { RiAdminLine } from "react-icons/ri";
 import { MdLocationCity, MdWork } from "react-icons/md";
-import { FaUserTag } from "react-icons/fa";
+import { FaFileAlt, FaUserTag } from "react-icons/fa";
 
 export default function SideMenu() {
   const drawerWidth = 240;
@@ -60,6 +60,29 @@ export default function SideMenu() {
         <div className={classes.toolbar} />
         <Divider />
         <MenuList>
+          <MenuItem
+            component={NavLink}
+            to="/jobadvertlist"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" /> İş ilanları
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/employers"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <ImBriefcase size="2em" /> İş verenler
+            </p>
+          </MenuItem>
+          <Divider />
           <MenuItem
             component={NavLink}
             to="/staff"
@@ -236,18 +259,6 @@ export default function SideMenu() {
           >
             <p>
               <MdWork size="2em" /> Çalışma Biçimi Güncelle
-            </p>
-          </MenuItem>
-          <Divider />
-          <MenuItem
-            component={NavLink}
-            to="/jobadvertlist"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <ImBriefcase size="2em" /> Ana Sayfa
             </p>
           </MenuItem>
           <Divider />

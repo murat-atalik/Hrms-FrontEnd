@@ -31,7 +31,7 @@ import JobFilter from "../pages/jobAdvertisement/JobFilter";
 import JobAdvertisementAdd from "../pages/jobAdvertisement/JobAdvertisementAdd";
 import JobAdvertisementList from "../pages/jobAdvertisement/JobAdvertisementList";
 import JobAdvertConfirm from "../pages/jobAdvertisement/JobAdvertConfirm";
-
+import JobAdvertChangeStatus from "../pages/jobAdvertisement/JobAdvertChangeStatus";
 //Register
 import CandidateRegister from "../pages/register/CandidateRegister";
 import StaffRegister from "../pages/register/StaffRegister";
@@ -53,59 +53,57 @@ import RoleUpdate from "../pages/role/RoleUpdate";
 //Login
 import Login from "../pages/login/Login";
 import CurriculumVitaeDetails from "../pages/curriculumVitae/CurriculumVitaeDetails";
+import JobAdvertDetail from "../pages/jobAdvertisement/JobAdvertDetails";
+import { useSelector } from "react-redux";
 
 export default function DashBoard() {
+  const { authItem } = useSelector((state) => state.auth);
   return (
     <div style={{ minHeight: "85vh" }}>
+      <Route exact path="/employers" component={EmployerList} />
+      <Route path="/employers/:id" component={EmployerDetail} />
       <Route exact path="/job" component={JobPositionList} />
       <Route exact path="/candidate" component={CandidateList} />
       <Route exact path="/cv" component={CurriculumVitaeList} />
-      <Route exact path="/staff" component={StaffList} />
-      <Route exact path="/jobadvertadd" component={JobAdvertisementAdd} />
-      <Route exact path="/jobadvert-confirm" component={JobAdvertConfirm} />
-      <Route exact path="/jobadvertlist" component={JobAdvertisementList} />
-      <Route
-        exact
-        path="/favoriteJobs"
-        component={FavoriteJobAdvertisementList}
-      />
-
-      <Route exact path="/staff/update/:id" component={StaffUpdate} />
-      <Route exact path="/company/update" component={CompanyUpdate} />
-
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register/employer" component={EmployerRegister} />
+      <Route exact path="/register/candidate" component={CandidateRegister} />
       <Route exact path="/filter" component={JobFilter} />
+      <Route exact path="/jobadvert-details/:id" component={JobAdvertDetail} />
+      <Route exact path="/jobadvertlist" component={JobAdvertisementList} />
+      <Route path="/cv/:id" component={CurriculumVitaeDetails} />
+      {/* staff */}
+      <Route exact path="/staff" component={StaffList} />
+      <Route exact path="/jobadvert-confirm" component={JobAdvertConfirm} />
+      <Route exact path="/staff/update/:id" component={StaffUpdate} />
       <Route
         exact
         path="/company/update-confirm"
         component={UpdateCompanyConfirm}
       />
-      {/* CV */}
-      <Route exact path="/cv-create" component={CurriculumVitaeCreate} />
-      <Route exact path="/cv-update/:id" component={CurriculumVitaeUpdate} />
-      <Route exact path="/cv-candidate" component={CandidateCVList} />
-      <Route path="/cv/:id" component={CurriculumVitaeDetails} />
-
-      {/* Employer */}
       <Route exact path="/employer/confirm" component={EmployerConfirm} />
-      <Route exact path="/employers" component={EmployerList} />
-      <Route path="/employers/:id" component={EmployerDetail} />
-      {/* Register */}
-      <Route exact path="/register/candidate" component={CandidateRegister} />
       <Route exact path="/register/staff" component={StaffRegister} />
-      <Route exact path="/register/employer" component={EmployerRegister} />
-      {/* Select values add */}
       <Route exact path="/add/jobPosition" component={JobPositionAdd} />
       <Route exact path="/add/city" component={CityAdd} />
       <Route exact path="/add/role" component={RoleAdd} />
       <Route exact path="/add/work-program" component={WorkProgramAdd} />
       <Route exact path="/add/work-type" component={WorkTypeAdd} />
-      {/* Select values update */}
       <Route exact path="/update/jobPosition" component={JobPositionUpdate} />
       <Route exact path="/update/city" component={CityUpdate} />
       <Route exact path="/update/role" component={RoleUpdate} />
       <Route exact path="/update/work-program" component={WorkProgramUpdate} />
       <Route exact path="/update/work-type" component={WorkTypeUpdate} />
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/jobadvert-status" component={JobAdvertChangeStatus} />
+      <Route exact path="/jobadvertadd" component={JobAdvertisementAdd} />
+      <Route exact path="/company/update" component={CompanyUpdate} />
+      <Route
+        exact
+        path="/favoriteJobs"
+        component={FavoriteJobAdvertisementList}
+      />
+      <Route exact path="/cv-create" component={CurriculumVitaeCreate} />
+      <Route exact path="/cv-update/:id" component={CurriculumVitaeUpdate} />
+      <Route exact path="/cv-candidate" component={CandidateCVList} />)
     </div>
   );
 }

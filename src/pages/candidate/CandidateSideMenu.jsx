@@ -10,7 +10,8 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { RiFileUserLine, RiFileAddLine } from "react-icons/ri";
-import { ImHome } from "react-icons/im";
+import { ImBriefcase, ImHome } from "react-icons/im";
+import { FaFileAlt } from "react-icons/fa";
 
 export default function CandidateSideMenu() {
   const drawerWidth = 240;
@@ -60,6 +61,40 @@ export default function CandidateSideMenu() {
         <MenuList>
           <MenuItem
             component={NavLink}
+            to="/jobadvertlist"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" />
+              İş ilanları
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/favoriteJobs"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileAlt size="2em" /> Favori İş ilanları
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/employers"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <ImBriefcase size="2em" /> İş Verenler
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
             to="/cv-candidate"
             style={{
               color: "white",
@@ -80,19 +115,7 @@ export default function CandidateSideMenu() {
               <RiFileAddLine size="2em" /> Öz Geçmiş Oluştur
             </p>
           </MenuItem>
-
-          <MenuItem
-            component={NavLink}
-            to="/jobadvertlist"
-            style={{
-              color: "white",
-            }}
-          >
-            <p>
-              <ImHome size="2em" /> Ana Sayfa
-            </p>
-          </MenuItem>
-        </MenuList>{" "}
+        </MenuList>
       </Drawer>
     </div>
   );

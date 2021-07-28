@@ -13,13 +13,15 @@ import {
   Box,
   Paper,
 } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import UserService from "../../services/userService";
 import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../../store/actions/authActions";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -33,6 +35,11 @@ function Copyright() {
   );
 }
 export default function Login() {
+  const dispatch = useDispatch();
+  const loginData = (user) => {
+    dispatch(userLogin(user));
+  };
+  const history = useHistory();
   const alert = useAlert();
   const userService = new UserService();
   const validationSchema = yup.object({
@@ -40,10 +47,7 @@ export default function Login() {
       .string("E-posta adresinizi girin")
       .required("E-posta adresi gerekli!")
       .email("Geçersiz e-posta"),
-    password: yup
-      .string("Şifre ")
-      .required("Şifre gerekli")
-      .min(8, "Şifre en az 8 karakter olmalı"),
+    password: yup.string("Şifre ").required("Şifre gerekli"),
   });
   const formik = useFormik({
     initialValues: {
@@ -55,7 +59,9 @@ export default function Login() {
   const handleLogin = (values) => {
     userService.login(values).then((result) => {
       if (result.data.success) {
+        loginData(result.data.data);
         alert.success("GİRİŞ BAŞARILI");
+        history.push("/");
       } else {
         alert.error("ŞİFRE VEYA KULLANICI ADI HATALI");
       }
@@ -129,11 +135,11 @@ export default function Login() {
                 Giriş Yap
               </FormikButton>
               <Grid container style={{ marginTop: "1em", marginBottom: "1em" }}>
-                <Grid item xs>
+                {/* <Grid item xs>
                   <Link href="#" variant="body2">
                     Şifremi Unuttum
                   </Link>
-                </Grid>
+                </Grid> */}
                 <Grid item>
                   <NavLink
                     to="/register/candidate"

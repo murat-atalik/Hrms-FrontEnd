@@ -9,7 +9,6 @@ export default function SignedOut(props) {
         <Button
           variant="contained"
           color="inherit"
-          //onClick={props.signIn}
           style={{ backgroundColor: "green" }}
           component={NavLink}
           to="/login"

@@ -15,16 +15,19 @@ import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
 import { AiFillDelete } from "react-icons/ai";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
+import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
+import CandidateSideMenu from "../candidate/CandidateSideMenu";
+import { useSelector } from "react-redux";
 
 export default function FavoriteJobAdvertisementList() {
+  const { authItem } = useSelector((state) => state.auth);
+
   const history = useHistory();
   const alert = useAlert();
   const [jobAdverts, setJobAdverts] = useState([]);
   let favoriteJobService = new FavoriteJobService();
   useEffect(() => {
-    favoriteJobService
-      .getAllByCandidateId(3)
-      .then((result) => setJobAdverts(result.data.data));
+    favoriteJobService.then((result) => setJobAdverts(result.data.data));
   }, []);
 
   const [page, setPage] = React.useState(0);
@@ -45,7 +48,7 @@ export default function FavoriteJobAdvertisementList() {
     favoriteJobService.delete(id).then(() => {
       alert.error("FAVORİ SİLİNDİ");
       favoriteJobService
-        .getAllByCandidateId(3)
+        .getAllByCandidateId(authItem[0].user.id)
         .then((result) => setJobAdverts(result.data.data));
     });
   };
@@ -88,12 +91,12 @@ export default function FavoriteJobAdvertisementList() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          <SideMenu />
+          <CandidateSideMenu />
         </Grid>
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          <SideMenuOnlyButton />
+          <CandidateSideMenuButton />
         </Grid>
       </div>
       <Grid item xs={10} lg={8}>

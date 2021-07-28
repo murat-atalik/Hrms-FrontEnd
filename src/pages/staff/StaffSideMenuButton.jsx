@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { ImBriefcase } from "react-icons/im";
-import { FaCogs, FaUserTag } from "react-icons/fa";
+import { FaCogs, FaFileAlt, FaUserTag } from "react-icons/fa";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
 import { MdLocationCity, MdWork } from "react-icons/md";
 
@@ -60,6 +60,25 @@ export default function SideMenu() {
         <div className={classes.toolbar} />
         <Divider />
         <MenuList>
+          <MenuItem
+            component={NavLink}
+            to="/jobadvertlist"
+            style={{
+              color: "white",
+            }}
+          >
+            <FaFileAlt size="2em" />
+          </MenuItem>
+
+          <MenuItem
+            component={NavLink}
+            to="/employers"
+            style={{
+              color: "white",
+            }}
+          >
+            <ImBriefcase size="2em" />
+          </MenuItem>
           <MenuItem
             component={NavLink}
             to="/staff"
@@ -196,16 +215,6 @@ export default function SideMenu() {
             }}
           >
             <MdWork size="2em" />
-          </MenuItem>
-          <Divider />
-          <MenuItem
-            component={NavLink}
-            to="/jobadvertlist"
-            style={{
-              color: "white",
-            }}
-          >
-            <ImBriefcase size="2em" />
           </MenuItem>
           <Divider />
         </MenuList>

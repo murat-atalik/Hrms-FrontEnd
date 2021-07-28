@@ -10,7 +10,8 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { RiFileUserLine, RiFileAddLine } from "react-icons/ri";
-import { ImHome } from "react-icons/im";
+import { ImBriefcase, ImHome } from "react-icons/im";
+import { FaFileAlt } from "react-icons/fa";
 
 export default function CandidateSideMenuButton() {
   const drawerWidth = 240;
@@ -60,6 +61,33 @@ export default function CandidateSideMenuButton() {
         <MenuList>
           <MenuItem
             component={NavLink}
+            to="/jobadvertlist"
+            style={{
+              color: "white",
+            }}
+          >
+            <FaFileAlt size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/favoriteJobs"
+            style={{
+              color: "white",
+            }}
+          >
+            <FaFileAlt size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/employers"
+            style={{
+              color: "white",
+            }}
+          >
+            <ImBriefcase size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
             to="/cv-candidate"
             style={{
               color: "white",
@@ -76,18 +104,6 @@ export default function CandidateSideMenuButton() {
           >
             <RiFileAddLine size="2em" />
           </MenuItem>
-
-          <Divider />
-          <MenuItem
-            component={NavLink}
-            to="/jobadvertlist"
-            style={{
-              color: "white",
-            }}
-          >
-            <ImHome size="2em" />
-          </MenuItem>
-          <Divider />
         </MenuList>
       </Drawer>
     </div>

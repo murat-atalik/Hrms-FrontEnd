@@ -23,14 +23,16 @@ export default class JobAdvertisementService {
       this.apiUrl + "/jobadvertisement/changeConfirmStatus?id=" + id
     );
   }
-  cahngeActive(values) {
+  changeActive(id) {
     return axios.post(
-      this.apiUrl + "/jobadvertisement/changeActiveStatus",
-      values
+      this.apiUrl + "/jobadvertisement/changeActiveStatus?id=" + id
     );
   }
   getByCompanyId(id) {
     return axios.get(this.apiUrl + "/jobadvertisement/getByCompany?id=" + id);
+  }
+  getById(id) {
+    return axios.get(this.apiUrl + "/jobadvertisement/getById?id=" + id);
   }
   getByEmployerId(id) {
     return axios.get(this.apiUrl + "/jobadvertisement/getByEmployer?id=" + id);
@@ -39,6 +41,21 @@ export default class JobAdvertisementService {
     return axios.post(
       this.apiUrl + "/jobadvertisement/getAllFiltered",
       filterOption
+    );
+  }
+  getByEmployerIdUnconfirmed(id) {
+    return axios.get(
+      this.apiUrl + "/jobadvertisement/getByEmployerUnconfirmed?id=" + id
+    );
+  }
+  getByEmployerIdPassive(id) {
+    return axios.get(
+      this.apiUrl + "/jobadvertisement/getByEmployerPassive?id=" + id
+    );
+  }
+  getByEmployerIdActive(id) {
+    return axios.get(
+      this.apiUrl + "/jobadvertisement/getByEmployerActive?id=" + id
     );
   }
 }

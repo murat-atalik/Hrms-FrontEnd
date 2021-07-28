@@ -11,17 +11,12 @@ import {
 import SignedIn from "./SignedIn";
 import SignedOut from "./SıgnedOut";
 import { ImHome } from "react-icons/im";
+import { useSelector } from "react-redux";
 
 export default function Navi() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const { authItem } = useSelector((state) => state.auth);
   const history = useHistory();
-  function handleSignOut() {
-    setIsAuthenticated(false);
-    history.push("/");
-  }
-  function handleSignIn() {
-    setIsAuthenticated(true);
-  }
+
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -55,11 +50,7 @@ export default function Navi() {
           </IconButton>
 
           <Grid container justify="flex-end">
-            {isAuthenticated ? (
-              <SignedIn signOut={handleSignOut} />
-            ) : (
-              <SignedOut signIn={handleSignIn} />
-            )}
+            {authItem[0].loggedIn ? <SignedIn /> : <SignedOut />}
           </Grid>
         </Toolbar>
       </AppBar>

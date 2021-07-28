@@ -24,9 +24,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import "react-dropzone-uploader/dist/styles.css";
 import { DropzoneArea } from "material-ui-dropzone";
 import { IoIosRemoveCircle } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 export default function CurriculumVitaeUpdate() {
-  let id = 0;
+  const { authItem } = useSelector((state) => state.auth);
+
   let cvService = new CurriculumVitaeService();
   const [imageUrl, setImageUrl] = useState();
   let file = new FormData();
@@ -91,7 +93,7 @@ export default function CurriculumVitaeUpdate() {
   });
   const cvAdd = useFormik({
     initialValues: {
-      candidateId: id,
+      candidateId: authItem[0].user.id,
       firstName: "",
       lastName: "",
       email: "",

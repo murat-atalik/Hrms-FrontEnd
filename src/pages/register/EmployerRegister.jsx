@@ -63,7 +63,6 @@ export default function EmployerRegister() {
     validationSchema: validationSchema,
   });
   const handleSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
     employerService.add(values).then((result) => {
       result.data.success
         ? alert.success("KULLANICI OLUŞTURULDU")
