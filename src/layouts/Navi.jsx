@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import {
   Typography,
   AppBar,
@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 
 export default function Navi() {
   const { authItem } = useSelector((state) => state.auth);
-  const history = useHistory();
 
   const useStyles = makeStyles((theme) => ({
     root: {

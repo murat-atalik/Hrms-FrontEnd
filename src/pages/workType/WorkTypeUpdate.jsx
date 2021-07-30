@@ -24,7 +24,7 @@ export default function WorkTypeUpdate() {
     workTypeService
       .getWorkTypes()
       .then((result) => setWorkTypes(result.data.data));
-  }, []);
+  });
   const tWorkTypes = workTypes.map(({ id, workType: value }) => ({
     id,
     value,

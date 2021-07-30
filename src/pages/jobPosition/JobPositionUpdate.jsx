@@ -24,7 +24,7 @@ export default function JobPositionUpdate() {
     jobPositionService
       .getJobPositions()
       .then((result) => setJobPositions(result.data.data));
-  }, []);
+  });
   const tJobPositions = jobPositions.map(({ id, positionName: value }) => ({
     id,
     value,

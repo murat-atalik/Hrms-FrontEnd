@@ -54,12 +54,10 @@ import RoleUpdate from "../pages/role/RoleUpdate";
 import Login from "../pages/login/Login";
 import CurriculumVitaeDetails from "../pages/curriculumVitae/CurriculumVitaeDetails";
 import JobAdvertDetail from "../pages/jobAdvertisement/JobAdvertDetails";
-import { useSelector } from "react-redux";
 import CandidateApplies from "../pages/jobAdvertApplies/CandidateApplies";
 import ReviewApplications from "../pages/jobAdvertApplies/ReviewAppllications";
 
 export default function DashBoard() {
-  const { authItem } = useSelector((state) => state.auth);
   return (
     <div style={{ minHeight: "85vh" }}>
       <Route exact path="/employers" component={EmployerList} />

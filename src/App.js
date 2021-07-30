@@ -1,6 +1,5 @@
 import Dashboard from "./layouts/Dashboard";
 import Navi from "./layouts/Navi";
-import { Container } from "@material-ui/core";
 import FooterBar from "./layouts/FooterBar";
 import Home from "./layouts/Home";
 import { useLocation } from "react-router-dom";

@@ -1,15 +1,12 @@
 import React from "react";
 import {
-  Paper,
   Container,
-  List,
-  ListItem,
   makeStyles,
   Typography,
   Link,
   CssBaseline,
 } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+
 function Copyright() {
   return (
     <Typography

@@ -1,6 +1,4 @@
 import {
-  Avatar,
-  Box,
   Button,
   Grid,
   Paper,
@@ -8,7 +6,7 @@ import {
   makeStyles,
   ButtonBase,
 } from "@material-ui/core";
-import Image from "material-ui-image";
+
 import { Form, useFormik, Formik, FieldArray } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
@@ -23,7 +21,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import "react-dropzone-uploader/dist/styles.css";
 import { DropzoneArea } from "material-ui-dropzone";
-import { IoIosRemoveCircle } from "react-icons/io";
+
 import { useSelector } from "react-redux";
 
 export default function CurriculumVitaeUpdate() {

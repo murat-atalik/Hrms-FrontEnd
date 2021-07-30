@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Formik, useFormik } from "formik";
+import { Form, Formik } from "formik";
 import * as yup from "yup";
 
 import { Grid, makeStyles } from "@material-ui/core";
@@ -40,7 +40,7 @@ export default function StaffUpdate() {
   const [staff, setStaff] = useState([]);
   useEffect(() => {
     staffService.getById(id).then((result) => setStaff(result.data.data));
-  }, []);
+  });
 
   const handleSubmit = (values) => {
     staffService.update(values);

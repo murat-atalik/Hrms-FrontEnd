@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -11,7 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 import FavoriteJobService from "../../services/favoriteJobService";
 import { AiFillHeart } from "react-icons/ai";
-import { Button, Hidden, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
@@ -91,13 +91,13 @@ export default function JobAdvertisementList() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
             <StaffSideMenu />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "employer" ? (
+            authItem[0].user.userType === "employer" ? (
             <EmployerSideMenu />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "candidate" ? (
+            authItem[0].user.userType === "candidate" ? (
             <CandidateSideMenu />
           ) : (
             <SideMenu />
@@ -106,13 +106,13 @@ export default function JobAdvertisementList() {
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
             <StaffSideMenuButton />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "employer" ? (
+            authItem[0].user.userType === "employer" ? (
             <EmployerSideMenuButton />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "candidate" ? (
+            authItem[0].user.userType === "candidate" ? (
             <CandidateSideMenuButton />
           ) : (
             <SideMenuOnlyButton />
@@ -136,7 +136,7 @@ export default function JobAdvertisementList() {
                 <TableCell>Maaş</TableCell>
                 <TableCell>son Başvuru Tarihi</TableCell>
                 <TableCell>İncele</TableCell>
-                {authItem[0].user.userType == "candidate" ? (
+                {authItem[0].user.userType === "candidate" ? (
                   <TableCell>Favori</TableCell>
                 ) : null}
               </TableRow>
@@ -170,7 +170,7 @@ export default function JobAdvertisementList() {
                       </Link>
                     </TableCell>
 
-                    {authItem[0].user.userType == "candidate" ? (
+                    {authItem[0].user.userType === "candidate" ? (
                       <TableCell>
                         <Button
                           type="button"

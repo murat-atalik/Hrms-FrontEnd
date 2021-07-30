@@ -1,17 +1,9 @@
-import {
-  Avatar,
-  Divider,
-  Grid,
-  makeStyles,
-  Paper,
-  Typography,
-} from "@material-ui/core";
+import { Avatar, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
 import SideMenu from "../../layouts/SideMenu";
 import CurriculumVitaeService from "../../services/curriculumVitaeService";
-import Image from "material-ui-image";
 import { MdBrokenImage } from "react-icons/md";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
@@ -23,7 +15,7 @@ export default function CurriculumVitaeDetails() {
     curriculumVitaService.getById(id).then((result) => {
       setCv(result.data.data);
     });
-  }, []);
+  });
   const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",

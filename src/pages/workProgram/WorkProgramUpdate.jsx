@@ -24,7 +24,7 @@ export default function WorkProgramUpdate() {
     workProgramService
       .getWorkPrograms()
       .then((result) => setWorkPrograms(result.data.data));
-  }, []);
+  });
   const tWorkPrograms = workPrograms.map(({ id, programName: value }) => ({
     id,
     value,

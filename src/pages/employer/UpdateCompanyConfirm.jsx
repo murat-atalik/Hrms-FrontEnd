@@ -29,7 +29,7 @@ export default function UpdateCompanyConfirm() {
     updateCompanyService
       .getAll()
       .then((result) => setCompanies(result.data.data));
-  }, []);
+  });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

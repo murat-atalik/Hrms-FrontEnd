@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { Form, Formik, useFormik } from "formik";
+import { Form, Formik } from "formik";
 import * as yup from "yup";
 
-import {
-  FormControl,
-  Grid,
-  makeStyles,
-  Paper,
-  InputLabel,
-  Select,
-  MenuItem,
-  Typography,
-} from "@material-ui/core";
+import { Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
@@ -31,7 +22,7 @@ export default function RoleUpdate() {
   const [selectedRole, setSelectedRole] = useState();
   useEffect(() => {
     roleService.getRoles().then((result) => setRoles(result.data.data));
-  }, []);
+  });
   const tRoles = roles.map(({ id, roleName: value }) => ({
     id,
     value,

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Paper,
   MenuItem,
   MenuList,
   makeStyles,
@@ -10,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { RiFileUserLine, RiFileAddLine } from "react-icons/ri";
-import { ImBriefcase, ImHome } from "react-icons/im";
+import { ImBriefcase } from "react-icons/im";
 import { FaFileAlt, FaFileSignature } from "react-icons/fa";
 
 export default function CandidateSideMenu() {

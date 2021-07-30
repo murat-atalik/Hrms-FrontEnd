@@ -10,11 +10,10 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import FavoriteJobService from "../../services/favoriteJobService";
 import { Button, Grid } from "@material-ui/core";
-import SideMenu from "../../layouts/SideMenu";
-import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
+
 import { AiFillDelete } from "react-icons/ai";
 import { useAlert } from "react-alert";
-import { useHistory } from "react-router-dom";
+
 import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
 import CandidateSideMenu from "../candidate/CandidateSideMenu";
 import { useSelector } from "react-redux";
@@ -22,7 +21,6 @@ import { useSelector } from "react-redux";
 export default function FavoriteJobAdvertisementList() {
   const { authItem } = useSelector((state) => state.auth);
 
-  const history = useHistory();
   const alert = useAlert();
   const [jobAdverts, setJobAdverts] = useState([]);
   let favoriteJobService = new FavoriteJobService();
@@ -30,7 +28,7 @@ export default function FavoriteJobAdvertisementList() {
     favoriteJobService
       .getAllByCandidateId(authItem[0].user.id)
       .then((result) => setJobAdverts(result.data.data));
-  }, []);
+  });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

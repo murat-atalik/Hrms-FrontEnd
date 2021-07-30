@@ -26,14 +26,14 @@ export default function EmployerDetail() {
     employerService
       .getByEmployerId(id)
       .then((result) => setEmployer(result.data.data));
-  }, []);
+  });
   const [jobAdverts, setJobAdverts] = useState({});
   useEffect(() => {
     let jobAdvertService = new JobAdvertisementService();
     jobAdvertService
       .getByEmployerIdActive(id)
       .then((result) => setJobAdverts(result.data.data));
-  }, []);
+  });
 
   const useStyles = makeStyles((theme) => ({
     root: {

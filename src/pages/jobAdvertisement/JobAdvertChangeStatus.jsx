@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -29,17 +29,13 @@ export default function JobAdvertChangeStatus() {
     jobAdvertisementService
       .getByEmployerIdActive(authItem[0].user.id)
       .then((result) => setJobAdvertsActive(result.data.data));
-  }, []);
-  useEffect(() => {
     jobAdvertisementService
       .getByEmployerIdPassive(authItem[0].user.id)
       .then((result) => setJobAdvertsPassive(result.data.data));
-  }, []);
-  useEffect(() => {
     jobAdvertisementService
       .getByEmployerIdUnconfirmed(authItem[0].user.id)
       .then((result) => setJobAdvertsUnconfirmed(result.data.data));
-  }, []);
+  });
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

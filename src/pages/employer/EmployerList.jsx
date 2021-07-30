@@ -82,13 +82,13 @@ export default function EmployerList() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
             <StaffSideMenu />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "employer" ? (
+            authItem[0].user.userType === "employer" ? (
             <EmployerSideMenu />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "candidate" ? (
+            authItem[0].user.userType === "candidate" ? (
             <CandidateSideMenu />
           ) : (
             <SideMenu />
@@ -97,13 +97,13 @@ export default function EmployerList() {
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
             <StaffSideMenuButton />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "employer" ? (
+            authItem[0].user.userType === "employer" ? (
             <EmployerSideMenuButton />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "candidate" ? (
+            authItem[0].user.userType === "candidate" ? (
             <CandidateSideMenuButton />
           ) : (
             <SideMenuOnlyButton />

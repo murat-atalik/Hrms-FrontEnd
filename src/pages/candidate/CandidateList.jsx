@@ -25,9 +25,6 @@ export default function CandidateList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, candidates.length - page * rowsPerPage);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -9,12 +9,11 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
-import FavoriteJobService from "../../services/favoriteJobService";
-import { AiFillCheckCircle, AiFillDelete, AiFillHeart } from "react-icons/ai";
-import { Button, CssBaseline, Hidden, Typography } from "@material-ui/core";
+import { AiFillCheckCircle, AiFillDelete } from "react-icons/ai";
+import { Button, CssBaseline, Typography } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import StaffSideMenu from "../../pages/staff/StaffSideMenu";
-import JobFilter from "./JobFilter";
+
 import StaffSideMenuButton from "../../pages/staff/StaffSideMenuButton";
 import { useAlert } from "react-alert";
 export default function JobAdvertConfirm() {
@@ -25,7 +24,7 @@ export default function JobAdvertConfirm() {
     jobAdvertisementService
       .getUnConfirmed()
       .then((result) => setJobAdverts(result.data.data));
-  }, []);
+  });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

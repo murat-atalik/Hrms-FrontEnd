@@ -1,13 +1,12 @@
-import { Menu, Button, MenuItem, Avatar, styled } from "@material-ui/core";
+import { Menu, Button, MenuItem } from "@material-ui/core";
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import { AiFillHeart } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
 
 import { userLogout } from "../store/actions/authActions";
 
-export default function SignedIn(props) {
-  const { authItem } = useSelector((state) => state.auth);
+export default function SignedIn() {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history = useHistory();

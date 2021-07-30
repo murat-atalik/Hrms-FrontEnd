@@ -13,10 +13,6 @@ import {
   Grid,
   Button,
   Typography,
-  withStyles,
-  MenuItem,
-  ListItemText,
-  Menu,
 } from "@material-ui/core";
 import { CgSearchLoading } from "react-icons/cg";
 import { useAlert } from "react-alert";
@@ -27,43 +23,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
 import EmployerSideMenu from "../employer/EmployerSideMenu";
 import PageNotFound from "../../layouts/404";
-import {
-  Cancel,
-  CheckCircle,
-  Edit,
-  PauseCircleFilled,
-} from "@material-ui/icons";
-
-const StyledMenu = withStyles({
-  paper: {
-    border: "1px solid #d3d4d5",
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    {...props}
-  />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main,
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
+import { Cancel, CheckCircle, PauseCircleFilled } from "@material-ui/icons";
 
 export default function ReviewApplications() {
   const alert = useAlert();
@@ -89,7 +49,7 @@ export default function ReviewApplications() {
     jobAdvertApplyService
       .getDenied(id)
       .then((result) => setDeniedApplies(result.data.data));
-  }, []);
+  });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -101,15 +61,6 @@ export default function ReviewApplications() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   const useStyles = makeStyles((theme) => ({
@@ -162,7 +113,6 @@ export default function ReviewApplications() {
 
       alert.success("İŞ BAŞVURUSU BEKLEMEDE");
     });
-    setAnchorEl(null);
   };
   const handleDenied = (value) => {
     console.log(value);
@@ -179,7 +129,6 @@ export default function ReviewApplications() {
 
       alert.success("İŞ BAŞVURUSU REDDEDİLDİ");
     });
-    setAnchorEl(null);
   };
   const handleApproved = (value) => {
     console.log(value);
@@ -196,10 +145,9 @@ export default function ReviewApplications() {
 
       alert.success("İŞ BAŞVURUSU BEKLEMEDE");
     });
-    setAnchorEl(null);
   };
 
-  if (authItem[0].user.id == employerId) {
+  if (authItem[0].user.id === employerId) {
     return (
       <Grid
         space={2}
@@ -233,7 +181,7 @@ export default function ReviewApplications() {
             >
               Bekleyen Başvurular
             </Typography>
-            {pendingApplies == undefined || pendingApplies.length <= 0 ? (
+            {pendingApplies === undefined || pendingApplies.length <= 0 ? (
               <h4 style={{ marginLeft: "2.5em" }}>
                 İş Başvurusu bulunmamaktadır.
               </h4>
@@ -401,7 +349,7 @@ export default function ReviewApplications() {
             >
               Onaylanan Başvurular
             </Typography>
-            {approvedApplies == undefined || approvedApplies.length <= 0 ? (
+            {approvedApplies === undefined || approvedApplies.length <= 0 ? (
               <h4 style={{ marginLeft: "2.5em" }}>
                 Onaylanmış İş Başvurusu bulunmamaktadır.
               </h4>
@@ -572,7 +520,7 @@ export default function ReviewApplications() {
             >
               Reddedilen Başvurular
             </Typography>
-            {deniedApplies == undefined || deniedApplies.length <= 0 ? (
+            {deniedApplies === undefined || deniedApplies.length <= 0 ? (
               <h4 style={{ marginLeft: "2.5em" }}>
                 Reddedilmiş İş Başvurusu bulunmamaktadır.
               </h4>

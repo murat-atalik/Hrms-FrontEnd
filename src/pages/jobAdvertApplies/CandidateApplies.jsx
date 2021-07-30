@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CurriculumVitaeService from "../../services/curriculumVitaeService";
+
 import {
   Table,
   TableHead,
@@ -9,15 +9,14 @@ import {
   TableContainer,
   TablePagination,
   Paper,
-  Avatar,
   makeStyles,
   Grid,
   Button,
   Typography,
 } from "@material-ui/core";
 import { CgSearchLoading } from "react-icons/cg";
-import { AiFillCheckCircle, AiFillDelete } from "react-icons/ai";
-import { GrUpdate } from "react-icons/gr";
+import { AiFillDelete } from "react-icons/ai";
+
 import { useAlert } from "react-alert";
 import CandidateSideMenu from "../candidate/CandidateSideMenu";
 import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
@@ -34,7 +33,7 @@ export default function CandidateApplies() {
     jobAdvertApplyService
       .getByCandidateId(authItem[0].user.id)
       .then((result) => setApplies(result.data.data));
-  }, []);
+  });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -125,7 +124,7 @@ export default function CandidateApplies() {
           >
             İş Başvuruları
           </Typography>
-          {applies == undefined || applies.length <= 0 ? (
+          {applies === undefined || applies.length <= 0 ? (
             <h4 style={{ marginLeft: "2.5em" }}>
               İş Başvurusu bulunmamaktadır.
             </h4>

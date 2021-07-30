@@ -13,10 +13,9 @@ import StaffSideMenu from "../staff/StaffSideMenu";
 import StaffSideMenuButton from "../staff/StaffSideMenuButton";
 
 import { useAlert } from "react-alert";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function WorkTypeAdd() {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state?.auth?.authItem);
   console.log(user);
   const alert = useAlert();

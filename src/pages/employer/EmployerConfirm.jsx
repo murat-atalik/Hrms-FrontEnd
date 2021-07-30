@@ -9,8 +9,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { CgSearchLoading } from "react-icons/cg";
-import { Link } from "react-router-dom";
+
 import { Button, Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
@@ -24,7 +23,7 @@ export default function EmployerConfirm() {
     employerService
       .getUnConfirmed()
       .then((result) => setEmployers(result.data.data));
-  }, []);
+  });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

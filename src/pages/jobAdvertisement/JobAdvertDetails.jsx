@@ -1,19 +1,9 @@
-import {
-  Grid,
-  Paper,
-  makeStyles,
-  Typography,
-  Button,
-  styled,
-} from "@material-ui/core";
+import { Grid, Paper, makeStyles, Typography, Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { CgSearchLoading } from "react-icons/cg";
 import { Link, useParams } from "react-router-dom";
 import SideMenu from "../../layouts/SideMenu";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
-import EmployerService from "../../services/employerService";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
-import { green } from "@material-ui/core/colors";
 import { useSelector } from "react-redux";
 import JobAdvertApplyService from "../../services/jobAdvertApplyService";
 import { useAlert } from "react-alert";
@@ -43,7 +33,7 @@ export default function JobAdvertDetail() {
     jobAdvertApplyService.checkApply(authItem[0].user.id, id).then((result) => {
       setApply(result.data.data);
     });
-  }, []);
+  });
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,13 +80,13 @@ export default function JobAdvertDetail() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
             <StaffSideMenu />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "employer" ? (
+            authItem[0].user.userType === "employer" ? (
             <EmployerSideMenu />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "candidate" ? (
+            authItem[0].user.userType === "candidate" ? (
             <CandidateSideMenu />
           ) : (
             <SideMenu />
@@ -105,13 +95,13 @@ export default function JobAdvertDetail() {
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
             <StaffSideMenuButton />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "employer" ? (
+            authItem[0].user.userType === "employer" ? (
             <EmployerSideMenuButton />
           ) : authItem[0].loggedIn &&
-            authItem[0].user.userType == "candidate" ? (
+            authItem[0].user.userType === "candidate" ? (
             <CandidateSideMenuButton />
           ) : (
             <SideMenuOnlyButton />
@@ -286,7 +276,7 @@ export default function JobAdvertDetail() {
                 </Grid>
               </Grid>
               <Grid item container xs={12} direction="row-reverse">
-                {authItem[0].user.userType == "candidate" && apply ? (
+                {authItem[0].user.userType === "candidate" && apply ? (
                   <Button
                     variant="contained"
                     size="large"
@@ -295,8 +285,8 @@ export default function JobAdvertDetail() {
                   >
                     Başvur
                   </Button>
-                ) : authItem[0].user.userType == "employer" &&
-                  authItem[0].user.id == jobAdvert?.employer?.id ? (
+                ) : authItem[0].user.userType === "employer" &&
+                  authItem[0].user.id === jobAdvert?.employer?.id ? (
                   <Button
                     component={Link}
                     to={`/review-applies/${jobAdvert?.id}`}

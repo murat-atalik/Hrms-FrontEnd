@@ -1,15 +1,12 @@
 import {
-  Avatar,
-  Box,
   Button,
   ButtonBase,
   Grid,
-  IconButton,
   makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
-import Image from "material-ui-image";
+
 import { Form, Formik, FieldArray } from "formik";
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
@@ -27,10 +24,9 @@ import FormikDAtePicker from "../../utilities/customFormComponents/FormikDatePic
 import { AiFillDelete, AiOutlinePlusCircle } from "react-icons/ai";
 
 import { DropzoneArea } from "material-ui-dropzone";
-import { IoIosRemoveCircle } from "react-icons/io";
+
 import DeleteIcon from "@material-ui/icons/Delete";
 import "alertifyjs/build/css/alertify.css";
-import alertify from "alertifyjs";
 
 import CandidateSideMenu from "../candidate/CandidateSideMenu";
 
@@ -56,7 +52,7 @@ export default function CurriculumVitaeUpdate() {
       setCurriculumVitae(result.data.data);
       setImageUrl(result.data.data?.imageUrl);
     });
-  }, []);
+  });
 
   let file = new FormData();
   const validationSchema = yup.object({

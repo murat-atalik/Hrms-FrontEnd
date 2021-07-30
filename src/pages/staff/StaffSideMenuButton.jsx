@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Paper,
   MenuItem,
   MenuList,
   makeStyles,
@@ -11,7 +10,6 @@ import {
 import { NavLink } from "react-router-dom";
 import { ImBriefcase } from "react-icons/im";
 import { FaCogs, FaFileAlt, FaUserTag } from "react-icons/fa";
-import LocationCityIcon from "@material-ui/icons/LocationCity";
 import { MdLocationCity, MdWork } from "react-icons/md";
 
 export default function SideMenu() {
