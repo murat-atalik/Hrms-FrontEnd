@@ -9,15 +9,15 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
-import FavoriteJobService from "../../services/favoriteJobService";
-import { AiFillCheckCircle, AiFillDelete, AiFillHeart } from "react-icons/ai";
-import { CgArrowsExchangeAltV } from "react-icons/cg";
-import { Button, CssBaseline, Hidden, Typography } from "@material-ui/core";
+import { AiFillDelete } from "react-icons/ai";
+import { CgArrowsExchangeAltV, CgSearchLoading } from "react-icons/cg";
+import { Button, CssBaseline, Typography } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import EmployerSideMenu from "../../pages/employer/EmployerSideMenu";
 import EmployerSideMenuButton from "../../pages/employer/EmployerSideMenuButton";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 export default function JobAdvertChangeStatus() {
   const { authItem } = useSelector((state) => state.auth);
   const alert = useAlert();
@@ -158,8 +158,9 @@ export default function JobAdvertChangeStatus() {
                   <TableCell>Çalışma Türü</TableCell>
                   <TableCell>Maaş</TableCell>
                   <TableCell>Son Başvuru Tarihi</TableCell>
-                  <TableCell>Durum değiştir</TableCell>
-                  <TableCell>Sil</TableCell>
+                  <TableCell>Durum Değiştir</TableCell>
+                  <TableCell>İş Başvurularını İncele</TableCell>
+                  {/* <TableCell>Sil</TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -198,6 +199,11 @@ export default function JobAdvertChangeStatus() {
                         </Button>
                       </TableCell>
                       <TableCell>
+                        <Link to={`/review-applies/${jobAdvert?.id}`}>
+                          <CgSearchLoading color="black" size="3em" />
+                        </Link>
+                      </TableCell>
+                      {/* <TableCell>
                         <Button
                           onClick={() => {
                             handleDelete(jobAdvert.id);
@@ -205,7 +211,7 @@ export default function JobAdvertChangeStatus() {
                         >
                           <AiFillDelete color="black" size="2em" />
                         </Button>
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   );
                 })}
@@ -256,7 +262,8 @@ export default function JobAdvertChangeStatus() {
                   <TableCell>Maaş</TableCell>
                   <TableCell>Son Başvuru Tarihi</TableCell>
                   <TableCell>Durum değiştir</TableCell>
-                  <TableCell>Sil</TableCell>
+                  <TableCell>İş Başvurularını İncele</TableCell>
+                  {/* <TableCell>Sil</TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -295,6 +302,11 @@ export default function JobAdvertChangeStatus() {
                         </Button>
                       </TableCell>
                       <TableCell>
+                        <Link to={`/review-applies/${jobAdvert?.id}`}>
+                          <CgSearchLoading color="black" size="3em" />
+                        </Link>
+                      </TableCell>
+                      {/* <TableCell>
                         <Button
                           onClick={() => {
                             handleDelete(jobAdvert.id);
@@ -302,7 +314,7 @@ export default function JobAdvertChangeStatus() {
                         >
                           <AiFillDelete color="black" size="2em" />
                         </Button>
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   );
                 })}

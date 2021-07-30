@@ -1,18 +1,11 @@
 import {
   Grid,
-  Table,
-  TableCell,
   Paper,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableContainer,
   makeStyles,
   Typography,
   Button,
   styled,
 } from "@material-ui/core";
-
 import React, { useEffect, useState } from "react";
 import { CgSearchLoading } from "react-icons/cg";
 import { Link, useParams } from "react-router-dom";
@@ -22,16 +15,33 @@ import EmployerService from "../../services/employerService";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
 import { green } from "@material-ui/core/colors";
 import { useSelector } from "react-redux";
+import JobAdvertApplyService from "../../services/jobAdvertApplyService";
+import { useAlert } from "react-alert";
+import CandidateSideMenu from "../candidate/CandidateSideMenu";
+import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
+import EmployerSideMenu from "../employer/EmployerSideMenu";
+import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
+import StaffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenuButton from "../staff/StaffSideMenuButton";
 export default function JobAdvertDetail() {
+  const alert = useAlert();
+  const jobAdvertApplyService = new JobAdvertApplyService();
   const { authItem } = useSelector((state) => state.auth);
-
   let { id } = useParams();
-
+  const values = {
+    candidateId: authItem[0].user.id,
+    jobAdvertisementId: id,
+  };
   const [jobAdvert, setJobAdvert] = useState({});
+  const [apply, setApply] = useState(false);
   useEffect(() => {
     let jobAdvertService = new JobAdvertisementService();
     jobAdvertService.getById(id).then((result) => {
       setJobAdvert(result.data.data);
+    });
+    let jobAdvertApplyService = new JobAdvertApplyService();
+    jobAdvertApplyService.checkApply(authItem[0].user.id, id).then((result) => {
+      setApply(result.data.data);
     });
   }, []);
 
@@ -62,13 +72,14 @@ export default function JobAdvertDetail() {
     },
   }));
   const classes = useStyles();
-  const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(green[500]),
-    backgroundColor: green[500],
-    "&:hover": {
-      backgroundColor: green[700],
-    },
-  }));
+
+  const handleApply = () => {
+    jobAdvertApplyService.add(values).then((result) => {
+      result.data.success
+        ? alert.success(result.data.message)
+        : alert.error(result.data.message);
+    });
+  };
   return (
     <Grid
       space={2}
@@ -79,12 +90,32 @@ export default function JobAdvertDetail() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          <SideMenu />
+          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+            <StaffSideMenu />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType == "employer" ? (
+            <EmployerSideMenu />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType == "candidate" ? (
+            <CandidateSideMenu />
+          ) : (
+            <SideMenu />
+          )}
         </Grid>
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          <SideMenuOnlyButton />
+          {authItem[0].loggedIn && authItem[0].user.userType == "staff" ? (
+            <StaffSideMenuButton />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType == "employer" ? (
+            <EmployerSideMenuButton />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType == "candidate" ? (
+            <CandidateSideMenuButton />
+          ) : (
+            <SideMenuOnlyButton />
+          )}
         </Grid>
       </div>
       <Grid item xs={10} lg={8}>
@@ -211,7 +242,7 @@ export default function JobAdvertDetail() {
                 <Grid item xs={5}>
                   <p> {jobAdvert?.workType?.workType}</p>
                 </Grid>
-              </Grid>{" "}
+              </Grid>
               <Grid space={2} container direction="row" alignItems="flex-start">
                 <Grid item xs={5}>
                   <p>Çalışma Programı:</p>
@@ -255,26 +286,26 @@ export default function JobAdvertDetail() {
                 </Grid>
               </Grid>
               <Grid item container xs={12} direction="row-reverse">
-                {authItem[0].user.userType == "candidate" ? (
-                  <ColorButton
+                {authItem[0].user.userType == "candidate" && apply ? (
+                  <Button
                     variant="contained"
                     size="large"
-                    onClick={() => {
-                      console.log("başvuru yapıldı");
-                    }}
+                    style={{ color: "white", background: "green" }}
+                    onClick={handleApply}
                   >
                     Başvur
-                  </ColorButton>
-                ) : authItem[0].user.userType == "employer" ? (
-                  <ColorButton
+                  </Button>
+                ) : authItem[0].user.userType == "employer" &&
+                  authItem[0].user.id == jobAdvert?.employer?.id ? (
+                  <Button
+                    component={Link}
+                    to={`/review-applies/${jobAdvert?.id}`}
                     variant="contained"
                     size="large"
-                    onClick={() => {
-                      console.log("incele yapıldı");
-                    }}
+                    style={{ color: "white", background: "green" }}
                   >
-                    İncele
-                  </ColorButton>
+                    Başvuruları İncele
+                  </Button>
                 ) : (
                   <div></div>
                 )}

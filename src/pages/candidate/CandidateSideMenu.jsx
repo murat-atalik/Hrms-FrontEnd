@@ -11,7 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { RiFileUserLine, RiFileAddLine } from "react-icons/ri";
 import { ImBriefcase, ImHome } from "react-icons/im";
-import { FaFileAlt } from "react-icons/fa";
+import { FaFileAlt, FaFileSignature } from "react-icons/fa";
 
 export default function CandidateSideMenu() {
   const drawerWidth = 240;
@@ -113,6 +113,17 @@ export default function CandidateSideMenu() {
           >
             <p>
               <RiFileAddLine size="2em" /> Öz Geçmiş Oluştur
+            </p>
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/job-applies"
+            style={{
+              color: "white",
+            }}
+          >
+            <p>
+              <FaFileSignature size="2em" /> İş Başvurularım
             </p>
           </MenuItem>
         </MenuList>

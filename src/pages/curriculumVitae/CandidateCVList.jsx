@@ -22,19 +22,21 @@ import { useAlert } from "react-alert";
 import CandidateSideMenu from "../candidate/CandidateSideMenu";
 import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function CurriculumVitaeList() {
   const alert = useAlert();
   const [curriculumVitaeActive, setCurriculumVitaesActive] = useState();
   const [curriculumVitaesPassive, setCurriculumVitaesPassive] = useState([]);
   const cvService = new CurriculumVitaeService();
-  let candidateId = 1;
+  const { authItem } = useSelector((state) => state.auth);
+
   useEffect(() => {
     cvService
-      .getByCandidateIdActive(candidateId)
+      .getByCandidateIdActive(authItem[0].user.id)
       .then((result) => setCurriculumVitaesActive(result.data.data));
     cvService
-      .getByCandidateIdPassive(candidateId)
+      .getByCandidateIdPassive(authItem[0].user.id)
       .then((result) => setCurriculumVitaesPassive(result.data.data));
   }, []);
 
@@ -87,10 +89,10 @@ export default function CurriculumVitaeList() {
   const handleDelete = (id) => {
     cvService.delete(id).then(() => {
       cvService
-        .getByCandidateIdActive(candidateId)
+        .getByCandidateIdActive(authItem[0].user.id)
         .then((result) => setCurriculumVitaesActive(result.data.data));
       cvService
-        .getByCandidateIdPassive(candidateId)
+        .getByCandidateIdPassive(authItem[0].user.id)
         .then((result) => setCurriculumVitaesPassive(result.data.data));
       alert.success("ÖZGEÇMİŞ SİLİNDİ");
     });
@@ -98,10 +100,10 @@ export default function CurriculumVitaeList() {
   const handleStatus = (id) => {
     cvService.changeStatus(id).then(() => {
       cvService
-        .getByCandidateIdActive(candidateId)
+        .getByCandidateIdActive(authItem[0].user.id)
         .then((result) => setCurriculumVitaesActive(result.data.data));
       cvService
-        .getByCandidateIdPassive(candidateId)
+        .getByCandidateIdPassive(authItem[0].user.id)
         .then((result) => setCurriculumVitaesPassive(result.data.data));
       alert.success("ÖZGEÇMİŞ AKTİF");
     });

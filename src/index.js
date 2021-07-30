@@ -13,6 +13,9 @@ import { saveState } from "./localStorage";
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_RIGHT,
+  containerStyle: {
+    zIndex: 999999,
+  },
 };
 
 const store = configureStore();
@@ -29,7 +32,6 @@ ReactDOM.render(
         <App />
       </AlertProvider>
     </BrowserRouter>
-    ,
   </Provider>,
   document.getElementById("root")
 );

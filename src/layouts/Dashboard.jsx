@@ -55,6 +55,8 @@ import Login from "../pages/login/Login";
 import CurriculumVitaeDetails from "../pages/curriculumVitae/CurriculumVitaeDetails";
 import JobAdvertDetail from "../pages/jobAdvertisement/JobAdvertDetails";
 import { useSelector } from "react-redux";
+import CandidateApplies from "../pages/jobAdvertApplies/CandidateApplies";
+import ReviewApplications from "../pages/jobAdvertApplies/ReviewAppllications";
 
 export default function DashBoard() {
   const { authItem } = useSelector((state) => state.auth);
@@ -96,6 +98,7 @@ export default function DashBoard() {
       <Route exact path="/jobadvert-status" component={JobAdvertChangeStatus} />
       <Route exact path="/jobadvertadd" component={JobAdvertisementAdd} />
       <Route exact path="/company/update" component={CompanyUpdate} />
+      <Route exact path="/review-applies/:id" component={ReviewApplications} />
       <Route
         exact
         path="/favoriteJobs"
@@ -103,7 +106,8 @@ export default function DashBoard() {
       />
       <Route exact path="/cv-create" component={CurriculumVitaeCreate} />
       <Route exact path="/cv-update/:id" component={CurriculumVitaeUpdate} />
-      <Route exact path="/cv-candidate" component={CandidateCVList} />)
+      <Route exact path="/cv-candidate" component={CandidateCVList} />
+      <Route exact path="/job-applies" component={CandidateApplies} />
     </div>
   );
 }

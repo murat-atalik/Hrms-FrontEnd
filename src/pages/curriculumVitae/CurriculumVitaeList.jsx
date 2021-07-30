@@ -92,7 +92,6 @@ export default function CurriculumVitaeList() {
               <TableRow>
                 <TableCell>Ad Soyad</TableCell>
                 <TableCell>Ön Yazı</TableCell>
-
                 <TableCell>Yabancı Diller</TableCell>
                 <TableCell>Yetenekler</TableCell>
                 <TableCell>Deneyimler</TableCell>

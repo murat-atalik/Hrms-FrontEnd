@@ -9,7 +9,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import SignedIn from "./SignedIn";
-import SignedOut from "./SıgnedOut";
+import SignedOut from "./SignedOut";
 import { ImHome } from "react-icons/im";
 import { useSelector } from "react-redux";
 

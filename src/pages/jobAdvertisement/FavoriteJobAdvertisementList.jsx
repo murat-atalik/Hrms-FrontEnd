@@ -27,14 +27,13 @@ export default function FavoriteJobAdvertisementList() {
   const [jobAdverts, setJobAdverts] = useState([]);
   let favoriteJobService = new FavoriteJobService();
   useEffect(() => {
-    favoriteJobService.then((result) => setJobAdverts(result.data.data));
+    favoriteJobService
+      .getAllByCandidateId(authItem[0].user.id)
+      .then((result) => setJobAdverts(result.data.data));
   }, []);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  // const emptyRows =
-  //   rowsPerPage - Math.min(rowsPerPage, jobAdverts.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
