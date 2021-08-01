@@ -88,7 +88,7 @@ export default function JobPositionList() {
             <TableHead>
               <TableRow>
                 <TableCell>İş Pozisyonu</TableCell>
-                <TableCell>İncele</TableCell>
+                {/* <TableCell>İncele</TableCell> */}
               </TableRow>
             </TableHead>
 
@@ -103,7 +103,7 @@ export default function JobPositionList() {
                 return (
                   <TableRow hover key={job.id}>
                     <TableCell>{job.positionName}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <a
                         href={job.id}
                         target={"_blank"}
@@ -111,7 +111,7 @@ export default function JobPositionList() {
                       >
                         <CgSearchLoading color="black" size="3em" />
                       </a>
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 );
               })}

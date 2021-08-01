@@ -11,8 +11,10 @@ import { NavLink } from "react-router-dom";
 import { ImBriefcase } from "react-icons/im";
 import { FaCogs, FaFileAlt, FaUserTag } from "react-icons/fa";
 import { MdLocationCity, MdWork } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 export default function SideMenu() {
+  const { authItem } = useSelector((state) => state.auth);
   const drawerWidth = 240;
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -106,7 +108,16 @@ export default function SideMenu() {
           </MenuItem>
           <MenuItem
             component={NavLink}
-            to="/staff/update/25"
+            to={`/staff/update/${authItem[0].user.id}`}
+            style={{
+              color: "white",
+            }}
+          >
+            <ImBriefcase size="2em" />
+          </MenuItem>
+          <MenuItem
+            component={NavLink}
+            to="/employer/confirm"
             style={{
               color: "white",
             }}
