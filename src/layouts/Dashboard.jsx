@@ -24,7 +24,7 @@ import EmployerDetail from "../pages/employer/EmployerDetail";
 import CompanyUpdate from "../pages/employer/CompanyUpdate";
 import UpdateCompanyConfirm from "../pages/employer/UpdateCompanyConfirm";
 import EmployerConfirm from "../pages/employer/EmployerConfirm";
-
+import EmployerUpdate from "../pages/employer/EmployerUpdate";
 //JobAdvertisement
 import FavoriteJobAdvertisementList from "../pages/jobAdvertisement/FavoriteJobAdvertisementList";
 import JobFilter from "../pages/jobAdvertisement/JobFilter";
@@ -56,6 +56,10 @@ import CurriculumVitaeDetails from "../pages/curriculumVitae/CurriculumVitaeDeta
 import JobAdvertDetail from "../pages/jobAdvertisement/JobAdvertDetails";
 import CandidateApplies from "../pages/jobAdvertApplies/CandidateApplies";
 import ReviewApplications from "../pages/jobAdvertApplies/ReviewAppllications";
+import ForgotPassword from "../pages/user/ForgotPassword";
+import StaffUpdateSelf from "../pages/staff/StaffUpdateSelf";
+import ChangePassword from "../pages/user/ChangePassword";
+import CandidateUpdate from "../pages/candidate/CandidateUpdate";
 
 export default function DashBoard() {
   return (
@@ -66,6 +70,9 @@ export default function DashBoard() {
       <Route exact path="/candidate" component={CandidateList} />
       <Route exact path="/cv" component={CurriculumVitaeList} />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/forgotPassword" component={ForgotPassword} />
+      <Route exact path="/changePassword" component={ChangePassword} />
+
       <Route exact path="/register/employer" component={EmployerRegister} />
       <Route exact path="/register/candidate" component={CandidateRegister} />
       <Route exact path="/filter" component={JobFilter} />
@@ -76,6 +83,7 @@ export default function DashBoard() {
       <Route exact path="/staff" component={StaffList} />
       <Route exact path="/jobadvert-confirm" component={JobAdvertConfirm} />
       <Route exact path="/staff/update/:id" component={StaffUpdate} />
+      <Route exact path="/staff-update" component={StaffUpdateSelf} />
       <Route
         exact
         path="/company/update-confirm"
@@ -96,6 +104,7 @@ export default function DashBoard() {
       <Route exact path="/jobadvert-status" component={JobAdvertChangeStatus} />
       <Route exact path="/jobadvertadd" component={JobAdvertisementAdd} />
       <Route exact path="/company/update" component={CompanyUpdate} />
+      <Route exact path="/employer-update" component={EmployerUpdate} />
       <Route exact path="/review-applies/:id" component={ReviewApplications} />
       <Route
         exact
@@ -106,6 +115,7 @@ export default function DashBoard() {
       <Route exact path="/cv-update/:id" component={CurriculumVitaeUpdate} />
       <Route exact path="/cv-candidate" component={CandidateCVList} />
       <Route exact path="/job-applies" component={CandidateApplies} />
+      <Route exact path="/candidate-update" component={CandidateUpdate} />
     </div>
   );
 }

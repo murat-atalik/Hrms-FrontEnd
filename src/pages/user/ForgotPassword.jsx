@@ -20,8 +20,7 @@ import FormikTextField from "../../utilities/customFormComponents/FormikTextFiel
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import UserService from "../../services/userService";
 import { useAlert } from "react-alert";
-import { useDispatch } from "react-redux";
-import { userLogin } from "../../store/actions/authActions";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -34,11 +33,7 @@ function Copyright() {
     </Typography>
   );
 }
-export default function Login() {
-  const dispatch = useDispatch();
-  const loginData = (user) => {
-    dispatch(userLogin(user));
-  };
+export default function ForgotPassword() {
   const history = useHistory();
   const alert = useAlert();
   const userService = new UserService();
@@ -47,23 +42,34 @@ export default function Login() {
       .string("E-posta adresinizi girin")
       .required("E-posta adresi gerekli!")
       .email("Geçersiz e-posta"),
-    password: yup.string("Şifre ").required("Şifre gerekli"),
+    password: yup
+      .string("Şifre ")
+      .required("Şifre gerekli")
+      .min(8, "Şifre en az 8 karakter olmalı"),
+    rePassword: yup
+      .string("Şifre ")
+      .required("Şifre gerekli")
+      .oneOf([yup.ref("password"), null], "şifreler aynı olmak zorunda"),
+    securityAnswer: yup
+      .string("Güvenlik sorusu cevabı")
+      .required("Güvenlik sorusu cevabı gerekli!"),
   });
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      rePassword: "",
+      securityAnswer: "",
     },
     validationSchema: validationSchema,
   });
-  const handleLogin = (values) => {
-    userService.login(values).then((result) => {
+  const handleForgotPassword = (values) => {
+    userService.forgotPassword(values).then((result) => {
       if (result.data.success) {
-        loginData(result.data.data);
-        alert.success("GİRİŞ BAŞARILI");
+        alert.success("ŞİFRE BAŞARIYLA DEĞİŞTİRİLDİ");
         history.push("/");
       } else {
-        alert.error("ŞİFRE VEYA KULLANICI ADI HATALI");
+        alert.error("EMAİL VEYA GÜVENLİK SORUSU CEVABI HATALI");
       }
     });
   };
@@ -110,12 +116,12 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Giriş yap
+            Şifremi Unuttum
           </Typography>
           <Formik
             initialValues={formik.initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleLogin}
+            onSubmit={handleForgotPassword}
           >
             <Form className={classes.form} noValidate>
               <FormikTextField
@@ -125,23 +131,36 @@ export default function Login() {
                 style={{ marginTop: "1em", marginBottom: "1em" }}
               />
               <FormikTextField
+                name="email"
+                type="securityAnswer"
+                label="Güvenlik Sorusu Cevabı"
+                style={{ marginTop: "1em", marginBottom: "1em" }}
+              />
+              <FormikTextField
                 name="password"
                 type="password"
                 label="Şifre"
                 style={{ marginTop: "1em", marginBottom: "1em" }}
               />
-
+              <FormikTextField
+                name="rePassword"
+                type="password"
+                label="Şifre Tekrarı"
+                style={{ marginTop: "1em", marginBottom: "1em" }}
+              />
               <FormikButton style={{ marginTop: "1em", marginBottom: "1em" }}>
-                Giriş Yap
+                ŞİFREYİ DEĞİŞTİR
               </FormikButton>
               <Grid container style={{ marginTop: "1em", marginBottom: "1em" }}>
-                <NavLink
-                  to="/forgotPassword"
-                  variant="body2"
-                  style={{ color: "blue" }}
-                >
-                  {"Şifremi unuttum"}
-                </NavLink>
+                <Grid item xs>
+                  <NavLink
+                    to="/login"
+                    variant="body2"
+                    style={{ color: "blue" }}
+                  >
+                    {"Giriş yap"}
+                  </NavLink>
+                </Grid>
                 <Grid item>
                   <NavLink
                     to="/register/candidate"

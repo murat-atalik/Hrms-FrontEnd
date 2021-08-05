@@ -6,7 +6,13 @@ export default class CandidateService {
   getCandidate() {
     return axios.get(this.apiUrl + "/candidates/getall");
   }
+  getById(id) {
+    return axios.get(this.apiUrl + "/candidates/getbyid?id=" + id);
+  }
   add(values) {
     return axios.post(this.apiUrl + "/candidates/add", values);
+  }
+  update(values) {
+    return axios.post(this.apiUrl + "/candidates/update", values);
   }
 }

@@ -6,4 +6,10 @@ export default class UserService {
   login(values) {
     return axios.post(this.apiUrl + "/users/login", values);
   }
+  changePassword(values) {
+    return axios.post(this.apiUrl + "/users/changePassword", values);
+  }
+  forgotPassword(values) {
+    return axios.post(this.apiUrl + "/users/forgotPassword", values);
+  }
 }

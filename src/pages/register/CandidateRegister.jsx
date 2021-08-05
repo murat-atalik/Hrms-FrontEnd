@@ -62,6 +62,9 @@ export default function CandidateRegister() {
     birthday: yup
       .string("Doğum tarihiniz")
       .required("Doğum tarihiniz gerekli!"),
+    securityAnswer: yup
+      .string("Güvenlik sorusu cevabı")
+      .required("Cevap gerekli!"),
   });
   const formik = useFormik({
     initialValues: {
@@ -72,6 +75,7 @@ export default function CandidateRegister() {
       lastName: "",
       birthday: "",
       nationalityId: "",
+      securityAnswer: "",
     },
     validationSchema: validationSchema,
   });
@@ -190,6 +194,16 @@ export default function CandidateRegister() {
                     name="nationalityId"
                     type="number"
                     label="Tc kimlik No"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: "1em", marginBottom: "1em" }}
+                >
+                  <FormikTextField
+                    name="securityAnswer"
+                    label="En sevdiğiniz film"
                   />
                 </Grid>
                 <Grid

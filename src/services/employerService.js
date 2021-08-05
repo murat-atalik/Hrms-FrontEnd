@@ -6,6 +6,9 @@ export default class EmployerService {
   add(values) {
     return axios.post(this.apiUrl + "/employers/add", values);
   }
+  update(values) {
+    return axios.post(this.apiUrl + "/employers/update", values);
+  }
   getEmployer() {
     return axios.get(this.apiUrl + "/employers/getAll");
   }

@@ -50,6 +50,9 @@ export default function EmployerRegister() {
     phoneNumber: yup
       .string("Telefon numarası")
       .required("Telefon numarası gerekli!"),
+    securityAnswer: yup
+      .string("Güvenlik sorusu cevabı")
+      .required("Cevap gerekli!"),
   });
   const formik = useFormik({
     initialValues: {
@@ -59,6 +62,7 @@ export default function EmployerRegister() {
       companyName: "",
       webAddress: "",
       phoneNumber: "",
+      securityAnswer: "",
     },
     validationSchema: validationSchema,
   });
@@ -172,6 +176,16 @@ export default function EmployerRegister() {
                       name="rePassword"
                       type="password"
                       label="Şifre tekrarı"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{ marginTop: "1em", marginBottom: "1em" }}
+                  >
+                    <FormikTextField
+                      name="securityAnswer"
+                      label="En sevdiğiniz film"
                     />
                   </Grid>
                 </Grid>

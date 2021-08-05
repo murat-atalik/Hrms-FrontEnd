@@ -2,44 +2,39 @@ import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles, Paper } from "@material-ui/core";
 import RoleService from "../../services/roleService";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import StaffService from "../../services/staffService";
-import { useParams } from "react-router-dom";
+
 import StaffSideMenu from "../staff/StaffSideMenu";
 import StaffSideMenuButton from "../staff/StaffSideMenuButton";
 import { useAlert } from "react-alert";
+import { useSelector } from "react-redux";
 
-export default function StaffUpdate() {
+export default function StaffUpdateSelf() {
   const alert = useAlert();
   let staffService = new StaffService();
-  let { id } = useParams();
+  const { authItem } = useSelector((state) => state.auth);
   const validationSchema = yup.object({
     id: yup.number(),
     email: yup
-      .string("E-posta adresi girin")
+      .string("E-posta adresinizi girin")
       .required("E-posta adresi gerekli!")
       .email("Geçersiz e-posta"),
-    firstName: yup.string("Adı girin").required("Adınız gerekli!"),
-    lastName: yup.string("Soyadı girin").required("Sayadınız gerekli!"),
+    firstName: yup.string("Adınızı girin").required("Adınız gerekli!"),
+    lastName: yup.string("Soyadınızı girin").required("Sayadınız gerekli!"),
     roleId: yup.string("Sistem rolü").required("Sistem rolü gerekli!"),
+    securityAnswer: yup.string("Güvenlik sorusu cevabı"),
   });
 
-  const [roles, setRoles] = useState([]);
-  useEffect(() => {
-    let roleService = new RoleService();
-    roleService.getRoles().then((result) => setRoles(result.data.data));
-  }, []);
-  const tRoles = roles.map(({ id, roleName: value }) => ({
-    id,
-    value,
-  }));
   const [staff, setStaff] = useState([]);
   useEffect(() => {
-    staffService.getById(id).then((result) => setStaff(result.data.data));
+    staffService
+      .getById(authItem[0].user.id)
+      .then((result) => setStaff(result.data.data));
   });
 
   const handleSubmit = (values) => {
@@ -92,47 +87,49 @@ export default function StaffUpdate() {
         </Grid>
       </div>
       <Grid item xs={10} lg={8}>
-        <Formik
-          enableReinitialize={true}
-          initialValues={{
-            id: id,
-            email: staff?.email || "",
-            firstName: staff?.firstName || "",
-            lastName: staff?.lastName || "",
-            roleId: staff?.role?.id || "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          <Form>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <FormikTextField
-                  name="email"
-                  type="email"
-                  label="E-Posta Adresi"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormikTextField name="firstName" label="Ad" />
-              </Grid>
-              <Grid item xs={12}>
-                <FormikTextField name="lastName" label="Soyad" />
-              </Grid>
+        <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
+          <Formik
+            enableReinitialize={true}
+            initialValues={{
+              id: authItem[0].user.id,
+              email: staff?.email || "",
+              firstName: staff?.firstName || "",
+              lastName: staff?.lastName || "",
+              roleId: staff?.role?.id || "",
+              securityAnswer: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            <Form>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <FormikTextField
+                    name="email"
+                    type="email"
+                    label="E-Posta Adresi"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormikTextField name="firstName" label="Ad" />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormikTextField name="lastName" label="Soyad" />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormikTextField
+                    name="securityAnswer"
+                    label="En Sevdiğiniz Film"
+                  />
+                </Grid>
 
-              <Grid item xs={12}>
-                <FormikSelect
-                  name="roleId"
-                  label="Yönetici Rolü"
-                  options={tRoles}
-                />
+                <Grid item xs={12}>
+                  <FormikButton>Güncelle</FormikButton>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <FormikButton>Güncelle</FormikButton>
-              </Grid>
-            </Grid>
-          </Form>
-        </Formik>
+            </Form>
+          </Formik>
+        </Paper>
       </Grid>
     </Grid>
   );
