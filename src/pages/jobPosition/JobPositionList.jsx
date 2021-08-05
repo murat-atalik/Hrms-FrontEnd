@@ -13,7 +13,6 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-import { CgSearchLoading } from "react-icons/cg";
 import { Grid } from "@material-ui/core";
 import SideMenu from "../../layouts/SideMenu";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
