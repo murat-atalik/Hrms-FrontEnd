@@ -25,6 +25,7 @@ export default function StaffUpdate() {
     firstName: yup.string("Adı girin").required("Adınız gerekli!"),
     lastName: yup.string("Soyadı girin").required("Sayadınız gerekli!"),
     roleId: yup.string("Sistem rolü").required("Sistem rolü gerekli!"),
+    securityAnswer: yup.string("Güvenlik sorusu cevabı"),
   });
 
   const [roles, setRoles] = useState([]);
@@ -103,6 +104,7 @@ export default function StaffUpdate() {
             firstName: staff?.firstName || "",
             lastName: staff?.lastName || "",
             roleId: staff?.role?.id || "",
+            securityAnswer: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
