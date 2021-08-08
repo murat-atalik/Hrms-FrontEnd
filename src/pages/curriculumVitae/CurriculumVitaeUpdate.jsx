@@ -33,7 +33,7 @@ import CandidateSideMenu from "../candidate/CandidateSideMenu";
 import "react-dropzone-uploader/dist/styles.css";
 import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
 import { useAlert } from "react-alert";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export default function CurriculumVitaeUpdate() {
   const alert = useAlert();
@@ -43,7 +43,7 @@ export default function CurriculumVitaeUpdate() {
   let languageService = new LanguageService();
   let experienceService = new ExperienceService();
   let { id } = useParams();
-
+  const history = useHistory();
   const [imageUrl, setImageUrl] = useState("");
   const [curriculumVitae, setCurriculumVitae] = useState([]);
 
@@ -114,6 +114,7 @@ export default function CurriculumVitaeUpdate() {
   const handleUpdate = (values) => {
     cvService.update(values);
     alert.success("ÖZGEÇMİŞ GÜNCELLENDİ");
+    history.push("/");
   };
   const upload = (data) => {
     file.append("file", data[0]);

@@ -11,8 +11,10 @@ import StaffSideMenu from "../staff/StaffSideMenu";
 import StaffSideMenuButton from "../staff/StaffSideMenuButton";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export default function StaffUpdateSelf() {
+  const history = useHistory();
   const alert = useAlert();
   let staffService = new StaffService();
   const { authItem } = useSelector((state) => state.auth);
@@ -40,7 +42,7 @@ export default function StaffUpdateSelf() {
       .update(values)
       .then((result) =>
         result.data.success
-          ? alert.success(result.data.message)
+          ? (alert.success(result.data.message), history.push("/"))
           : alert.error(result.data.message)
       );
   };

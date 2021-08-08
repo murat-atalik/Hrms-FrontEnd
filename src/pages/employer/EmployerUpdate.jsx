@@ -13,11 +13,12 @@ import EmployerSideMenu from "../employer/EmployerSideMenu";
 import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export default function EmployerUpdate() {
   const alert = useAlert();
   let employerService = new EmployerService();
-
+  const history = useHistory();
   const { authItem } = useSelector((state) => state.auth);
   const validationSchema = yup.object({
     employerId: yup.string("Gerekli").required("Gerekli!"),
@@ -43,7 +44,7 @@ export default function EmployerUpdate() {
       .update(values)
       .then((result) =>
         result.data.success
-          ? alert.success(result.data.message)
+          ? (alert.success(result.data.message), history.push("/"))
           : alert.error(result.data.message)
       );
   };

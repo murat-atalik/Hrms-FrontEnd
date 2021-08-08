@@ -13,11 +13,12 @@ import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
 import CandidateService from "../../services/candidateService";
 import FormikDAtePicker from "../../utilities/customFormComponents/FormikDatePicker";
+import { useHistory } from "react-router-dom";
 
 export default function CandidateUpdate() {
   const alert = useAlert();
   let candidateService = new CandidateService();
-
+  const history = useHistory();
   const { authItem } = useSelector((state) => state.auth);
   const validationSchema = yup.object({
     candidateId: yup.string("Gerekli").required("Gerekli!"),
@@ -46,7 +47,7 @@ export default function CandidateUpdate() {
       .update(values)
       .then((result) =>
         result.data.success
-          ? alert.success(result.data.message)
+          ? (alert.success(result.data.message), history.push("/"))
           : alert.error(result.data.message)
       );
   };

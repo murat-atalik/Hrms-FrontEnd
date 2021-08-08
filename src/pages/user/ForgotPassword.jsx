@@ -131,8 +131,7 @@ export default function ForgotPassword() {
                 style={{ marginTop: "1em", marginBottom: "1em" }}
               />
               <FormikTextField
-                name="email"
-                type="securityAnswer"
+                name="securityAnswer"
                 label="Güvenlik Sorusu Cevabı"
                 style={{ marginTop: "1em", marginBottom: "1em" }}
               />

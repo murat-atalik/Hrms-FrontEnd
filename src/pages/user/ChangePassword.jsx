@@ -20,8 +20,10 @@ import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
 import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
 import UserService from "../../services/userService";
+import { useHistory } from "react-router-dom";
 
 export default function ChangePassword() {
+  const history = useHistory();
   const alert = useAlert();
   let userService = new UserService();
   const { authItem } = useSelector((state) => state.auth);
@@ -54,6 +56,7 @@ export default function ChangePassword() {
     userService.changePassword(values).then((result) => {
       if (result.data.success) {
         alert.success("ŞİFRE GÜNCELLENDİ");
+        history.push("/");
       } else alert.error(result.data.message);
     });
   };
