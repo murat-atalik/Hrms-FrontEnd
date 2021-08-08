@@ -19,13 +19,11 @@ export default function JobAdvertisementAdd() {
   let jobPositionsService = new JobPositionService();
 
   const validationSchema = yup.object({
-    jobPositionName: yup
-      .string("İş Pozisyonu")
-      .required("İş pozisyonu gerekli!"),
+    positionName: yup.string("İş Pozisyonu").required("İş pozisyonu gerekli!"),
   });
   const formik = useFormik({
     initialValues: {
-      jobPositionName: "",
+      positionName: "",
     },
     validationSchema: validationSchema,
   });
@@ -104,10 +102,7 @@ export default function JobAdvertisementAdd() {
                   xs={12}
                   style={{ marginTop: "2em", marginBottom: "1em" }}
                 >
-                  <FormikTextField
-                    name="jobPositionName"
-                    label="İş Pozisyonu"
-                  />
+                  <FormikTextField name="positionName" label="İş Pozisyonu" />
                 </Grid>
 
                 <Grid

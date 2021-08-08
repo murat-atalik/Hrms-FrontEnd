@@ -38,7 +38,7 @@ export default function CurriculumVitaeList() {
     cvService
       .getByCandidateIdPassive(authItem[0].user.id)
       .then((result) => setCurriculumVitaesPassive(result.data.data));
-  });
+  }, []);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -154,9 +154,9 @@ export default function CurriculumVitaeList() {
                     <TableRow hover key={curriculumVitaeActive?.id}>
                       <TableCell>
                         <Avatar src={curriculumVitaeActive?.imageUrl} />
-                        {curriculumVitaeActive?.candidate?.firstName +
+                        {curriculumVitaeActive?.firstName +
                           "  " +
-                          curriculumVitaeActive?.candidate?.lastName}
+                          curriculumVitaeActive?.lastName}
                       </TableCell>
                       <TableCell>
                         {curriculumVitaeActive?.coverLetter}
@@ -233,9 +233,7 @@ export default function CurriculumVitaeList() {
                     <TableRow hover key={cv.id}>
                       <TableCell>
                         <Avatar src={cv.imageUrl} />
-                        {cv.candidate?.firstName +
-                          "  " +
-                          cv.candidate?.lastName}
+                        {cv?.firstName + "  " + cv?.lastName}
                       </TableCell>
                       <TableCell>{cv.coverLetter}</TableCell>
 

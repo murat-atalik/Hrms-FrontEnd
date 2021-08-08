@@ -30,7 +30,6 @@ export default function FooterBar() {
     root: {
       display: "flex",
       flexDirection: "column",
-      marginTop: "10vh",
 
       backgroundColor: "#eceff1",
       zIndex: 1301,

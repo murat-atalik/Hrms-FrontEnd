@@ -17,7 +17,7 @@ function App() {
           {location.pathname === "/home" || location.pathname === "/" ? (
             <Home />
           ) : (
-            <div style={{ paddingTop: "10em" }}>
+            <div style={{ paddingTop: "10em", marginBottom: "10em" }}>
               <Dashboard />
             </div>
           )}

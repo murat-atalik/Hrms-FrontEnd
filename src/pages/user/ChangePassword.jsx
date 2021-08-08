@@ -27,7 +27,6 @@ export default function ChangePassword() {
   const { authItem } = useSelector((state) => state.auth);
 
   const validationSchema = yup.object({
-    userId: yup.number().required("Kullanıcı gerekli!"),
     oldPassword: yup
       .string("Şifre ")
       .required("Şifre gerekli")
@@ -43,7 +42,7 @@ export default function ChangePassword() {
   });
   const formik = useFormik({
     initialValues: {
-      userId: authItem[0],
+      userId: authItem[0].user.id,
       oldPassword: "",
       newPassword: "",
       reNewPassword: "",
@@ -51,11 +50,11 @@ export default function ChangePassword() {
     validationSchema: validationSchema,
   });
 
-  const handleSubmit = (values) => {
+  const handleChangePassword = (values) => {
     userService.changePassword(values).then((result) => {
-      result.data.success
-        ? alert.success("ŞİFRE GÜNCELLENDİ")
-        : alert.error("HATA");
+      if (result.data.success) {
+        alert.success("ŞİFRE GÜNCELLENDİ");
+      } else alert.error(result.data.message);
     });
   };
 
@@ -132,9 +131,9 @@ export default function ChangePassword() {
           <Formik
             initialValues={formik.initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={handleChangePassword}
           >
-            <Form>
+            <Form noValidate>
               <Grid container spacing={2}>
                 <Grid
                   item
@@ -165,7 +164,7 @@ export default function ChangePassword() {
                   />
                 </Grid>
                 <Grid item xs={12} style={{ marginBottom: "1em" }}>
-                  <FormikButton> Şifre Değiştir </FormikButton>
+                  <FormikButton>Şifre Değiştir</FormikButton>
                 </Grid>
               </Grid>
             </Form>

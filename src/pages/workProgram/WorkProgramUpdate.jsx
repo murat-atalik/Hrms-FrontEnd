@@ -24,7 +24,7 @@ export default function WorkProgramUpdate() {
     workProgramService
       .getWorkPrograms()
       .then((result) => setWorkPrograms(result.data.data));
-  });
+  }, []);
   const tWorkPrograms = workPrograms.map(({ id, programName: value }) => ({
     id,
     value,
@@ -43,6 +43,9 @@ export default function WorkProgramUpdate() {
       result.data.success
         ? alert.success("İŞ PROGRAMI GÜNCELLENDİ")
         : alert.error("HATA");
+      workProgramService
+        .getWorkPrograms()
+        .then((result) => setWorkPrograms(result.data.data));
     });
   };
 

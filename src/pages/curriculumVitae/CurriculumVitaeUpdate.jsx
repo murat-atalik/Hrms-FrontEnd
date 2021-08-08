@@ -52,7 +52,7 @@ export default function CurriculumVitaeUpdate() {
       setCurriculumVitae(result.data.data);
       setImageUrl(result.data.data?.imageUrl);
     });
-  });
+  }, []);
 
   let file = new FormData();
   const validationSchema = yup.object({
@@ -245,7 +245,7 @@ export default function CurriculumVitaeUpdate() {
             enableReinitialize={true}
             initialValues={{
               id: id || "",
-              candidateId: 3 || "",
+              candidateId: curriculumVitae?.candidate?.id || "",
               firstName: curriculumVitae?.firstName || "",
               lastName: curriculumVitae?.lastName || "",
               email: curriculumVitae?.email || "",

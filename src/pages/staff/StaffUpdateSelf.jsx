@@ -33,11 +33,16 @@ export default function StaffUpdateSelf() {
     staffService
       .getById(authItem[0].user.id)
       .then((result) => setStaff(result.data.data));
-  });
+  }, []);
 
   const handleSubmit = (values) => {
-    staffService.update(values);
-    alert.success("BİLGİLER GÜNCELLENDİ");
+    staffService
+      .update(values)
+      .then((result) =>
+        result.data.success
+          ? alert.success(result.data.message)
+          : alert.error(result.data.message)
+      );
   };
   const useStyles = makeStyles((theme) => ({
     root: {

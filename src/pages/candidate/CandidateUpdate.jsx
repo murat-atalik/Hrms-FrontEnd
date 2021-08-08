@@ -7,8 +7,8 @@ import { Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
 
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
-import EmployerSideMenu from "../employer/EmployerSideMenu";
-import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
+import CandidateSideMenu from "../candidate/CandidateSideMenu";
+import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
 import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
 import CandidateService from "../../services/candidateService";
@@ -39,15 +39,15 @@ export default function CandidateUpdate() {
     candidateService
       .getById(authItem[0].user.id)
       .then((result) => setCandidate(result.data.data));
-  });
+  }, []);
 
   const handleSubmit = (values) => {
     candidateService
       .update(values)
       .then((result) =>
         result.data.success
-          ? alert.success("GÜNCELLEME BAŞARILI")
-          : alert.error("GÜNCELLEME HATALI")
+          ? alert.success(result.data.message)
+          : alert.error(result.data.message)
       );
   };
   const useStyles = makeStyles((theme) => ({
@@ -87,12 +87,12 @@ export default function CandidateUpdate() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          <EmployerSideMenu />
+          <CandidateSideMenu />
         </Grid>
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          <EmployerSideMenuButton />
+          <CandidateSideMenuButton />
         </Grid>
       </div>
       <Grid item xs={10} lg={8}>

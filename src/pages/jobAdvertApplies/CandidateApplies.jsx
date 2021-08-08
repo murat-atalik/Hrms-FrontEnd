@@ -33,7 +33,7 @@ export default function CandidateApplies() {
     jobAdvertApplyService
       .getByCandidateId(authItem[0].user.id)
       .then((result) => setApplies(result.data.data));
-  });
+  }, []);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

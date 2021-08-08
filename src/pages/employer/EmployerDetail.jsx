@@ -12,13 +12,22 @@ import {
 
 import React, { useEffect, useState } from "react";
 import { CgSearchLoading } from "react-icons/cg";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import SideMenu from "../../layouts/SideMenu";
 import SideMenuOnlyButton from "../../layouts/SideMenuOnlyButton";
 import EmployerService from "../../services/employerService";
 import JobAdvertisementService from "../../services/jobAdvertisementService";
+import CandidateSideMenu from "../candidate/CandidateSideMenu";
+import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
+import EmployerSideMenu from "../employer/EmployerSideMenu";
+import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
+import StaffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenuButton from "../staff/StaffSideMenuButton";
 
 export default function EmployerDetail() {
+  const { authItem } = useSelector((state) => state.auth);
+
   let { id } = useParams();
   const [employer, setEmployer] = useState({});
   useEffect(() => {
@@ -26,14 +35,14 @@ export default function EmployerDetail() {
     employerService
       .getByEmployerId(id)
       .then((result) => setEmployer(result.data.data));
-  });
+  }, []);
   const [jobAdverts, setJobAdverts] = useState({});
   useEffect(() => {
     let jobAdvertService = new JobAdvertisementService();
     jobAdvertService
       .getByEmployerIdActive(id)
       .then((result) => setJobAdverts(result.data.data));
-  });
+  }, []);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -72,12 +81,32 @@ export default function EmployerDetail() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          <SideMenu />
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
+            <StaffSideMenu />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType === "employer" ? (
+            <EmployerSideMenu />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType === "candidate" ? (
+            <CandidateSideMenu />
+          ) : (
+            <SideMenu />
+          )}
         </Grid>
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          <SideMenuOnlyButton />
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
+            <StaffSideMenuButton />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType === "employer" ? (
+            <EmployerSideMenuButton />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType === "candidate" ? (
+            <CandidateSideMenuButton />
+          ) : (
+            <SideMenuOnlyButton />
+          )}
         </Grid>
       </div>
       <Grid item xs={10} lg={8}>

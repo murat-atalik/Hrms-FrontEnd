@@ -22,7 +22,7 @@ export default function CityUpdate() {
   const [selectedCity, setSelectedCity] = useState();
   useEffect(() => {
     cityService.getCities().then((result) => setCities(result.data.data));
-  });
+  }, []);
   const tCities = cities.map(({ id, cityName: value }) => ({
     id,
     value,
@@ -39,6 +39,7 @@ export default function CityUpdate() {
       result.data.success
         ? alert.success("ŞEHİR GÜNCELLENDİ")
         : alert.error("HATA");
+      cityService.getCities().then((result) => setCities(result.data.data));
     });
   };
 

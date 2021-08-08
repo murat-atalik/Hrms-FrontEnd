@@ -15,7 +15,6 @@ import { useAlert } from "react-alert";
 
 export default function StaffUpdate() {
   const alert = useAlert();
-  let staffService = new StaffService();
   let { id } = useParams();
   const validationSchema = yup.object({
     id: yup.number(),
@@ -39,10 +38,14 @@ export default function StaffUpdate() {
   }));
   const [staff, setStaff] = useState([]);
   useEffect(() => {
+    let staffService = new StaffService();
+
     staffService.getById(id).then((result) => setStaff(result.data.data));
-  });
+  }, []);
 
   const handleSubmit = (values) => {
+    let staffService = new StaffService();
+
     staffService.update(values);
     alert.success("BİLGİLER GÜNCELLENDİ");
   };

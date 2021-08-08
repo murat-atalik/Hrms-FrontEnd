@@ -106,15 +106,7 @@ export default function SideMenu() {
           >
             <ImBriefcase size="2em" />
           </MenuItem>
-          <MenuItem
-            component={NavLink}
-            to={`/staff/update/${authItem[0].user.id}`}
-            style={{
-              color: "white",
-            }}
-          >
-            <ImBriefcase size="2em" />
-          </MenuItem>
+
           <MenuItem
             component={NavLink}
             to="/employer/confirm"

@@ -7,7 +7,17 @@ import CurriculumVitaeService from "../../services/curriculumVitaeService";
 import { MdBrokenImage } from "react-icons/md";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
+import CandidateSideMenu from "../candidate/CandidateSideMenu";
+import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
+import EmployerSideMenu from "../employer/EmployerSideMenu";
+import EmployerSideMenuButton from "../employer/EmployerSideMenuButton";
+import StaffSideMenu from "../staff/StaffSideMenu";
+import StaffSideMenuButton from "../staff/StaffSideMenuButton";
+import { useSelector } from "react-redux";
+
 export default function CurriculumVitaeDetails() {
+  const { authItem } = useSelector((state) => state.auth);
+
   let { id } = useParams();
   const curriculumVitaService = new CurriculumVitaeService();
   const [cv, setCv] = useState({});
@@ -15,7 +25,7 @@ export default function CurriculumVitaeDetails() {
     curriculumVitaService.getById(id).then((result) => {
       setCv(result.data.data);
     });
-  });
+  }, []);
   const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
@@ -61,12 +71,32 @@ export default function CurriculumVitaeDetails() {
     >
       <div className={classes.sideMenu}>
         <Grid item lg={2}>
-          <SideMenu />
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
+            <StaffSideMenu />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType === "employer" ? (
+            <EmployerSideMenu />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType === "candidate" ? (
+            <CandidateSideMenu />
+          ) : (
+            <SideMenu />
+          )}
         </Grid>
       </div>
       <div className={classes.sideMenuOnlyButton}>
         <Grid item xs={1}>
-          <SideMenuOnlyButton />
+          {authItem[0].loggedIn && authItem[0].user.userType === "staff" ? (
+            <StaffSideMenuButton />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType === "employer" ? (
+            <EmployerSideMenuButton />
+          ) : authItem[0].loggedIn &&
+            authItem[0].user.userType === "candidate" ? (
+            <CandidateSideMenuButton />
+          ) : (
+            <SideMenuOnlyButton />
+          )}
         </Grid>
       </div>
 

@@ -7,7 +7,7 @@ import { Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 
 import FormikButton from "../../utilities/customFormComponents/FormikButton";
 import FormikTextField from "../../utilities/customFormComponents/FormikTextField";
-import JobPositionService from "../../services/jobPositionService";
+import WorkProgramService from "../../services/workProgramService";
 
 import StaffSideMenu from "../staff/StaffSideMenu";
 import StaffSideMenuButton from "../staff/StaffSideMenuButton";
@@ -16,7 +16,7 @@ import { useAlert } from "react-alert";
 
 export default function WorkProgramAdd() {
   const alert = useAlert();
-  let jobPositionsService = new JobPositionService();
+  let workProgramService = new WorkProgramService();
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -31,7 +31,7 @@ export default function WorkProgramAdd() {
   });
 
   const handleSubmit = (values) => {
-    jobPositionsService.add(values).then((result) => {
+    workProgramService.add(values).then((result) => {
       result.data.success
         ? alert.success("PROGRAM EKLENDİ")
         : alert.error("HATA");

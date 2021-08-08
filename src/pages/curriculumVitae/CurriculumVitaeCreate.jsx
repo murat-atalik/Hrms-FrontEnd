@@ -18,15 +18,17 @@ import CandidateSideMenuButton from "../candidate/CandidateSideMenuButton";
 import FormikDAtePicker from "../../utilities/customFormComponents/FormikDatePicker";
 import { AiFillDelete, AiOutlinePlusCircle } from "react-icons/ai";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import { useHistory } from "react-router-dom";
 import "react-dropzone-uploader/dist/styles.css";
 import { DropzoneArea } from "material-ui-dropzone";
 
+import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
 
 export default function CurriculumVitaeUpdate() {
+  const alert = useAlert();
   const { authItem } = useSelector((state) => state.auth);
-
+  const history = useHistory();
   let cvService = new CurriculumVitaeService();
   const [imageUrl, setImageUrl] = useState();
   let file = new FormData();
@@ -89,44 +91,11 @@ export default function CurriculumVitaeUpdate() {
     ),
     imageUrl: yup.string("Fotoğraf"),
   });
-  const cvAdd = useFormik({
-    initialValues: {
-      candidateId: authItem[0].user.id,
-      firstName: "",
-      lastName: "",
-      email: "",
-      coverLetter: "",
-      github: "",
-      linkedin: "",
-      abilities: [{ abilityName: "" }],
-      educations: [
-        {
-          startingDate: "",
-          graduationDate: "",
-          schoolName: "",
-        },
-      ],
-      experiences: [
-        {
-          businessName: "",
-          position: "",
-          quitDate: "",
-          startingDate: "",
-        },
-      ],
-      languages: [
-        {
-          degree: "",
-          language: "",
-        },
-      ],
-      imageUrl: imageUrl || "",
-    },
-    validationSchema: validationSchema,
-  });
 
   const handleCvAdd = (values) => {
     cvService.addCv(values);
+    alert.success("ÖZ GEÇMİŞ EKLENDİ");
+    history.push("/home");
   };
 
   const upload = (data) => {
@@ -240,7 +209,38 @@ export default function CurriculumVitaeUpdate() {
         <Paper style={{ backgroundColor: "#E5E5E5", padding: "4em" }}>
           <Formik
             enableReinitialize={true}
-            initialValues={cvAdd.initialValues}
+            initialValues={{
+              candidateId: authItem[0].user.id,
+              firstName: "",
+              lastName: "",
+              email: "",
+              coverLetter: "",
+              github: "",
+              linkedin: "",
+              abilities: [{ abilityName: "" }],
+              educations: [
+                {
+                  startingDate: "",
+                  graduationDate: "",
+                  schoolName: "",
+                },
+              ],
+              experiences: [
+                {
+                  businessName: "",
+                  position: "",
+                  quitDate: "",
+                  startingDate: "",
+                },
+              ],
+              languages: [
+                {
+                  degree: "",
+                  language: "",
+                },
+              ],
+              imageUrl: imageUrl || "",
+            }}
             validationSchema={validationSchema}
             onSubmit={handleCvAdd}
           >

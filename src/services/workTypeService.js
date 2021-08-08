@@ -7,9 +7,9 @@ export default class WorkTypeService {
     return axios.get(this.apiUrl + "/worktype/getall");
   }
   add(values) {
-    return axios.get(this.apiUrl + "/worktype/add", values);
+    return axios.post(this.apiUrl + "/worktype/add", values);
   }
   update(values) {
-    return axios.get(this.apiUrl + "/worktype/update", values);
+    return axios.post(this.apiUrl + "/worktype/update", values);
   }
 }

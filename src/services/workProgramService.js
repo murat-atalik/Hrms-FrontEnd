@@ -7,9 +7,9 @@ export default class WorkProgramService {
     return axios.get(this.apiUrl + "/workprogram/getall");
   }
   add(values) {
-    return axios.get(this.apiUrl + "/workprogram/add", values);
+    return axios.post(this.apiUrl + "/workprogram/add", values);
   }
   update(values) {
-    return axios.get(this.apiUrl + "/workprogram/update", values);
+    return axios.post(this.apiUrl + "/workprogram/update", values);
   }
 }

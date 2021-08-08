@@ -134,21 +134,31 @@ export default function Login() {
               <FormikButton style={{ marginTop: "1em", marginBottom: "1em" }}>
                 Giriş Yap
               </FormikButton>
-              <Grid container style={{ marginTop: "1em", marginBottom: "1em" }}>
-                <NavLink
-                  to="/forgotPassword"
-                  variant="body2"
-                  style={{ color: "blue" }}
-                >
-                  {"Şifremi unuttum"}
-                </NavLink>
+
+              <Grid
+                item
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="flex-end"
+                style={{ marginTop: "1em", marginBottom: "1em" }}
+              >
+                <Grid item xs>
+                  <NavLink
+                    to="/forgotPassword"
+                    variant="body2"
+                    style={{ color: "blue" }}
+                  >
+                    Şifremi unuttum
+                  </NavLink>
+                </Grid>
                 <Grid item>
                   <NavLink
                     to="/register/candidate"
                     variant="body2"
                     style={{ color: "blue" }}
                   >
-                    {"Hesabınız yok mu? Kayıt Ol"}
+                    Hesabınız yok mu? Kayıt Ol
                   </NavLink>
                 </Grid>
               </Grid>

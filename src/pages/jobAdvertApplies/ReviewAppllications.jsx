@@ -49,7 +49,7 @@ export default function ReviewApplications() {
     jobAdvertApplyService
       .getDenied(id)
       .then((result) => setDeniedApplies(result.data.data));
-  });
+  }, []);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

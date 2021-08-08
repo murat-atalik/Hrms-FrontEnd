@@ -17,12 +17,13 @@ import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
 
 export default function RoleUpdate() {
   const alert = useAlert();
-  const roleService = new RoleService();
   const [roles, setRoles] = useState([]);
   const [selectedRole, setSelectedRole] = useState();
   useEffect(() => {
+    let roleService = new RoleService();
+
     roleService.getRoles().then((result) => setRoles(result.data.data));
-  });
+  }, []);
   const tRoles = roles.map(({ id, roleName: value }) => ({
     id,
     value,
@@ -34,10 +35,13 @@ export default function RoleUpdate() {
   });
 
   const handleSelect = (value) => {
+    let roleService = new RoleService();
+
     roleService.update(value).then((result) => {
       result.data.success
         ? alert.success("ROL GÜNCELLENDİ")
         : alert.error("HATA");
+      roleService.getRoles().then((result) => setRoles(result.data.data));
     });
   };
 

@@ -40,7 +40,7 @@ export default function CompanyUpdate() {
     employerService
       .getByEmployerId(authItem[0].user.id)
       .then((result) => setEmployer(result.data.data));
-  });
+  }, []);
   const history = useHistory();
   const handleSubmit = (values) => {
     updateCompanyService.add(values).then(() => history.push("/"));

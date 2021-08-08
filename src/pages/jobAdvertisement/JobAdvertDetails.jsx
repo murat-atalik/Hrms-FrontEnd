@@ -33,7 +33,7 @@ export default function JobAdvertDetail() {
     jobAdvertApplyService.checkApply(authItem[0].user.id, id).then((result) => {
       setApply(result.data.data);
     });
-  });
+  }, []);
 
   const useStyles = makeStyles((theme) => ({
     root: {

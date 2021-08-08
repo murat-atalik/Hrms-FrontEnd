@@ -17,14 +17,15 @@ import FormikSelect from "../../utilities/customFormComponents/FormikSelect";
 
 export default function JobPositionUpdate() {
   const alert = useAlert();
-  const jobPositionService = new JobPositionService();
   const [jobPositions, setJobPositions] = useState([]);
   const [selectedJobPositions, setSelectedJobPositions] = useState();
   useEffect(() => {
+    let jobPositionService = new JobPositionService();
+
     jobPositionService
       .getJobPositions()
       .then((result) => setJobPositions(result.data.data));
-  });
+  }, []);
   const tJobPositions = jobPositions.map(({ id, positionName: value }) => ({
     id,
     value,
@@ -38,10 +39,14 @@ export default function JobPositionUpdate() {
   });
 
   const handleSelect = (value) => {
+    let jobPositionService = new JobPositionService();
     jobPositionService.update(value).then((result) => {
       result.data.success
         ? alert.success("İŞ POZİSYONU GÜNCELLENDİ")
         : alert.error("HATA");
+      jobPositionService
+        .getJobPositions()
+        .then((result) => setJobPositions(result.data.data));
     });
   };
 

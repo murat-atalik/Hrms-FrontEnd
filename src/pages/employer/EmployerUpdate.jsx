@@ -36,15 +36,15 @@ export default function EmployerUpdate() {
     employerService
       .getByEmployerId(authItem[0].user.id)
       .then((result) => setEmployer(result.data.data));
-  });
+  }, []);
 
   const handleSubmit = (values) => {
     employerService
       .update(values)
       .then((result) =>
         result.data.success
-          ? alert.success("GÜNCELLEME BAŞARILI")
-          : alert.error("GÜNCELLEME HATALI")
+          ? alert.success(result.data.message)
+          : alert.error(result.data.message)
       );
   };
   const useStyles = makeStyles((theme) => ({

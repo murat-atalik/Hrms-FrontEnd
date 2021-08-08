@@ -8,9 +8,9 @@ export default class RoleService {
     return axios.get(this.apiUrl + "/roles/getall");
   }
   add(values) {
-    return axios.get(this.apiUrl + "/roles/add", values);
+    return axios.post(this.apiUrl + "/roles/add", values);
   }
   update(values) {
-    return axios.get(this.apiUrl + "/roles/update", values);
+    return axios.post(this.apiUrl + "/roles/update", values);
   }
 }

@@ -7,9 +7,9 @@ export default class JobPositionService {
     return axios.get(this.apiUrl + "/job_positions/getall");
   }
   add(values) {
-    return axios.get(this.apiUrl + "/job_positions/add", values);
+    return axios.post(this.apiUrl + "/job_positions/add", values);
   }
   update(values) {
-    return axios.get(this.apiUrl + "/job_positions/update", values);
+    return axios.post(this.apiUrl + "/job_positions/update", values);
   }
 }

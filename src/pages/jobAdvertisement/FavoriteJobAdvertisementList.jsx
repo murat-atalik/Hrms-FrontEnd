@@ -24,11 +24,13 @@ export default function FavoriteJobAdvertisementList() {
   const alert = useAlert();
   const [jobAdverts, setJobAdverts] = useState([]);
   let favoriteJobService = new FavoriteJobService();
+
   useEffect(() => {
+    let favoriteJobService = new FavoriteJobService();
     favoriteJobService
       .getAllByCandidateId(authItem[0].user.id)
       .then((result) => setJobAdverts(result.data.data));
-  });
+  }, []);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -186,11 +188,6 @@ export default function FavoriteJobAdvertisementList() {
                     </TableRow>
                   );
                 })}
-                {/* {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )} */}
               </TableBody>
             </Table>
           </TableContainer>

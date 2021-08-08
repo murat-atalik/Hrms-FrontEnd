@@ -176,7 +176,7 @@ export default function JobAdvertisementList() {
                           type="button"
                           onClick={() => {
                             let values = {
-                              candidateId: 3,
+                              candidateId: authItem[0].user.id,
                               jobAdvertisementId: jobAdvert.id,
                             };
 
